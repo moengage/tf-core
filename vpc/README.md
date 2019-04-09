@@ -16,8 +16,8 @@
 
 | Name | Description |
 |------|-------------|
-| igw\_id |  |
-| nat\_gws |  |
-| s3\_vpc\_endpoint |  |
-| vpc |  |
+| igw\_id | Internet Gateway ID |
+| nat\_gws | NAT Gateway IDs - NAT Gateway Private IPs - NAT Gateway Public Elastic IPs |
+| s3\_vpc\_endpoint | S3 VPC Endpoint - State |
+| vpc | VPC ID - CIDR Block |
 

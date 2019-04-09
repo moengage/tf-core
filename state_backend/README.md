@@ -13,6 +13,6 @@
 
 | Name | Description |
 |------|-------------|
-| bucket |  |
-| dynamodb\_table |  |
+| bucket | Bucket ID |
+| dynamodb\_table | DynamoDB table ID |
 
