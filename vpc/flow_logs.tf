@@ -13,13 +13,13 @@ resource "aws_cloudwatch_log_group" "flow_logs" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.vpc_name}-vpc-flow-logs"),
+    map("Name", "${local.resource_identifier}-vpc-flow-logs"),
   )}"
 }
 
 resource "aws_iam_role" "vpc_flow_logs" {
   count = "${var.enable_flow_logs ? 1 : 0}"
-  name  = "${local.vpc_name}-vpc-flow-logs}"
+  name  = "${local.resource_identifier}-vpc-flow-logs}"
 
   assume_role_policy = <<EOF
 {
@@ -40,7 +40,7 @@ EOF
 
 resource "aws_iam_role_policy" "vpc_flow_logs_policy" {
   count = "${var.enable_flow_logs ? 1 : 0}"
-  name  = "${local.vpc_name}-vpc-flow-logs-policy"
+  name  = "${local.resource_identifier}-vpc-flow-logs-policy"
   role  = "${aws_iam_role.vpc_flow_logs.id}"
 
   policy = <<EOF

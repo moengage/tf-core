@@ -10,7 +10,7 @@ resource "aws_vpc" "default" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.vpc_name}-vpc")
+    map("Name", "${local.resource_identifier}-vpc")
   )}"
 }
 
@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "igw" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.vpc_name}-vpc-igw"),
+    map("Name", "${local.resource_identifier}-vpc-igw"),
   )}"
 }
 
@@ -28,7 +28,7 @@ resource "aws_route_table" "public" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.vpc_name}-rt-public"),
+    map("Name", "${local.resource_identifier}-rt-public"),
   )}"
 }
 
@@ -73,7 +73,7 @@ resource "aws_eip" "nat_gw_eip" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.vpc_name}-vpc-nat-gw-eip-${count.index}"),
+    map("Name", "${local.resource_identifier}-vpc-nat-gw-eip-${count.index}"),
   )}"
 }
 
@@ -94,7 +94,7 @@ resource "aws_nat_gateway" "nat_gw" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.vpc_name}-vpc-nat-gw-${substr(element(data.aws_availability_zones.available.names, count.index),-2,-1)}"),
+    map("Name", "${local.resource_identifier}-vpc-nat-gw-${substr(element(data.aws_availability_zones.available.names, count.index),-2,-1)}"),
   )}"
 
   lifecycle {

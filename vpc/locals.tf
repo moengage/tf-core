@@ -7,5 +7,5 @@ locals {
     Environment = "${lower(var.environment)}"
   }
 
-  vpc_name = "${lower(var.environment)}-${lower(var.cluster)}"
+  resource_identifier = "${lower(var.environment)}-${lower(var.cluster)}"
 }
