@@ -63,7 +63,6 @@ resource "aws_subnet" "public" {
     map("Name", "management-public-${substr(element(var.availability_zones, count.index), -2, -1)}"),
     map("SubnetType", "public"),
     map("SubnetGroup", "management"),
-    map("Business", "sre"),
   )}"
 }
 
