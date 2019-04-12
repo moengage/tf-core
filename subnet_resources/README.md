@@ -8,7 +8,7 @@
 | environment | Environment name | string | n/a | yes |
 | nat\_gateways | availability_zones and nat_gateway_ids map | map | n/a | yes |
 | region | Region name | string | n/a | yes |
-| vpc\_cidr | VPC CIDR | string | n/a | yes |
+| vpc\_id | VPC ID | string | n/a | yes |
 | cluster | Cluster name | string | `"default"` | no |
 
 ## Outputs

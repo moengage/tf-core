@@ -15,8 +15,8 @@ variable "cluster" {
   description = "Cluster name"
 }
 
-variable "vpc_cidr" {
-  description = "VPC CIDR"
+variable "vpc_id" {
+  description = "VPC ID"
 }
 
 variable "business_name" {
