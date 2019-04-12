@@ -6,7 +6,7 @@ resource "aws_subnet" "private" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.resource_identifier}-private-${substr(element(var.availability_zones, count.index), -2, -1)})"),
+    map("Name", "${local.resource_identifier}-private-${substr(element(var.availability_zones, count.index), -2, -1)}"),
     map("ResourceType", "private"),
     map("ResourceGroup", "${lower(var.business_name)}"),
   )}"
@@ -18,7 +18,7 @@ resource "aws_route_table" "private" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.resource_identifier}-rt-private-${element(var.availability_zones, count.index), -2, -1}"),
+    map("Name", "${local.resource_identifier}-rt-private-${substr(element(var.availability_zones, count.index), -2, -1)}"),
     map("ResourceType", "private"),
     map("ResourceGroup", "${lower(var.business_name)}"),
   )}"
@@ -34,8 +34,8 @@ resource "aws_route" "private_route_to_nat_gw" {
 
 resource "aws_route_table_association" "private" {
   count          = "${length(var.availability_zones)}"
-  subnet_id      = "${element(aws_subnet.private.*.id), count.index}"
-  route_table_id = "${element(aws_route.private.*.id, count.index)}"
+  subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
 
 resource "aws_subnet" "public" {
@@ -47,7 +47,7 @@ resource "aws_subnet" "public" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.resource_identifier}-public-${element(var.availability_zones, count.index), -2, -1}"),
+    map("Name", "${local.resource_identifier}-public-${substr(element(var.availability_zones, count.index), -2, -1)}"),
     map("ResourceType", "public"),
     map("ResourceGroup", "${lower(var.business_name)}"),
   )}"
@@ -55,6 +55,6 @@ resource "aws_subnet" "public" {
 
 resource "aws_route_table_association" "public" {
   count          = "${length(var.availability_zones)}"
-  subnet_id      = "${aws_subnet.public.*.id}"
+  subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${data.aws_route_table.selected.id}"
 }

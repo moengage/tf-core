@@ -7,5 +7,5 @@ output "private_subnets" {
 }
 
 output "private_nacls" {
-  value = "${formatlist("%v - %v", aws_network_acl.private.*.id, join(",", aws_network_acl.private.*.subnet_ids))}"
+  value = "${formatlist("%v - %v", aws_network_acl.private.*.id, join(",", flatten(aws_network_acl.private.*.subnet_ids)))}"
 }

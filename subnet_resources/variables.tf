@@ -32,3 +32,13 @@ variable "nat_gateways" {
   type        = "map"
   description = "availability_zones and nat_gateway_ids map"
 }
+
+variable "private_subnets" {
+  type        = "map"
+  description = "availability_zones and CIDR map"
+}
+
+variable "public_subnets" {
+  type        = "map"
+  description = "availability_zones and CIDR map"
+}
