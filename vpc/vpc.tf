@@ -29,6 +29,8 @@ resource "aws_route_table" "public" {
   tags = "${merge(
     local.default_tags,
     map("Name", "${local.resource_identifier}-rt-public"),
+    map("ResourceType", "public"),
+    map("ResourceGroup", "management"),
   )}"
 }
 
@@ -61,8 +63,8 @@ resource "aws_subnet" "public" {
   tags = "${merge(
     local.default_tags,
     map("Name", "management-public-${substr(element(var.availability_zones, count.index), -2, -1)}"),
-    map("SubnetType", "public"),
-    map("SubnetGroup", "management"),
+    map("ResourceType", "public"),
+    map("ResourceGroup", "management"),
   )}"
 }
 

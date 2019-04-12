@@ -9,8 +9,8 @@ data "aws_subnet_ids" "management" {
   vpc_id = "${aws_vpc.default.id}"
 
   tags {
-    SubnetGroup = "management"
-    SubnetType  = "public"
+    ResourceGroup = "management"
+    ResourceType  = "public"
   }
 
   depends_on = [
