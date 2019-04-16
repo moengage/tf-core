@@ -2,16 +2,23 @@
 
 Core Terraform modules to create infrastructure resources with default tags. This modules can be used to write simple terraform modules to manage infrastructure.
 
-Resource names are dynamically generated using provided variables. We follow
+# Important Notes
+
+  - `Naming Convention:` Resource names are dynamically generated using provided variables. We follow
 some convention while naming resources, please go through
 `locals.tf`/`resource_identifier` to understand pattern.
+  - `Permanent Resources:` These resources will be created no matter what
+  - `Optional Resources:` These resources are optional, will be created if flag
+      variables are on.
 
 # Modules
-  - `state_backend`:
+
+  - `state_backend:` # We keep state in S3 and for state locking use DynamoDB. Every environment/cluster should implement this exactly once.
     - `1 S3 Bucket`
     - `1 DynamoDB Table`
 
-  - `vpc`:
+  - `vpc:` # Every environment/cluster should implement this exactly once and
+try to re-use common resources (NAT Gateways, Public Route Table, VPC Endpoint) as much as possible
     - Permanent resources
       - `1 VPC`
       - `1 Internet Gateway`
