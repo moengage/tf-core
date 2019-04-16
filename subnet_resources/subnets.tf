@@ -30,12 +30,24 @@ resource "aws_route" "private_route_to_nat_gw" {
   destination_cidr_block = "0.0.0.0/0"
   depends_on             = ["aws_route_table.private"]
   nat_gateway_id         = "${var.nat_gateways[element(var.availability_zones, count.index)]}"
+
+  lifecycle {
+    ignore_changes = [
+      "route_table_id",
+    ]
+  }
 }
 
 resource "aws_route_table_association" "private" {
   count          = "${length(var.availability_zones)}"
   subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
   route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
+
+  lifecycle {
+    ignore_changes = [
+      "subnet_id",
+    ]
+  }
 }
 
 resource "aws_subnet" "public" {
@@ -57,4 +69,10 @@ resource "aws_route_table_association" "public" {
   count          = "${length(var.availability_zones)}"
   subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${data.aws_route_table.selected.id}"
+
+  lifecycle {
+    ignore_changes = [
+      "subnet_id",
+    ]
+  }
 }
