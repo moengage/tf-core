@@ -23,6 +23,8 @@
 | volume\_size | The size of the volume in gigabytes | string | n/a | yes |
 | vpc\_id | VPC ID | string | n/a | yes |
 | cluster | Cluster Name | string | `"default"` | no |
+| cpu\_credits | The credit option for CPU usage. Can be standard or unlimited. T3 instances are launched as unlimited by default. T2 instances are launched as standard by default | string | `"unlimited"` | no |
+| delete\_network\_interfaces\_on\_termination | Whether the network interface should be destroyed on instance termination | string | `"true"` | no |
 | device\_name | The name of the device to mount | string | `"/dev/sda1"` | no |
 | ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized | string | `"true"` | no |
 | enabled\_metrics |  | list | `<list>` | no |
@@ -33,16 +35,21 @@
 | iam\_instance\_profile | The IAM Instance Profile to launch the instance with | list | `<list>` | no |
 | launch\_template\_version | Template version. Can be version number, $Latest, or $Default. | string | `"$Latest"` | no |
 | metrics\_granularity | The granularity to associate with the metrics to collect. The only valid value is 1Minute | string | `"1Minute"` | no |
+| min\_elb\_capacity | Setting this causes Terraform to wait for this number of instances from this autoscaling group to show up healthy in the ELB only on creation. Updates will not wait on ELB instance number changes. | string | `"0"` | no |
 | monitoring\_enabled | If true, the launched EC2 instance will have detailed monitoring enabled | string | `"false"` | no |
 | notification\_enabled | If enabled SNS notification will be sent out | string | `"false"` | no |
 | on\_demand\_allocation\_strategy | Strategy to use when launching on-demand instances. Valid values: prioritized. Default: prioritized | string | `"prioritized"` | no |
 | on\_demand\_base\_capacity | Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances. Default: 0 | string | `"0"` | no |
 | on\_demand\_percentage\_above\_base\_capacity | Percentage split between on-demand and Spot instances above the base on-demand capacity. Default: 100 | string | `"100"` | no |
+| protect\_from\_scale\_in | Allows setting instance protection. The autoscaling group will not select instances with this setting for terminination during scale in events. | string | `"false"` | no |
 | spot\_allocation\_strategy | How to allocate capacity across the Spot pools. Valid values: lowest-price. Default: lowest-price | string | `"lowest-price"` | no |
-| spot\_instance\_pools | Number of Spot pools per availability zone to allocate capacity. EC2 Auto Scaling selects the cheapest Spot pools and evenly allocates Spot capacity across the number of Spot pools that you specify. Default: 1 | string | `"1"` | no |
+| spot\_instance\_pools | Number of Spot pools per availability zone to allocate capacity. EC2 Auto Scaling selects the cheapest Spot pools and evenly allocates Spot capacity across the number of Spot pools that you specify. Default: 1 | string | `"3"` | no |
+| spot\_max\_price | Maximum price per unit hour that the user is willing to pay for the Spot instances. Default: on-demand price | string | `""` | no |
+| suspended\_processes | A list of processes to suspend for the AutoScaling Group. The allowed values are Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer. Note that if you suspend either the Launch or Terminate process types, it can prevent your autoscaling group from functioning properly | list | `<list>` | no |
 | target\_group\_arns | A list of aws_alb_target_group ARNs, for use with Application Load Balancing. | list | `<list>` | no |
 | termination\_policies | A list of policies to decide how the instances in the auto scale group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default | list | `<list>` | no |
 | wait\_for\_capacity\_timeout | A maximum duration that Terraform should wait for ASG instances to be healthy before timing out. Setting this to 0 causes Terraform to skip all Capacity Waiting behavior. Default: 10m | string | `"10m"` | no |
+| wait\_for\_elb\_capacity | Setting this will cause Terraform to wait for exactly this number of healthy instances from this autoscaling group in all attached load balancers on both create and update operations. (Takes precedence over min_elb_capacity behavior.) | string | `"0"` | no |
 
 ## Outputs
 

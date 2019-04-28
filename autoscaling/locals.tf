@@ -26,4 +26,8 @@ locals {
     map("key", "Name", "value", "${local.resource_identifier}", "propagate_at_launch", false),
     map("key", "CreatedBy", "value", "${var.created_by}", "propagate_at_launch", false),
   )}"
+
+  asg_managed_name_tag = {
+    Name = "${local.resource_identifier}"
+  }
 }

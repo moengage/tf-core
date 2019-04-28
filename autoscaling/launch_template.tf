@@ -1,5 +1,9 @@
 resource "aws_launch_template" "default" {
-  name = "${local.resource_identifier}-lt"
+  name                 = "${local.resource_identifier}-lt"
+  ebs_optimized        = "${var.ebs_optimized}"
+  iam_instance_profile = "${var.iam_instance_profile}"
+  image_id             = "${var.image_id}"
+  key_name             = "${var.key_name}"
 
   block_device_mappings {
     device_name = "${var.device_name}"
@@ -9,13 +13,9 @@ resource "aws_launch_template" "default" {
     }
   }
 
-  ebs_optimized = "${var.ebs_optimized}"
-
-  iam_instance_profile = "${var.iam_instance_profile}"
-
-  image_id = "${var.image_id}"
-
-  key_name = "${var.key_name}"
+  credit_specification {
+    cpu_credits = "${var.cpu_credits}"
+  }
 
   monitoring {
     enabled = "${var.monitoring_enabled}"
@@ -24,26 +24,29 @@ resource "aws_launch_template" "default" {
   network_interfaces {
     associate_public_ip_address = "${var.associate_public_ip_address}"
     security_groups             = ["${concat(list(aws_security_group.instances.id), var.instance_security_group_ids)}"]
+    delete_on_termination       = "${var.delete_network_interfaces_on_termination}"
   }
-
-  #vpc_security_group_ids = ["${concat(list(aws_security_group.instances.id), var.instance_security_group_ids)}"]
 
   tag_specifications {
     resource_type = "instance"
 
     tags = "${merge(
       local.default_tags,
+      local.asg_managed_name_tag,
       var.extra_instance_tags,
     )}"
   }
+
   tag_specifications {
     resource_type = "volume"
 
     tags = "${merge(
       local.default_tags,
+      local.asg_managed_name_tag,
       var.extra_volume_tags,
     )}"
   }
+
   tags = "${merge(
     local.default_tags,
   )}"

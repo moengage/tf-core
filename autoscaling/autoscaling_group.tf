@@ -1,27 +1,22 @@
 resource "aws_autoscaling_group" "default" {
-  name = "${local.resource_identifier}-asg"
-
+  name                      = "${local.resource_identifier}-asg"
   max_size                  = "${var.max_size}"
   min_size                  = "${var.min_size}"
   health_check_grace_period = "${var.health_check_grace_period}"
   health_check_type         = "${var.health_check_type}"
   default_cooldown          = "${var.default_cooldown}"
-
-  desired_capacity = "${var.desired_capacity}"
-
-  force_delete = "${var.force_delete}"
-
-  vpc_zone_identifier = "${var.instance_subnet_ids}"
-
-  target_group_arns = "${var.target_group_arns}"
-
-  termination_policies = "${var.termination_policies}"
-
-  enabled_metrics = "${var.enabled_metrics}"
-
+  desired_capacity          = "${var.desired_capacity}"
+  force_delete              = "${var.force_delete}"
+  vpc_zone_identifier       = "${var.instance_subnet_ids}"
+  target_group_arns         = "${var.target_group_arns}"
+  termination_policies      = "${var.termination_policies}"
+  enabled_metrics           = "${var.enabled_metrics}"
   wait_for_capacity_timeout = "${var.wait_for_capacity_timeout}"
-
-  metrics_granularity = "${var.metrics_granularity}"
+  metrics_granularity       = "${var.metrics_granularity}"
+  suspended_processes       = "${var.suspended_processes}"
+  min_elb_capacity          = "${var.min_elb_capacity}"
+  wait_for_elb_capacity     = "${var.wait_for_elb_capacity}"
+  protect_from_scale_in     = "${var.protect_from_scale_in}"
 
   mixed_instances_policy {
     launch_template {
@@ -49,6 +44,7 @@ resource "aws_autoscaling_group" "default" {
       on_demand_percentage_above_base_capacity = "${var.on_demand_percentage_above_base_capacity}"
       spot_allocation_strategy                 = "${var.spot_allocation_strategy}"
       spot_instance_pools                      = "${var.spot_instance_pools}"
+      spot_max_price                           = "${var.spot_max_price}"
     }
   }
 
