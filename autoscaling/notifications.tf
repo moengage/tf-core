@@ -1,10 +1,10 @@
 resource "aws_sns_topic" "default" {
-  count = "${var.notification_enabled == "true" ? 1 : 0}"
+  count = "${var.notification_enabled ? 1 : 0}"
   name  = "${local.resource_identifier}-asg-notifications"
 }
 
 resource "aws_autoscaling_notification" "default" {
-  count       = "${var.notification_enabled == "true" ? 1 : 0}"
+  count       = "${var.notification_enabled ? 1 : 0}"
   topic_arn   = "${aws_sns_topic.default.arn}"
   group_names = ["${aws_autoscaling_group.default.*.id}"]
 

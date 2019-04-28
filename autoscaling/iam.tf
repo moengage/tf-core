@@ -1,5 +1,5 @@
 resource "aws_iam_role" "asg_notifications_role" {
-  count = "${var.notification_enabled == "true" ? 1 : 0}"
+  count = "${var.notification_enabled ? 1 : 0}"
   name  = "${local.iam_resource_identifier}-asg-notifications-role"
   path  = "${local.iam_resource_path}"
 
@@ -20,7 +20,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "asg_sns_access" {
-  count = "${var.notification_enabled == "true" ? 1 : 0}"
+  count = "${var.notification_enabled ? 1 : 0}"
   name  = "${local.iam_resource_identifier}-asg-sns-access-policy"
   role  = "${aws_iam_role.asg_notifications_role.id}"
 
