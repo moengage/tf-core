@@ -14,8 +14,7 @@ locals {
   resource_identifier  = "${lower(local._resource_identifier)}"
 
   iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"
-  _iam_resource_path      = "/${var.environment}/${var.business_name}/${var.service_name}/${data.aws_region.current.name}/"
-  iam_resource_path       = "${lower(local._iam_resource_path)}"
+  iam_resource_path       = "/${replace(local.iam_resource_identifier, "-", "/")}/"
 
   asg_tags = "${list(
     map("key", "Business", "value", "${lower(var.business_name)}", "propagate_at_launch", false),
