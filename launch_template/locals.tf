@@ -13,8 +13,4 @@ locals {
   _service_type        = "${var.service_type != "" ? format("%s-", var.service_type) : ""}"
   _resource_identifier = "${local._service_type}${var.business_name}-${var.service_name}"
   resource_identifier  = "${lower(local._resource_identifier)}"
-
-  asg_managed_name_tag = {
-    Name = "${local.resource_identifier}"
-  }
 }
