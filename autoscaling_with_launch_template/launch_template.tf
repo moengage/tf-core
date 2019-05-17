@@ -1,9 +1,12 @@
 resource "aws_launch_template" "default" {
-  name                 = "${local.resource_identifier}-lt"
-  ebs_optimized        = "${var.ebs_optimized}"
-  iam_instance_profile = "${var.iam_instance_profile}"
-  image_id             = "${var.image_id}"
-  key_name             = "${var.key_name}"
+  name          = "${local.resource_identifier}-lt"
+  ebs_optimized = "${var.ebs_optimized}"
+  image_id      = "${var.image_id}"
+  key_name      = "${var.key_name}"
+
+  iam_instance_profile {
+    arn = "${var.iam_instance_profile}"
+  }
 
   block_device_mappings {
     device_name = "${var.device_name}"

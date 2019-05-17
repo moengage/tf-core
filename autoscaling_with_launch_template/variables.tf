@@ -99,8 +99,7 @@ variable "health_check_type" {
 
 variable "iam_instance_profile" {
   description = "The IAM Instance Profile to launch the instance with"
-  type        = "list"
-  default     = []
+  default     = ""
 }
 
 variable "image_id" {
