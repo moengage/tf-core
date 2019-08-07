@@ -24,3 +24,7 @@ variable "dynamodb_write_capacity_unit" {
   default     = 5
   description = "DynamoDB write capacity units"
 }
+
+variable "region" {
+  description = "AWS Region"
+}

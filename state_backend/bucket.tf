@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "default" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = "${merge(
