@@ -95,8 +95,8 @@ resource "aws_nat_gateway" "nat_gw" {
 
   tags = "${merge(
     local.default_tags,
-    map("Name", "${local.resource_identifier}-vpc-nat-gw-${substr(element(data.aws_availability_zones.available.names, count.index),-2,-1)}"),
-    map("AvaiabilityZone", "${element(data.aws_availability_zones.available.names, count.index)}"),
+    map("Name", "${local.resource_identifier}-vpc-nat-gw-${substr(element(var.availability_zones, count.index), -2, -1)}"),
+    map("AvaiabilityZone", "${element(var.availability_zones, count.index)}"),
   )}"
 
   lifecycle {

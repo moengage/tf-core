@@ -5,7 +5,7 @@ locals {
     CreatedBy   = "${lower(var.created_by)}"
     Cluster     = "${lower(var.cluster)}"
     Environment = "${lower(var.environment)}"
-    Business    = "sre"
+    Business    = "DevOps"
   }
 
   resource_identifier = "${lower(var.environment)}-${lower(var.cluster)}"
