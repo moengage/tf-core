@@ -10,3 +10,23 @@ resource "aws_network_acl" "private" {
     map( "ResourceGroup", "${lower(var.business_name)}" )
 )}"
 }
+
+resource "aws_network_acl_rule" "private_ingress" {
+  count          = "${length(var.availability_zones)}"
+  network_acl_id = "${element(aws_network_acl.private.*.id, count.index)}"
+  rule_number    = 100
+  rule_action    = "allow"
+  egress         = false
+  protocol       = "-1"
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "private_egress" {
+  count          = "${length(var.availability_zones)}"
+  network_acl_id = "${element(aws_network_acl.private.*.id, count.index)}"
+  rule_number    = 100
+  rule_action    = "allow"
+  egress         = true
+  protocol       = "-1"
+  cidr_block     = "0.0.0.0/0"
+}
