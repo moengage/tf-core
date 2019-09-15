@@ -4,7 +4,7 @@ resource "aws_security_group" "default" {
   vpc_id = "${var.vpc_id}"
 
   tags = "${merge(
-    map("Name", "${local.resource_identifier}-instance-sg"),
+    map("Name", "${local.resource_identifier}-controlplane-sg"),
     local.default_tags,
     var.extra_tags)
   }"

@@ -2,6 +2,15 @@ variable "region" {
   description = "Region"
 }
 
+variable "authenticator_command" {
+  default     = "aws-vault"
+  description = "Authenticator you use"
+}
+
+variable "business" {
+  description = "Business"
+}
+
 variable "created_by" {
   description = "Created By"
 }
@@ -23,10 +32,15 @@ variable "create_controlplane_security_group" {
   default     = true
 }
 
+variable "create_worker_iam_role" {
+  description = "Flag to create worker node role"
+  default     = true
+}
+
 variable "enabled_cluster_log_types" {
   description = "A list of the desired control plane logging to enable. Valid values are: api, audit, authenticator, controllerManager, scheduler"
   type        = "list"
-  default     = ["api", "audit"]
+  default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }
 
 variable "log_retention_in_days" {

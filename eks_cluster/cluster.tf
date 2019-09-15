@@ -17,6 +17,7 @@ resource "aws_eks_cluster" "default" {
   }
 
   depends_on = [
+    "aws_iam_role.default",
     "aws_iam_role_policy_attachment.eks_cluster_policy",
     "aws_iam_role_policy_attachment.eks_service_policy",
     "aws_cloudwatch_log_group.default",
