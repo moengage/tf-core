@@ -37,6 +37,11 @@ variable "create_worker_iam_role" {
   default     = true
 }
 
+variable "create_worker_security_group" {
+  description = "Flag to create worker security groups"
+  default     = true
+}
+
 variable "enabled_cluster_log_types" {
   description = "A list of the desired control plane logging to enable. Valid values are: api, audit, authenticator, controllerManager, scheduler"
   type        = "list"

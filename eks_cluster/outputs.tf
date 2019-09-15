@@ -10,6 +10,10 @@ output "controlplane_security_group" {
   value = "${join(",", aws_security_group.default.*.id)}"
 }
 
+output "worker_security_group" {
+  value = "${join(",", aws_security_group.worker_default.*.id)}"
+}
+
 output "worker_role_name" {
   value = "${join(",", aws_iam_role.worker_default.*.name)}"
 }

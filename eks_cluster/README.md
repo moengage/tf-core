@@ -16,6 +16,7 @@
 | create\_controlplane\_security\_group | Flag to create controlplane security group | string | `"true"` | no |
 | create\_timeout | Create timeout | string | `"30m"` | no |
 | create\_worker\_iam\_role | Flag to create worker node role | string | `"true"` | no |
+| create\_worker\_security\_group | Flag to create worker security groups | string | `"true"` | no |
 | delete\_timeout | Delete timeout | string | `"15m"` | no |
 | enabled\_cluster\_log\_types | A list of the desired control plane logging to enable. Valid values are: api, audit, authenticator, controllerManager, scheduler | list | `<list>` | no |
 | extra\_tags | Extra tags | map | `<map>` | no |
@@ -36,4 +37,5 @@
 | kubeconfig\_certificate\_authority\_data |  |
 | worker\_role\_arn |  |
 | worker\_role\_name |  |
+| worker\_security\_group |  |
 
