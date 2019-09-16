@@ -16,7 +16,7 @@ locals {
   iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"
   iam_resource_path       = "/${replace(local.iam_resource_identifier, "-", "/")}/"
 
-  asg_tags = "${list(
+  _asg_tags = "${list(
     map("key", "Business", "value", "${lower(var.business_name)}", "propagate_at_launch", false),
     map("key", "Service", "value", "${lower(var.service_name)}", "propagate_at_launch", false),
     map("key", "Environment", "value", "${lower(var.environment)}", "propagate_at_launch", false),
@@ -26,6 +26,8 @@ locals {
     map("key", "Name", "value", "${local.resource_identifier}", "propagate_at_launch", false),
     map("key", "CreatedBy", "value", "${var.created_by}", "propagate_at_launch", false),
   )}"
+
+  asg_tags = "${concat(local._asg_tags, var.extra_asg_tags)}"
 
   asg_managed_name_tag = {
     Name = "${local.resource_identifier}"

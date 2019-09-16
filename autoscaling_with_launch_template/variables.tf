@@ -79,8 +79,14 @@ variable "environment" {
   description = "Environment"
 }
 
+variable "extra_asg_tags" {
+  type    = "list"
+  default = []
+}
+
 variable "fab_tag" {
   description = "Fab Tag"
+  default     = "nottagged"
 }
 
 variable "force_delete" {
@@ -214,6 +220,11 @@ variable "termination_policies" {
 
 variable "tertiary_instance_type" {
   description = "Tertiary instance type"
+}
+
+variable "user_data" {
+  description = "Instance user data"
+  default     = ""
 }
 
 variable "volume_size" {
