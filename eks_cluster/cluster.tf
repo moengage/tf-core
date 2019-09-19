@@ -2,6 +2,7 @@ resource "aws_eks_cluster" "default" {
   name                      = "${local.resource_identifier}"
   role_arn                  = "${var.manage_iam_resources ? aws_iam_role.default.arn : var.iam_role_arn}"
   enabled_cluster_log_types = "${var.enabled_cluster_log_types}"
+  version                   = "${var.cluster_version}"
 
   vpc_config {
     subnet_ids              = "${var.subnet_ids}"
