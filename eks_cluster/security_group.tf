@@ -6,8 +6,9 @@ resource "aws_security_group" "default" {
   tags = "${merge(
     map("Name", "${local.resource_identifier}-controlplane-sg"),
     local.default_tags,
-    var.extra_tags)
-  }"
+    var.extra_tags,
+    map("kubernetes.io/cluster/${local.resource_identifier}", "owned")
+  )}"
 }
 
 resource "aws_security_group" "worker_default" {
@@ -18,8 +19,9 @@ resource "aws_security_group" "worker_default" {
   tags = "${merge(
     map("Name", "${local.resource_identifier}-worker-sg"),
     local.default_tags,
-    var.extra_tags)
-  }"
+    var.extra_tags,
+    map("kubernetes.io/cluster/${local.resource_identifier}", "owned")
+  )}"
 }
 
 resource "aws_security_group_rule" "default_ingress" {
