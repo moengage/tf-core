@@ -25,7 +25,7 @@ variable "notification_enabled" {
 }
 
 variable "enabled_metrics" {
-  type = "list"
+  type = list(string)
 
   default = [
     "GroupMinSize",
@@ -63,7 +63,7 @@ variable "health_check_type" {
 
 variable "instance_subnet_ids" {
   description = "Subnet IDs where instances will be launched"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "launch_template_id" {
@@ -152,12 +152,12 @@ variable "suspended_processes" {
 
 variable "target_group_arns" {
   description = "A list of aws_alb_target_group ARNs, for use with Application Load Balancing."
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "termination_policies" {
-  type        = "list"
+  type        = list(string)
   description = "A list of policies to decide how the instances in the auto scale group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default"
   default     = ["OldestInstance"]
 }
@@ -179,3 +179,4 @@ variable "wait_for_elb_capacity" {
   description = "Setting this will cause Terraform to wait for exactly this number of healthy instances from this autoscaling group in all attached load balancers on both create and update operations. (Takes precedence over min_elb_capacity behavior.)"
   default     = 0
 }
+
