@@ -30,11 +30,12 @@ variable "flow_logs_retention_in_days" {
 }
 
 variable "availability_zones" {
-  type        = "list"
+  type        = list(string)
   description = "Availability zones list in which management subnets and respective infrastructure will be created"
 }
 
 variable "management_public_subnets" {
-  type        = "map"
+  type        = map(string)
   description = "Public subnets where NAT gateways will be launched"
 }
+
