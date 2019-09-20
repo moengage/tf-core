@@ -1,6 +1,6 @@
 variable "aws_lb_accounts" {
   description = "Use the account ID that corresponds to the region for your load balancer and bucket"
-  type        = "map"
+  type        = map(string)
 
   default = {
     us-east-1      = "127311923021"
@@ -157,12 +157,12 @@ variable "lb_logs_retention_days" {
 
 variable "lb_subnets" {
   description = "Subnet IDS where AWS will launch load balancer"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "lb_security_groups" {
   description = "Security group IDs which will be associated with load balancer"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -178,3 +178,4 @@ variable "service_name" {
 variable "vpc_id" {
   description = "VPC ID"
 }
+
