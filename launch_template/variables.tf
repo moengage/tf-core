@@ -53,7 +53,7 @@ variable "image_id" {
 
 variable "instance_security_group_ids" {
   description = "Security Group IDs which will be attached to launched instances"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "key_name" {
@@ -76,3 +76,4 @@ variable "service_type" {
 variable "volume_size" {
   description = "The size of the volume in gigabytes"
 }
+
