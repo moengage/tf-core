@@ -80,7 +80,7 @@ variable "environment" {
 }
 
 variable "extra_asg_tags" {
-  type    = list(string)
+  type    = list(object({ key = string, propagate_at_launch = bool, value = string }))
   default = []
 }
 
