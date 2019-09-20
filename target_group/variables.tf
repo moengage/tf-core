@@ -88,3 +88,4 @@ variable "stickiness_enabled" {
 variable "vpc_id" {
   description = "VPC ID"
 }
+
