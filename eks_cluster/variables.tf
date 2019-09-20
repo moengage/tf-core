@@ -49,7 +49,7 @@ variable "create_worker_security_group" {
 
 variable "enabled_cluster_log_types" {
   description = "A list of the desired control plane logging to enable. Valid values are: api, audit, authenticator, controllerManager, scheduler"
-  type        = "list"
+  type        = list(string)
   default     = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 }
 
@@ -60,7 +60,7 @@ variable "log_retention_in_days" {
 
 variable "extra_tags" {
   description = "Extra tags"
-  type        = "map"
+  type        = map(string)
   default     = {}
 }
 
@@ -76,7 +76,7 @@ variable "iam_role_arn" {
 
 variable "subnet_ids" {
   description = "Subnet IDs where cluster will be created and managed by AWS"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "enable_endpoint_private_access" {
@@ -89,7 +89,7 @@ variable "enable_endpoint_public_access" {
 
 variable "security_group_ids" {
   description = "Security groups which will be attached to EKS Master/controlplane"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -111,3 +111,4 @@ variable "update_timeout" {
 variable "vpc_id" {
   description = "VPC ID"
 }
+

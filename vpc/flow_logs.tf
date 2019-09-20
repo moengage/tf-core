@@ -1,24 +1,26 @@
 resource "aws_flow_log" "all" {
-  count           = "${var.enable_flow_logs ? 1 : 0}"
-  log_destination = "${aws_cloudwatch_log_group.flow_logs.arn}"
-  iam_role_arn    = "${aws_iam_role.vpc_flow_logs.arn}"
-  vpc_id          = "${aws_vpc.default.id}"
+  count           = var.enable_flow_logs ? 1 : 0
+  log_destination = aws_cloudwatch_log_group.flow_logs[0].arn
+  iam_role_arn    = aws_iam_role.vpc_flow_logs[0].arn
+  vpc_id          = aws_vpc.default.id
   traffic_type    = "ALL"
 }
 
 resource "aws_cloudwatch_log_group" "flow_logs" {
-  count             = "${var.enable_flow_logs ? 1 : 0}"
+  count             = var.enable_flow_logs ? 1 : 0
   name              = "/vpc-flow-logs/${aws_vpc.default.id}"
-  retention_in_days = "${var.flow_logs_retention_in_days}"
+  retention_in_days = var.flow_logs_retention_in_days
 
-  tags = "${merge(
+  tags = merge(
     local.default_tags,
-    map("Name", "${local.resource_identifier}-vpc-flow-logs"),
-  )}"
+    {
+      "Name" = "${local.resource_identifier}-vpc-flow-logs"
+    },
+  )
 }
 
 resource "aws_iam_role" "vpc_flow_logs" {
-  count = "${var.enable_flow_logs ? 1 : 0}"
+  count = var.enable_flow_logs ? 1 : 0
   name  = "${local.resource_identifier}-vpc-flow-logs"
 
   assume_role_policy = <<EOF
@@ -36,12 +38,13 @@ resource "aws_iam_role" "vpc_flow_logs" {
   ]
 }
 EOF
+
 }
 
 resource "aws_iam_role_policy" "vpc_flow_logs_policy" {
-  count = "${var.enable_flow_logs ? 1 : 0}"
+  count = var.enable_flow_logs ? 1 : 0
   name  = "${local.resource_identifier}-vpc-flow-logs-policy"
-  role  = "${aws_iam_role.vpc_flow_logs.id}"
+  role  = aws_iam_role.vpc_flow_logs[0].id
 
   policy = <<EOF
 {
@@ -61,4 +64,6 @@ resource "aws_iam_role_policy" "vpc_flow_logs_policy" {
   ]
 }
 EOF
+
 }
+

@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "logs" {
-  count         = "${var.lb_access_logs_enabled ? 1 : 0}"
-  bucket        = "${local.logs_bucket_name}"
+  count         = var.lb_access_logs_enabled ? 1 : 0
+  bucket        = local.logs_bucket_name
   acl           = "log-delivery-write"
   force_destroy = true
 
@@ -24,12 +24,13 @@ resource "aws_s3_bucket" "logs" {
 }
 EOF
 
+
   lifecycle_rule {
     id      = "cleanup"
     enabled = true
 
     expiration {
-      days = "${var.lb_logs_retention_days}"
+      days = var.lb_logs_retention_days
     }
   }
 
@@ -39,8 +40,11 @@ EOF
     abort_incomplete_multipart_upload_days = 2
   }
 
-  tags = "${merge(
+  tags = merge(
     local.default_tags,
-    map("Name", "${local.logs_bucket_name}"),
-  )}"
+    {
+      "Name" = local.logs_bucket_name
+    },
+  )
 }
+

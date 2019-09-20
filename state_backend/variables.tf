@@ -28,3 +28,4 @@ variable "dynamodb_write_capacity_unit" {
 variable "region" {
   description = "AWS Region"
 }
+

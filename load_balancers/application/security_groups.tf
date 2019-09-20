@@ -1,7 +1,7 @@
 resource "aws_security_group" "alb" {
-  count  = "${var.lb_create_security_group ? 1 : 0}"
+  count  = var.lb_create_security_group ? 1 : 0
   name   = "${local.resource_identifier}-sg"
-  vpc_id = "${var.vpc_id}"
+  vpc_id = var.vpc_id
 
   egress {
     from_port   = 0
@@ -14,8 +14,11 @@ resource "aws_security_group" "alb" {
     create_before_destroy = true
   }
 
-  tags = "${merge(
-		local.default_tags,
-		map( "Name", "${local.resource_identifier}-sg"),
-	)}"
+  tags = merge(
+    local.default_tags,
+    {
+      "Name" = "${local.resource_identifier}-sg"
+    },
+  )
 }
+
