@@ -9,8 +9,11 @@ resource "aws_s3_bucket" "default" {
     prevent_destroy = false
   }
 
-  tags = "${merge(
+  tags = merge(
     local.default_tags,
-    map("Name", "${local.resource_identifier}-terraform-state-storage"),
-  )}"
+    {
+      "Name" = "${local.resource_identifier}-terraform-state-storage"
+    },
+  )
 }
+
