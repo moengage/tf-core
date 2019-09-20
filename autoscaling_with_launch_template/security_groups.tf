@@ -1,11 +1,13 @@
 resource "aws_security_group" "instances" {
   name_prefix = "${local.resource_identifier}-instance-sg"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = var.vpc_id
 
-  tags = "${merge(
-		local.default_tags,
-		map("Name", "${local.resource_identifier}-instance-sg")
-	)}"
+  tags = merge(
+    local.default_tags,
+    {
+      "Name" = "${local.resource_identifier}-instance-sg"
+    },
+  )
 
   egress {
     from_port   = 0
@@ -18,3 +20,4 @@ resource "aws_security_group" "instances" {
     create_before_destroy = true
   }
 }
+
