@@ -24,21 +24,22 @@ variable "business_name" {
 }
 
 variable "availability_zones" {
-  type        = "list"
+  type        = list(string)
   description = "Availability zones list in which management subnets and respective infrastructure will be created"
 }
 
 variable "nat_gateways" {
-  type        = "map"
+  type        = map(string)
   description = "availability_zones and nat_gateway_ids map"
 }
 
 variable "private_subnets" {
-  type        = "map"
+  type        = map(string)
   description = "availability_zones and CIDR map"
 }
 
 variable "public_subnets" {
-  type        = "map"
+  type        = map(string)
   description = "availability_zones and CIDR map"
 }
+
