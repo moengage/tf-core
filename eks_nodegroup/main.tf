@@ -21,7 +21,7 @@ module "nodegroup" {
   environment                              = var.environment
   health_check_type                        = var.health_check_type
   iam_instance_profile                     = aws_iam_instance_profile.default.arn
-  image_id                                 = data.aws_ssm_parameter.default.value
+  image_id                                 = coalesce(var.image_id, data.aws_ssm_parameter.default.value)
   instance_subnet_ids                      = var.instance_subnet_ids
   instance_security_group_ids              = [data.aws_security_group.default.id]
   key_name                                 = var.key_name

@@ -22,6 +22,10 @@ variable "desired_capacity" {
 variable "environment" {
 }
 
+variable "image_id" {
+  default = ""
+}
+
 variable "instance_subnet_ids" {
   type = list(string)
 }
