@@ -52,3 +52,8 @@ data "template_file" "kubeconfig" {
   }
 }
 
+data "external" "thumbprint" {
+  program = ["${path.module}/scripts/thumbprint.sh", data.aws_region.current.name]
+}
+
+

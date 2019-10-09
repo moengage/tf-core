@@ -59,3 +59,9 @@ resource "aws_iam_role_policy_attachment" "ecr_readonly_policy" {
   role       = aws_iam_role.worker_default[0].name
 }
 
+resource "aws_iam_openid_connect_provider" "default" {
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = [data.external.thumbprint.result.thumbprint]
+  url             = "${aws_eks_cluster.default.identity.0.oidc.0.issuer}"
+}
+
