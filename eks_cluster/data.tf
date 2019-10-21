@@ -53,7 +53,6 @@ data "template_file" "kubeconfig" {
 }
 
 data "external" "thumbprint" {
-  program = ["${path.module}/scripts/thumbprint.sh", data.aws_region.current.name]
+  program = ["kubergrunt", "eks", "oidc-thumbprint", "--issuer-url", aws_eks_cluster.default.identity.0.oidc.0.issuer]
 }
-
 
