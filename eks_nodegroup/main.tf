@@ -35,10 +35,22 @@ module "nodegroup" {
   volume_size                              = var.volume_size
   vpc_id                                   = var.vpc_id
   user_data                                = data.template_file.userdata.rendered
-  extra_asg_tags = [{
-    "key"                 = "kubernetes.io/cluster/${var.cluster_name}"
-    "value"               = "owned"
-    "propagate_at_launch" = true
-  }]
+  extra_asg_tags = [
+    {
+      "key"                 = "kubernetes.io/cluster/${var.cluster_name}"
+      "value"               = "owned"
+      "propagate_at_launch" = true
+    },
+    {
+      "key"                 = "k8s.io/cluster-autoscaler/${var.cluster_name}"
+      "value"               = "owned"
+      "propagate_at_launch" = true
+    },
+    {
+      "key"                 = "k8s.io/cluster-autoscaler/enabled"
+      "value"               = "${var.cluster_autoscaler_enabled}"
+      "propagate_at_launch" = true
+    },
+  ]
 }
 

@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# commands block ALL containers from using the instance profile credentials
+# TODO: Make sure infra managements pods are not blocked before enabling it for nodes
+#yum install -y iptables-services
+#iptables --insert FORWARD 1 --in-interface eni+ --destination 169.254.169.254/32 --jump DROP
+#iptables-save | tee /etc/sysconfig/iptables
+#systemctl enable --now iptables
+
 # Sysctl changes
 ## Disable IPv6
 cat <<EOF > /etc/sysctl.d/10-disable-ipv6.conf
@@ -50,7 +57,6 @@ net.ipv4.neigh.default.gc_thresh3=16384
 EOF
 
 systemctl restart systemd-sysctl.service
-
 
 /etc/eks/bootstrap.sh --apiserver-endpoint '${cluster_endpoint}' \
     --b64-cluster-ca '${certificate_authority_data}' '${cluster_name}' \

@@ -10,6 +10,11 @@ variable "business_name" {
 variable "created_by" {
 }
 
+variable "cluster_autoscaler_enabled" {
+  default = "true"
+  type    = string
+}
+
 variable "default_cooldown" {
 }
 

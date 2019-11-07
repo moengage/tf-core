@@ -7,6 +7,7 @@
 | business\_name |  | string | n/a | yes |
 | cluster\_name |  | string | n/a | yes |
 | cluster\_version |  | string | n/a | yes |
+| cluster\_autoscaler_enabled |  | string | `"true"` | no |
 | created\_by |  | string | n/a | yes |
 | default\_cooldown |  | string | n/a | yes |
 | desired\_capacity |  | string | n/a | yes |
