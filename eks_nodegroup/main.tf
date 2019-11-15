@@ -44,12 +44,12 @@ module "nodegroup" {
     {
       "key"                 = "k8s.io/cluster-autoscaler/${var.cluster_name}"
       "value"               = "owned"
-      "propagate_at_launch" = true
+      "propagate_at_launch" = false
     },
     {
-      "key"                 = "k8s.io/cluster-autoscaler/enabled"
-      "value"               = "${var.cluster_autoscaler_enabled}"
-      "propagate_at_launch" = true
+      "key"                 = "k8s.io/cluster-autoscaler/${var.cluster_autoscaler_enabled ? "enabled" : "disabled"}"
+      "value"               = "true"
+      "propagate_at_launch" = false
     },
   ]
 }

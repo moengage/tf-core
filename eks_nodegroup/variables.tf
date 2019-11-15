@@ -11,8 +11,8 @@ variable "created_by" {
 }
 
 variable "cluster_autoscaler_enabled" {
-  default = "true"
-  type    = string
+  default = true
+  type    = bool
 }
 
 variable "default_cooldown" {
@@ -29,6 +29,7 @@ variable "environment" {
 
 variable "image_id" {
   default = ""
+  type    = string
 }
 
 variable "instance_subnet_ids" {

@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "worker_default" {
 
 data "template_file" "config_map_aws_auth" {
   count    = var.create_worker_iam_role ? 1 : 0
-  template = file("${path.module}/templates/config_map_aws_auth.tpl")
+  template = file("${path.module}/templates/config_map_aws_auth.tmpl")
 
   vars = {
     aws_iam_role_arn = aws_iam_role.worker_default[0].arn
@@ -41,10 +41,10 @@ data "template_file" "config_map_aws_auth" {
 }
 
 data "template_file" "kubeconfig" {
-  template = file("${path.module}/templates/kubeconfig.tpl")
+  template = file("${path.module}/templates/kubeconfig.tmpl")
 
   vars = {
-    kubeconfig_name           = aws_eks_cluster.default.name
+    cluster_name              = aws_eks_cluster.default.name
     endpoint                  = aws_eks_cluster.default.endpoint
     region                    = data.aws_region.current.name
     cluster_auth_base64       = aws_eks_cluster.default.certificate_authority[0].data

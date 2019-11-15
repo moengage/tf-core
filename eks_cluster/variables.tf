@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "authenticator_command" {
-  default     = "aws-vault"
+  default     = "aws-iam-authenticator"
   description = "Authenticator you use"
 }
 
