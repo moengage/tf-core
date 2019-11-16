@@ -55,6 +55,11 @@ variable "extra_volume_tags" {
   default     = {}
 }
 
+variable "instance_types" {
+  type        = list(string)
+  description = "List of instance type, ordered priority, less index more priority"
+}
+
 variable "notification_enabled" {
   description = "If enabled SNS notification will be sent out"
   default     = false
@@ -169,17 +174,9 @@ variable "on_demand_percentage_above_base_capacity" {
   default     = 100
 }
 
-variable "primary_instance_type" {
-  description = "Primary instance Type"
-}
-
 variable "protect_from_scale_in" {
   description = "Allows setting instance protection. The autoscaling group will not select instances with this setting for terminination during scale in events."
   default     = false
-}
-
-variable "secondary_instance_type" {
-  description = "Secondary instance Type"
 }
 
 variable "service_name" {
@@ -216,10 +213,6 @@ variable "termination_policies" {
   type        = list(string)
   description = "A list of policies to decide how the instances in the auto scale group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default"
   default     = ["OldestInstance"]
-}
-
-variable "tertiary_instance_type" {
-  description = "Tertiary instance type"
 }
 
 variable "user_data" {

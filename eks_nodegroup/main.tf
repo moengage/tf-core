@@ -28,9 +28,7 @@ module "nodegroup" {
   max_size                                 = var.max_size
   min_size                                 = var.min_size
   on_demand_percentage_above_base_capacity = var.on_demand_percentage_above_base_capacity
-  primary_instance_type                    = var.primary_instance_type
-  secondary_instance_type                  = var.secondary_instance_type
-  tertiary_instance_type                   = var.tertiary_instance_type
+  instance_types                           = var.instance_types
   service_name                             = var.service_name
   volume_size                              = var.volume_size
   vpc_id                                   = var.vpc_id

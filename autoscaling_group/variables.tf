@@ -66,6 +66,11 @@ variable "instance_subnet_ids" {
   type        = list(string)
 }
 
+variable "instance_types" {
+  description = "List of instance types, ordered priority, less index more priority"
+  type        = list(string)
+}
+
 variable "launch_template_id" {
   description = "Template ID"
 }
@@ -108,17 +113,9 @@ variable "on_demand_percentage_above_base_capacity" {
   default     = 100
 }
 
-variable "primary_instance_type" {
-  description = "Primary instance Type"
-}
-
 variable "protect_from_scale_in" {
   description = "Allows setting instance protection. The autoscaling group will not select instances with this setting for terminination during scale in events."
   default     = false
-}
-
-variable "secondary_instance_type" {
-  description = "Secondary instance Type"
 }
 
 variable "service_name" {
@@ -160,10 +157,6 @@ variable "termination_policies" {
   type        = list(string)
   description = "A list of policies to decide how the instances in the auto scale group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default"
   default     = ["OldestInstance"]
-}
-
-variable "tertiary_instance_type" {
-  description = "Tertiary instance type"
 }
 
 variable "vpc_id" {

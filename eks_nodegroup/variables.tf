@@ -32,6 +32,11 @@ variable "image_id" {
   type    = string
 }
 
+variable "instance_types" {
+  description = "List of instance types, ordered priority, less index more priority"
+  type        = list(string)
+}
+
 variable "instance_subnet_ids" {
   type = list(string)
 }
@@ -46,15 +51,6 @@ variable "min_size" {
 }
 
 variable "on_demand_percentage_above_base_capacity" {
-}
-
-variable "primary_instance_type" {
-}
-
-variable "secondary_instance_type" {
-}
-
-variable "tertiary_instance_type" {
 }
 
 variable "service_name" {
