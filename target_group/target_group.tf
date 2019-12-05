@@ -1,4 +1,5 @@
 resource "aws_lb_target_group" "default" {
+  count = var.enabled ? 1 : 0
   name = "${substr(
     local.resource_identifier,
     0,

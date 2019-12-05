@@ -15,6 +15,12 @@ variable "deregistration_delay" {
   default     = 300
 }
 
+variable "enabled" {
+  description = "Create resources"
+  default     = true
+  type        = bool
+}
+
 variable "environment" {
   description = "Environment"
 }

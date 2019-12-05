@@ -5,6 +5,7 @@
 | business\_name | Business Name | string | n/a | yes |
 | cluster | Cluster Name | string | n/a | yes |
 | created\_by | Created By | string | n/a | yes |
+| enabled | Create resources | bool | true | no |
 | environment | Environment | string | n/a | yes |
 | health\_check\_matcher | The HTTP codes to use when checking for a successful response from a target. You can specify multiple values (for example, '200,202') or a range of values (for example, '200-299') | string | n/a | yes |
 | health\_check\_path | The destination for the health check request | string | n/a | yes |
