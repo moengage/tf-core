@@ -20,4 +20,3 @@ resource "aws_security_group" "instances" {
     create_before_destroy = true
   }
 }
-

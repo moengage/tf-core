@@ -178,3 +178,7 @@ variable "wait_for_elb_capacity" {
   default     = 0
 }
 
+variable "propagate_tags_at_launch" {
+  description = "Enables propagation of the tag to Amazon EC2 instances launched via this ASG"
+  default = true
+}

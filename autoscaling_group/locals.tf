@@ -17,7 +17,7 @@ locals {
   iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"
   iam_resource_path       = "/${replace(local.iam_resource_identifier, "-", "/")}/"
 
-  asg_tags = [
+  _asg_tags = [
     {
       "key"                 = "Business"
       "value"               = lower(var.business_name)
