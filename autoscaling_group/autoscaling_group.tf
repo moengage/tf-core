@@ -26,43 +26,43 @@ resource "aws_autoscaling_group" "default" {
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 1 ? var.instance_types.0 : ""}"
+        instance_type = length(var.instance_types) >= 1 ? var.instance_types.0 : ""
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 2 ? var.instance_types.1 : ""}"
+        instance_type = length(var.instance_types) >= 2 ? var.instance_types.1 : ""
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 3 ? var.instance_types.2 : ""}"
+        instance_type = length(var.instance_types) >= 3 ? var.instance_types.2 : ""
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 4 ? var.instance_types.3 : ""}"
+        instance_type = length(var.instance_types) >= 4 ? var.instance_types.3 : ""
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 5 ? var.instance_types.4 : ""}"
+        instance_type = length(var.instance_types) >= 5 ? var.instance_types.4 : ""
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 6 ? var.instance_types.5 : ""}"
+        instance_type = length(var.instance_types) >= 6 ? var.instance_types.5 : ""
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 7 ? var.instance_types.6 : ""}"
+        instance_type = length(var.instance_types) >= 7 ? var.instance_types.6 : ""
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 8 ? var.instance_types.7 : ""}"
+        instance_type = length(var.instance_types) >= 8 ? var.instance_types.7 : ""
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 9 ? var.instance_types.8 : ""}"
+        instance_type = length(var.instance_types) >= 9 ? var.instance_types.8 : ""
       }
 
       override {
-        instance_type = "${length(var.instance_types) >= 10 ? var.instance_types.9 : ""}"
+        instance_type = length(var.instance_types) >= 10 ? var.instance_types.9 : ""
       }
     }
     instances_distribution {
