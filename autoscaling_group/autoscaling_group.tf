@@ -1,5 +1,6 @@
 resource "aws_autoscaling_group" "default" {
   name                      = "${local.resource_identifier}-asg"
+  count                     = var.enabled ? 1 : 0
   max_size                  = var.max_size
   min_size                  = var.min_size
   health_check_grace_period = var.health_check_grace_period

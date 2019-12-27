@@ -1,5 +1,6 @@
 resource "aws_security_group" "instances" {
   name_prefix = "${local.resource_identifier}-instance-sg"
+  count       = var.enabled ? 1 : 0
   vpc_id      = var.vpc_id
 
   tags = merge(

@@ -182,3 +182,9 @@ variable "propagate_tags_at_launch" {
   description = "Enables propagation of the tag to Amazon EC2 instances launched via this ASG"
   default = true
 }
+
+variable "enabled" {
+  description = "Create resources"
+  default     = true
+  type        = bool
+}

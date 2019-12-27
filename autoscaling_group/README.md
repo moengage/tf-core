@@ -5,6 +5,7 @@
 | business\_name | Business Name | string | n/a | yes |
 | created\_by | Created By | string | n/a | yes |
 | default\_cooldown | Time between a scaling activity and the succeeding scaling activity | string | n/a | yes |
+| enabled | Create resources | bool | true | no |
 | desired\_capacity | The number of Amazon EC2 instances that should be running in the group | string | n/a | yes |
 | environment | Environment | string | n/a | yes |
 | fab\_tag | Fab Tag | string | n/a | yes |
