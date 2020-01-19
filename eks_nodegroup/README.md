@@ -1,28 +1,40 @@
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+| random | n/a |
+| template | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| associate\_public\_ip\_address |  | string | n/a | yes |
-| bootstrap\_extra\_args |  | string | `""` | no |
-| business\_name |  | string | n/a | yes |
-| cluster\_name |  | string | n/a | yes |
-| cluster\_version |  | string | n/a | yes |
-| cluster\_autoscaler_enabled |  | bool | `"true"` | no |
-| created\_by |  | string | n/a | yes |
-| default\_cooldown |  | string | n/a | yes |
-| desired\_capacity |  | string | n/a | yes |
-| environment |  | string | n/a | yes |
-| health\_check\_type |  | string | n/a | yes |
-| image\_id |  | string | `""` | no |
-| instance\_subnet\_ids |  | list(string) | n/a | yes |
-| key\_name |  | string | n/a | yes |
-| max\_size |  | string | n/a | yes |
-| min\_size |  | string | n/a | yes |
-| on\_demand\_percentage\_above\_base\_capacity |  | string | n/a | yes |
-| primary\_instance\_type |  | string | n/a | yes |
-| region |  | string | n/a | yes |
-| secondary\_instance\_type |  | string | n/a | yes |
-| service\_name |  | string | n/a | yes |
-| tertiary\_instance\_type |  | string | n/a | yes |
-| volume\_size |  | string | n/a | yes |
-| vpc\_id |  | string | n/a | yes |
+|------|-------------|------|---------|:-----:|
+| associate\_public\_ip\_address | Whether to associate public ip address to instances | `any` | n/a | yes |
+| business\_name | business name tag | `any` | n/a | yes |
+| cluster\_name | n/a | `any` | n/a | yes |
+| cluster\_version | n/a | `any` | n/a | yes |
+| created\_by | Creator | `any` | n/a | yes |
+| default\_cooldown | n/a | `any` | n/a | yes |
+| desired\_capacity | n/a | `any` | n/a | yes |
+| environment | n/a | `any` | n/a | yes |
+| health\_check\_type | n/a | `any` | n/a | yes |
+| instance\_subnet\_ids | n/a | `list(string)` | n/a | yes |
+| instance\_types | List of instance types, ordered priority, less index more priority | `list(string)` | n/a | yes |
+| key\_name | n/a | `any` | n/a | yes |
+| max\_size | n/a | `any` | n/a | yes |
+| min\_size | n/a | `any` | n/a | yes |
+| on\_demand\_percentage\_above\_base\_capacity | n/a | `any` | n/a | yes |
+| region | Region Name | `any` | n/a | yes |
+| service\_name | n/a | `any` | n/a | yes |
+| volume\_size | n/a | `any` | n/a | yes |
+| vpc\_id | n/a | `any` | n/a | yes |
+| bootstrap\_extra\_args | n/a | `string` | `""` | no |
+| cluster\_autoscaler\_enabled | Add cluster autoscaler tags | `bool` | `true` | no |
+| ecr\_cross\_account\_registry\_ids | List of AWS ECR registry ids/account ids | `list` | `[]` | no |
+| image\_id | AMI to use, if not specified latest EKS Optimized AMI will be used | `string` | `""` | no |
+
+## Outputs
+
+No output.
+

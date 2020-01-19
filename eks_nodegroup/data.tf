@@ -10,6 +10,8 @@ data "template_file" "userdata" {
     certificate_authority_data = data.aws_eks_cluster.default.certificate_authority[0].data
     cluster_name               = data.aws_eks_cluster.default.name
     bootstrap_extra_args       = var.bootstrap_extra_args
+    registry_ids               = join(" ", var.ecr_cross_account_registry_ids)
+    cross_account_ecr_enabled  = length(var.ecr_cross_account_registry_ids) > 0
   }
 }
 
