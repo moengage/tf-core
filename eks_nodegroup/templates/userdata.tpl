@@ -70,4 +70,5 @@ echo "0 */6 * * * ec2-user \$(aws ecr get-login --no-include-email --region us-e
         "--kube-reserved cpu=250m,memory=0.5Gi,ephemeral-storage=1Gi \
         --system-reserved cpu=250m,memory=0.2Gi,ephemeral-storage=1Gi \
         --eviction-hard memory.available<500Mi,nodefs.available<10% \
+        --allowed-unsafe-sysctls net.core.somaxconn \
         ${bootstrap_extra_args}"
