@@ -5,7 +5,7 @@ resource "aws_security_group" "base_sg" {
   tags        = local.default_tags
 
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = var.create_before_destroy
   }
 }
 
