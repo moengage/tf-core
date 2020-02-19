@@ -8,7 +8,6 @@
 | vpc_id | VPC ID | string | n/a | yes |
 | resource_type | Resource Type (public/private/cluster) | string | n/a | yes |
 | resource_group | Resource Group | string | n/a | yes |
-| create_before_destroy | Create SG before destroying | bool | true | no |
 | sg_description | The security group description | string | n/a | yes |
 | allow_all_egress | Add an allow all egress rule to the SG | bool | true | no |
 

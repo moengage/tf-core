@@ -22,12 +22,6 @@ variable resource_group {
   description = "Resource Group (service name)"
 }
 
-variable create_before_destroy {
-  type        = bool
-  default     = true
-  description = "Create SG before destroying"
-}
-
 variable sg_description {
   description = "The security group description"
 }
