@@ -2,6 +2,7 @@ resource "aws_security_group" "base_sg" {
   name        = local.resource_identifier
   vpc_id      = var.vpc_id
   description = var.sg_description
+  tags        = local.default_tags
 
   lifecycle {
     create_before_destroy = true
