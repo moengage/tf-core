@@ -1,5 +1,5 @@
 locals {
-  resource_identifier = lower("${var.cluster}-${var.resource_group}-${var.resource_type}-sg")
+  resource_identifier = lower("${var.resource_group}-${var.resource_type}-sg")
 
   default_tags = {
     ManagedBy     = "terraform"
