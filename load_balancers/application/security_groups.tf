@@ -1,6 +1,6 @@
 resource "aws_security_group" "alb" {
   count  = var.lb_create_security_group ? 1 : 0
-  name   = "${local.resource_identifier}-sg"
+  name   = "${local.resource_identifier}-alb-sg"
   vpc_id = var.vpc_id
 
   egress {
@@ -17,8 +17,7 @@ resource "aws_security_group" "alb" {
   tags = merge(
     local.default_tags,
     {
-      "Name" = "${local.resource_identifier}-sg"
+      "Name" = "${local.resource_identifier}-alb-sg"
     },
   )
 }
-

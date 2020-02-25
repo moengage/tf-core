@@ -22,4 +22,3 @@ locals {
     ) : join(",", var.lb_security_groups),
   )
 }
-
