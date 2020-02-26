@@ -9,7 +9,7 @@ locals {
     Service     = lower(var.service_name)
   }
 
-  _resource_identifier = "${var.environment}-${var.business_name}-${var.service_name}"
+  _resource_identifier = "${var.service_name}"
   resource_identifier  = lower(local._resource_identifier)
 }
 
