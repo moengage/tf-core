@@ -188,3 +188,9 @@ variable "enabled" {
   default     = true
   type        = bool
 }
+
+variable "create_asg_security_group" {
+  description = "True to create asg sg"
+  default = false
+  type = bool
+}

@@ -41,6 +41,8 @@
 | wait\_for\_capacity\_timeout | A maximum duration that Terraform should wait for ASG instances to be healthy before timing out. Setting this to 0 causes Terraform to skip all Capacity Waiting behavior. Default: 10m | string | `"10m"` | no |
 | wait\_for\_elb\_capacity | Setting this will cause Terraform to wait for exactly this number of healthy instances from this autoscaling group in all attached load balancers on both create and update operations. (Takes precedence over min_elb_capacity behavior.) | string | `"0"` | no |
 | propagate_tags_at_launch |Enables propagation of the tag to Amazon EC2 instances launched via this ASG | N/A | yes
+| create_asg_security_group | True to create asg sg | false| no
+
 
 ## Outputs
 
