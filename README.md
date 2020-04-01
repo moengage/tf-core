@@ -40,5 +40,8 @@ try to re-use common resources (NAT Gateways, Public Route Table, VPC Endpoint) 
       - `<n> route tables for each private subnet`
       - `<n> network ACLS for each private subnet`
       - `<n> S3 VPC endpoint association for private subnets`
-      - `<n> NAT Gateway route and <n> route association with private subnets``
+      - `<n> NAT Gateway route and <n> route association with private subnets`
       - `<n> Public Route Table association with just created public subnets`
+
+  - Other modules can be used when they are needed
+
