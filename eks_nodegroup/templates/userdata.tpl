@@ -56,6 +56,11 @@ net.ipv4.neigh.default.gc_thresh2=12288
 net.ipv4.neigh.default.gc_thresh3=16384
 EOF
 
+# Disable THP
+cat <<EOF > /etc/rc.local
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+EOF
+
 systemctl restart systemd-sysctl.service
 
 %{ if cross_account_ecr_enabled }
