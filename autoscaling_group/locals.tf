@@ -5,7 +5,7 @@ locals {
     CreatedBy   = lower(var.created_by)
     Cluster     = lower(var.cluster)
     Environment = lower(var.environment)
-    Business    = lower(var.business_name)
+    Business    = var.business_name
     Service     = lower(var.service_name)
     FabTag      = var.fab_tag
   }
@@ -20,7 +20,7 @@ locals {
   _asg_tags = [
     {
       "key"                 = "Business"
-      "value"               = lower(var.business_name)
+      "value"               = var.business_name
       "propagate_at_launch" = var.propagate_tags_at_launch
     },
     {
