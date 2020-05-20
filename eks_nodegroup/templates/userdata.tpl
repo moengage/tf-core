@@ -110,8 +110,8 @@ echo "0 */6 * * * ec2-user \$(aws ecr get-login --no-include-email --region us-e
 /etc/eks/bootstrap.sh --apiserver-endpoint '${cluster_endpoint}' \
     --b64-cluster-ca '${certificate_authority_data}' '${cluster_name}' \
     --kubelet-extra-args \
-        "--kube-reserved cpu=250m,memory=0.5Gi,ephemeral-storage=1Gi \
-        --system-reserved cpu=250m,memory=0.2Gi,ephemeral-storage=1Gi \
+        "--kube-reserved cpu=100m,memory=0.5Gi,ephemeral-storage=1Gi \
+        --system-reserved cpu=100m,memory=0.2Gi,ephemeral-storage=1Gi \
         --eviction-hard memory.available<500Mi,nodefs.available<10% \
         --allowed-unsafe-sysctls net.core.somaxconn \
         ${bootstrap_extra_args}"
