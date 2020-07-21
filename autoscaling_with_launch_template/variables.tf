@@ -1,3 +1,8 @@
+variable "alternate_resource_name" {
+  description = "Alternate Resource Name"
+  default     = ""
+}
+
 variable "associate_public_ip_address" {
   description = "Associate a public ip address with the network interface. Boolean value."
 }

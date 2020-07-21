@@ -49,7 +49,7 @@ locals {
     },
     {
       "key"                 = "Name"
-      "value"               = local.resource_identifier
+      "value"               = "${coalesce(var.alternate_resource_name, local.resource_identifier)}"
       "propagate_at_launch" = false
     },
     {
@@ -62,7 +62,7 @@ locals {
   asg_tags = concat(local._asg_tags, var.extra_asg_tags)
 
   asg_managed_name_tag = {
-    Name = local.resource_identifier
+    Name = "${coalesce(var.alternate_resource_name, local.resource_identifier)}"
   }
 }
 

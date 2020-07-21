@@ -1,5 +1,5 @@
 resource "aws_autoscaling_group" "default" {
-  name                      = "${local.resource_identifier}-asg"
+  name                      = "${coalesce(var.alternate_resource_name, join("-", [local.resource_identifier, "asg"]))}"
   max_size                  = var.max_size
   min_size                  = var.min_size
   health_check_grace_period = var.health_check_grace_period

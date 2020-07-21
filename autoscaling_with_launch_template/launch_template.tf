@@ -1,5 +1,5 @@
 resource "aws_launch_template" "default" {
-  name          = "${local.resource_identifier}-lt"
+  name          = "${coalesce(var.alternate_resource_name, join("-", [local.resource_identifier, "lt"]))}"
   ebs_optimized = var.ebs_optimized
   image_id      = var.image_id
   key_name      = var.key_name
