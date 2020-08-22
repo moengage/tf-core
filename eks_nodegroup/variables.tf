@@ -82,3 +82,7 @@ variable "ecr_cross_account_registry_ids" {
   description = "List of AWS ECR registry ids/account ids"
   default     = []
 }
+
+variable "target_group_arns" {
+  default = []
+}

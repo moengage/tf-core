@@ -33,6 +33,7 @@ module "nodegroup" {
   volume_size                              = var.volume_size
   vpc_id                                   = var.vpc_id
   user_data                                = data.template_file.userdata.rendered
+  target_group_arns                        = var.target_group_arns
   extra_asg_tags = [
     {
       "key"                 = "kubernetes.io/cluster/${var.cluster_name}"
