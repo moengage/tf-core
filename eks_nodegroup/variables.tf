@@ -78,6 +78,10 @@ variable "bootstrap_extra_args" {
   default = ""
 }
 
+variable "kubernetes_namespace" {
+  default = "default"
+}
+
 variable "ecr_cross_account_registry_ids" {
   description = "List of AWS ECR registry ids/account ids"
   default     = []

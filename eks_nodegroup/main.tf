@@ -50,6 +50,11 @@ module "nodegroup" {
       "value"               = "true"
       "propagate_at_launch" = false
     },
+    {
+      "key"                 = "k8s.io/cluster-autoscaler/node-template/label/eks.moengage.io/namespace"
+      "value"               = "${var.kubernetes_namespace}"
+      "propagate_at_launch" = false
+    }
   ]
 }
 
