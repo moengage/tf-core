@@ -90,3 +90,7 @@ variable "ecr_cross_account_registry_ids" {
 variable "target_group_arns" {
   default = []
 }
+
+variable "spot_allocation_strategy" {
+  default = "capacity-optimized"
+}
