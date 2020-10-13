@@ -30,6 +30,7 @@ module "nodegroup" {
   on_demand_percentage_above_base_capacity = var.on_demand_percentage_above_base_capacity
   instance_types                           = var.instance_types
   spot_allocation_strategy                 = var.spot_allocation_strategy
+  spot_instance_pools                      = var.spot_instance_pools
   service_name                             = var.service_name
   volume_size                              = var.volume_size
   vpc_id                                   = var.vpc_id
