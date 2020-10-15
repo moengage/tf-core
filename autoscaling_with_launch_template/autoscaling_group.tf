@@ -1,5 +1,5 @@
 resource "aws_autoscaling_group" "default" {
-  name                      = "${coalesce(var.alternate_resource_name, join("-", [local.resource_identifier, "asg"]))}"
+  name                      = coalesce(var.alternate_resource_name, join("-", [local.resource_identifier, "asg"]))
   max_size                  = var.max_size
   min_size                  = var.min_size
   health_check_grace_period = var.health_check_grace_period
@@ -79,7 +79,7 @@ resource "aws_autoscaling_group" "default" {
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes        = ["desired_capacity"]
+    ignore_changes        = [desired_capacity]
   }
 
   tags = local.asg_tags

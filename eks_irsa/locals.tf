@@ -11,6 +11,6 @@ locals {
 
   resource_identifier = "${lower(var.eks_cluster_name)}-${lower(var.kubernetes_service_account_namespace)}-${lower(var.kubernetes_service_account_name)}"
 
-  oidc_issuer     = "${replace(data.aws_eks_cluster.default.identity.0.oidc.0.issuer, "https://", "")}"
+  oidc_issuer     = replace(data.aws_eks_cluster.default.identity.0.oidc.0.issuer, "https://", "")
   oidc_issuer_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${local.oidc_issuer}"
 }
