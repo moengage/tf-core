@@ -98,3 +98,7 @@ variable "spot_allocation_strategy" {
 variable "spot_instance_pools" {
   default = 0
 }
+
+variable "fab_tag" {
+  default = "nottagged"
+}

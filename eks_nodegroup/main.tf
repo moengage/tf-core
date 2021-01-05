@@ -15,6 +15,7 @@ module "nodegroup" {
   source                                   = "../../tf-core/autoscaling_with_launch_template/"
   associate_public_ip_address              = var.associate_public_ip_address
   business_name                            = var.business_name
+  fab_tag                                  = var.fab_tag
   created_by                               = var.created_by
   default_cooldown                         = var.default_cooldown
   desired_capacity                         = var.desired_capacity
