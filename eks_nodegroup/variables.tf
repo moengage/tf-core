@@ -100,5 +100,5 @@ variable "spot_instance_pools" {
 }
 
 variable "fab_tag" {
-  default = "nottagged"
+  default = "kubernetes"
 }
