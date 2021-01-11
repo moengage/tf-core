@@ -13,6 +13,7 @@ resource "aws_launch_template" "default" {
 
     ebs {
       volume_size = var.volume_size
+      volume_type = var.volume_type
     }
   }
 

@@ -57,6 +57,11 @@ module "nodegroup" {
       "key"                 = "k8s.io/cluster-autoscaler/node-template/label/eks.moengage.io/namespace"
       "value"               = var.kubernetes_namespace
       "propagate_at_launch" = false
+    },
+    {
+      "key"                 = "k8s.io/cluster-autoscaler/node-template/label/eks.moengage.io/service"
+      "value"               = var.fab_tag
+      "propagate_at_launch" = false
     }
   ]
 }

@@ -77,3 +77,8 @@ variable "volume_size" {
   description = "The size of the volume in gigabytes"
 }
 
+variable "volume_type" {
+  description = "Volume Type"
+  default     = "gp3"
+}
+
