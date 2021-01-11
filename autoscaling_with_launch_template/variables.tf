@@ -231,7 +231,7 @@ variable "volume_size" {
 
 variable "volume_type" {
   description = "Volume Size"
-  default     = "gp3"
+  default     = "gp2"
 }
 
 variable "vpc_id" {

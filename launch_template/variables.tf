@@ -79,6 +79,6 @@ variable "volume_size" {
 
 variable "volume_type" {
   description = "Volume Type"
-  default     = "gp3"
+  default     = "gp2"
 }
 
