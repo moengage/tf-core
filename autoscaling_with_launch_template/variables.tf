@@ -229,6 +229,11 @@ variable "volume_size" {
   description = "The size of the volume in gigabytes"
 }
 
+variable "volume_type" {
+  description = "Volume Size"
+  default     = "gp3"
+}
+
 variable "vpc_id" {
   description = "VPC ID"
 }

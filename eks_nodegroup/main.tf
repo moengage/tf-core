@@ -12,7 +12,7 @@ resource "aws_iam_instance_profile" "default" {
 }
 
 module "nodegroup" {
-  source                                   = "../../tf-core/autoscaling_with_launch_template/"
+  source                                   = "../autoscaling_with_launch_template/"
   associate_public_ip_address              = var.associate_public_ip_address
   business_name                            = var.business_name
   fab_tag                                  = var.fab_tag
