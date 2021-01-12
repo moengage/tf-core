@@ -84,6 +84,7 @@ variable "kubernetes_namespace" {
 
 variable "ecr_cross_account_registry_ids" {
   description = "List of AWS ECR registry ids/account ids"
+  type        = list(string)
   default     = []
 }
 
