@@ -11,7 +11,7 @@ resource "aws_iam_instance_profile" "default" {
   role = data.aws_iam_role.default.name
 }
 
-module "nodegroup" { 
+module "nodegroup" {
   source                                   = "git@github.com:moengage/tf-core.git//autoscaling_with_launch_template?ref=master"
   associate_public_ip_address              = var.associate_public_ip_address
   business_name                            = var.business_name
@@ -37,32 +37,6 @@ module "nodegroup" {
   vpc_id                                   = var.vpc_id
   user_data                                = data.template_file.userdata.rendered
   target_group_arns                        = var.target_group_arns
-  extra_asg_tags = [
-    {
-      "key"                 = "kubernetes.io/cluster/${var.cluster_name}"
-      "value"               = "owned"
-      "propagate_at_launch" = true
-    },
-    {
-      "key"                 = "k8s.io/cluster-autoscaler/${var.cluster_name}"
-      "value"               = "owned"
-      "propagate_at_launch" = false
-    },
-    {
-      "key"                 = "k8s.io/cluster-autoscaler/${var.cluster_autoscaler_enabled ? "enabled" : "disabled"}"
-      "value"               = "true"
-      "propagate_at_launch" = false
-    },
-    {
-      "key"                 = "k8s.io/cluster-autoscaler/node-template/label/eks.moengage.io/namespace"
-      "value"               = var.kubernetes_namespace
-      "propagate_at_launch" = false
-    },
-    {
-      "key"                 = "k8s.io/cluster-autoscaler/node-template/label/eks.moengage.io/service"
-      "value"               = var.fab_tag
-      "propagate_at_launch" = false
-    }
-  ]
+  extra_asg_tags                           = local.asg_tags
 }
 

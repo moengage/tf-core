@@ -23,6 +23,11 @@ variable "cluster_autoscaler_enabled" {
 variable "default_cooldown" {
 }
 
+variable "extra_asg_tags" {
+  type    = list(object({ key = string, propagate_at_launch = bool, value = string }))
+  default = []
+}
+
 variable "health_check_type" {
 }
 
