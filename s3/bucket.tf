@@ -1,8 +1,9 @@
 resource "aws_s3_bucket" "default" {
-  bucket = "${local.resource_identifier}-terraform-state-storage"
+  bucket = local.resource_identifier
+  acl    = var.acl
 
   versioning {
-    enabled = true
+    enabled = var.versioning_enabled
   }
 
   lifecycle {
@@ -12,15 +13,8 @@ resource "aws_s3_bucket" "default" {
   tags = merge(
     local.default_tags,
     {
-      "Name" = "${local.resource_identifier}-terraform-state-storage"
+      "Name" = local.resource_identifier
     },
   )
-}
-
-resource "aws_s3_bucket_public_access_block" "default" {
-  bucket = aws_s3_bucket.default.id
-
-  block_public_acls   = true
-  block_public_policy = true
 }
 
