@@ -12,7 +12,7 @@ resource "aws_iam_instance_profile" "default" {
 }
 
 module "nodegroup" {
-  source                                   = "git@github.com:moengage/tf-core.git//autoscaling_with_launch_template?ref=master"
+  source                                   = "git@github.com:moengage/tf-core.git//autoscaling_with_launch_template?ref = master"
   associate_public_ip_address              = var.associate_public_ip_address
   business_name                            = var.business_name
   fab_tag                                  = var.fab_tag
@@ -33,6 +33,7 @@ module "nodegroup" {
   spot_allocation_strategy                 = var.spot_allocation_strategy
   spot_instance_pools                      = var.spot_instance_pools
   service_name                             = var.service_name
+  subservice_name                          = var.subservice_name
   volume_size                              = var.volume_size
   vpc_id                                   = var.vpc_id
   user_data                                = data.template_file.userdata.rendered

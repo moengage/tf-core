@@ -1,4 +1,12 @@
 locals {
+  _subservice_name     = coalesce(var.subservice_name, var.service_name)
+  _service_type        = var.service_type != "" ? format("%s-", var.service_type) : ""
+  _resource_identifier = "${local._service_type}${var.business_name}-${var.service_name}"
+  resource_identifier  = lower(local._resource_identifier)
+
+  iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"
+  iam_resource_path       = "/${replace(local.iam_resource_identifier, "-", "/")}/"
+
   default_tags = {
     ManagedBy   = "terraform"
     Region      = data.aws_region.current.name
@@ -7,15 +15,9 @@ locals {
     Environment = lower(var.environment)
     Business    = lower(var.business_name)
     Service     = lower(var.service_name)
+    SubService  = lower(local._subservice_name)
     FabTag      = var.fab_tag
   }
-
-  _service_type        = var.service_type != "" ? format("%s-", var.service_type) : ""
-  _resource_identifier = "${local._service_type}${var.business_name}-${var.service_name}"
-  resource_identifier  = lower(local._resource_identifier)
-
-  iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"
-  iam_resource_path       = "/${replace(local.iam_resource_identifier, "-", "/")}/"
 
   _asg_tags = [
     {
@@ -26,6 +28,11 @@ locals {
     {
       "key"                 = "Service"
       "value"               = lower(var.service_name)
+      "propagate_at_launch" = var.propagate_tags_at_launch
+    },
+    {
+      "key"                 = "SubService"
+      "value"               = lower(local._subservice_name)
       "propagate_at_launch" = var.propagate_tags_at_launch
     },
     {

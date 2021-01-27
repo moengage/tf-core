@@ -68,6 +68,11 @@ variable "service_name" {
   description = "Service name"
 }
 
+variable "subservice_name" {
+  description = "Sub Service Name"
+  default     = ""
+}
+
 variable "service_type" {
   description = "Service Type"
   default     = ""

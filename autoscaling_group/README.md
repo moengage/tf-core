@@ -17,6 +17,7 @@
 | primary\_instance\_type | Primary instance Type | string | n/a | yes |
 | secondary\_instance\_type | Secondary instance Type | string | n/a | yes |
 | service\_name | Service name | string | n/a | yes |
+| subservice\_name | Sub-service name | string | n/a | yes |
 | tertiary\_instance\_type | Tertiary instance type | string | n/a | yes |
 | vpc\_id | VPC ID | string | n/a | yes |
 | cluster | Cluster Name | string | `"default"` | no |

@@ -127,6 +127,11 @@ variable "service_name" {
   description = "Service name"
 }
 
+variable "subservice_name" {
+  description = "Sub Service name"
+  default     = ""
+}
+
 variable "service_type" {
   description = "Service type"
   default     = ""
@@ -180,7 +185,7 @@ variable "wait_for_elb_capacity" {
 
 variable "propagate_tags_at_launch" {
   description = "Enables propagation of the tag to Amazon EC2 instances launched via this ASG"
-  default = true
+  default     = true
 }
 
 variable "enabled" {
@@ -191,6 +196,6 @@ variable "enabled" {
 
 variable "create_asg_security_group" {
   description = "True to create asg sg"
-  default = false
-  type = bool
+  default     = false
+  type        = bool
 }

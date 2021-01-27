@@ -175,6 +175,11 @@ variable "service_name" {
   description = "Service Name"
 }
 
+variable "subservice_name" {
+  description = "Sub Service Name"
+  default     = ""
+}
+
 variable "vpc_id" {
   description = "VPC ID"
 }

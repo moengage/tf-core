@@ -24,5 +24,7 @@ resource "aws_eks_cluster" "default" {
     aws_cloudwatch_log_group.default,
     aws_security_group.default,
   ]
+
+  tags = local.default_tags
 }
 

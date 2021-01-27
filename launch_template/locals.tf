@@ -1,4 +1,6 @@
 locals {
+  _subservice_name = coalesce(var.subservice_name, var.service_name)
+
   default_tags = {
     ManagedBy   = "terraform"
     Region      = data.aws_region.current.name
@@ -7,6 +9,7 @@ locals {
     Environment = lower(var.environment)
     Business    = lower(var.business_name)
     Service     = lower(var.service_name)
+    SubService  = lower(local._subservice_name)
     FabTag      = var.fab_tag
   }
 

@@ -67,6 +67,10 @@ variable "on_demand_percentage_above_base_capacity" {
 variable "service_name" {
 }
 
+variable "subservice_name" {
+  default = ""
+}
+
 variable "volume_size" {
 }
 

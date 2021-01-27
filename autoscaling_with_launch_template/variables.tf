@@ -188,6 +188,11 @@ variable "service_name" {
   description = "Service name"
 }
 
+variable "subservice_name" {
+  description = "Sub Service Name"
+  default     = ""
+}
+
 variable "spot_allocation_strategy" {
   description = "How to allocate capacity across the Spot pools. Valid values: lowest-price. Default: lowest-price"
   default     = "lowest-price"

@@ -31,6 +31,16 @@ variable "team" {
   description = "Team"
 }
 
+variable "service_name" {
+  description = "Service Name"
+  default     = "kubernetes"
+}
+
+variable "subservice_name" {
+  description = "Sub Service Name"
+  default     = ""
+}
+
 variable "create_controlplane_security_group" {
   description = "Flag to create controlplane security group"
   default     = true
