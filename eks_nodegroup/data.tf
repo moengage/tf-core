@@ -27,6 +27,6 @@ data "aws_region" "current" {
 }
 
 data "aws_ssm_parameter" "default" {
-  name = "/aws/service/eks/optimized-ami/${var.cluster_version}/amazon-linux-2/recommended/image_id"
+  name = "/aws/service/eks/optimized-ami/${var.cluster_version}/amazon-linux-2${local._architecture_suffix[var.architecture]}/recommended/image_id"
 }
 

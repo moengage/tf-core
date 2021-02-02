@@ -1,5 +1,10 @@
 locals {
   _subservice_name = coalesce(var.subservice_name, var.service_name)
+  _architecture_suffix = {
+    "arm64"             = "-arm64",
+    "amd64"             = "",
+    "amd64-accelerated" = "-gpu"
+  }
 
   default_tags = {
     ManagedBy   = "terraform"
