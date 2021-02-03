@@ -9,6 +9,10 @@ variable "associate_public_ip_address" {
 variable "architecture" {
   default     = "amd64"
   description = "Architecture, supported types are amd64, arm64, amd64-accelerated"
+  validation {
+    condition     = can(regex("^arm64$|^amd64$|^amd64-accelerated$", var.architecture))
+    error_message = "Supported values are amd64, arm64, amd64-accelerated"
+  }
 }
 
 variable "business_name" {
