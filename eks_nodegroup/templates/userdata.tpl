@@ -73,7 +73,7 @@ net.ipv4.tcp_rfc1337=1
 net.ipv4.tcp_syncookies=1
 
 # Connection tracking to prevent dropped connections (usually issue on LBs)
-net.netfilter.nf_conntrack_max=262144
+net.netfilter.nf_conntrack_max=524288
 net.ipv4.netfilter.ip_conntrack_generic_timeout=120
 net.netfilter.nf_conntrack_tcp_timeout_established=86400
 
