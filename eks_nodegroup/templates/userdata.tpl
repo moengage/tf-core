@@ -90,9 +90,16 @@ vm.swappiness=10
 vm.dirty_ratio=60
 vm.dirty_background_ratio=2
 
+fs.file-max=65536
+
 # Sets the time before the kernel considers migrating a proccess to another core
 kernel.sched_migration_cost_ns=5000000
 EOF
+
+cat <<EOT >> /etc/security/limits.conf
+*               soft    nofile          65535
+*               hard    nofile          65535
+EOT
 
 # Disable THP
 cat <<EOF > /etc/rc.local
