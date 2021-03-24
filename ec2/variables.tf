@@ -61,6 +61,7 @@ variable "root_volume_size" {
 
 variable "ebs_volume_size" {
   description = "Disk Volume Size for all ebs attached disks"
+  default     = 20
 }
 
 variable "ebs_volume_type" {
@@ -74,7 +75,6 @@ variable "ebs_volume_count" {
 }
 
 variable "ami_id" {
-  default     = ""
   description = "AMI ID to use for launching this instance"
 }
 
@@ -90,6 +90,7 @@ variable "extra_instance_tags" {
 
 variable "ec2_device_names" {
   default = [
+    "/dev/sdc",
     "/dev/sdd",
     "/dev/sde",
     "/dev/sdf",

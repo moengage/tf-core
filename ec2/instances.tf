@@ -1,6 +1,6 @@
 resource "aws_instance" "ec2" {
   count                       = var.ec2_instance_count
-  ami                         = coalesce(var.ami_id, data.aws_ami.ubuntu.id)
+  ami                         = var.ami_id
   availability_zone           = element(var.availability_zones, length(var.availability_zones) % var.ec2_instance_count)
   instance_type               = var.instance_type
   key_name                    = var.instance_keyname
