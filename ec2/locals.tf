@@ -7,7 +7,6 @@ locals {
     Business    = lower(var.business_name)
     Service     = lower(var.service_name)
     SubService  = lower(var.subservice_name)
-    prometheus  = "enabled"
     FabTag      = lower(var.fabtag)
   }
 
