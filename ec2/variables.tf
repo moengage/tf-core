@@ -11,11 +11,11 @@ variable "business_name" {
 }
 
 variable "service_name" {
-  description = "Service name will be used in DNS, naming resources etc, keep it as kafka"
+  description = "Service name will be used in DNS, naming resources, costs calculation etc, "
 }
 
 variable "subservice_name" {
-  description = "SubService name will be used in DNS, naming resources etc, keep it as kafka"
+  description = "SubService name will be used in DNS, naming resources etc,"
 }
 
 variable "ec2_instance_count" {
@@ -28,7 +28,7 @@ variable "availability_zones" {
 }
 
 variable "instance_type" {
-  description = "AWS Instance Type for the broker - eg c6g.xlarge/m5.2xlarge"
+  description = "AWS Instance Type for the instance - eg c6g.xlarge/m5.2xlarge"
 }
 
 variable "instance_keyname" {

@@ -26,13 +26,13 @@ No requirements.
 | extra\_instance\_tags | Extra tags for instances to be launched in ASG | `map(string)` | `{}` | no |
 | fabtag | Promewtheus will use this for scrapping metrics | `any` | n/a | yes |
 | instance\_keyname | SSH KeyPair name for this instance | `any` | n/a | yes |
-| instance\_type | AWS Instance Type for the broker - eg c6g.xlarge/m5.2xlarge | `any` | n/a | yes |
+| instance\_type | AWS Instance Type for the instance - eg c6g.xlarge/m5.2xlarge | `any` | n/a | yes |
 | root\_volume\_size | Size of the Root Disk Volume | `number` | `20` | no |
 | root\_volume\_type | Root Disk Volume Type - Allowed values = gp2/gp3/st1 | `string` | `"gp3"` | no |
 | security\_group\_ids | List of security group ids to be assigned to this instance | `list(string)` | n/a | yes |
-| service\_name | Service name will be used in DNS, naming resources etc, keep it as kafka | `any` | n/a | yes |
+| service\_name | Service name will be used in DNS, naming resources, costs calculation etc, | `any` | n/a | yes |
 | subnet\_ids | Subnets where this instance can be launched | `list(string)` | n/a | yes |
-| subservice\_name | SubService name will be used in DNS, naming resources etc, keep it as kafka | `any` | n/a | yes |
+| subservice\_name | SubService name will be used in DNS, naming resources etc, | `any` | n/a | yes |
 
 ## Outputs
 
