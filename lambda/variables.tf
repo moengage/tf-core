@@ -85,3 +85,8 @@ variable "vpc_security_group_ids" {
   description = "List of security group ids when Lambda Function should run in the VPC."
   type        = list(string)
 }
+
+variable "retention_in_days" {
+  type    = number
+  default = 7
+}

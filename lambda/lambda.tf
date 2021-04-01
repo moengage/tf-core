@@ -8,7 +8,6 @@ resource "aws_lambda_function" "default" {
   timeout                        = var.timeout
   filename                       = var.filename
 
-
   tags = merge(
     local.default_tags,
     var.extra_tags
@@ -30,9 +29,9 @@ resource "aws_lambda_function" "default" {
   }
 }
 
-resource "aws_cloudwatch_log_group" "example" {
+resource "aws_cloudwatch_log_group" "default" {
   name              = "/aws/lambda/${var.function_name}"
-  retention_in_days = 7
+  retention_in_days = var.retention_in_days
 }
 
 
