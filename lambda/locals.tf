@@ -12,4 +12,3 @@ locals {
   _resource_identifier = "${var.environment}-${var.business_name}-${var.service_name}-${var.subservice_name}"
   resource_identifier  = lower(local._resource_identifier)
 }
-
