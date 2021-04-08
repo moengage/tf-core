@@ -1,7 +1,7 @@
 locals {
   _subservice_name     = coalesce(var.subservice_name, var.service_name)
   _service_type        = var.service_type != "" ? format("%s-", var.service_type) : ""
-  _resource_identifier = "${local._service_type}${var.business_name}-${var.service_name}"
+  _resource_identifier = "${var.business_name}-${var.service_name}-${var.subservice_name}"
   resource_identifier  = lower(local._resource_identifier)
 
   iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"
