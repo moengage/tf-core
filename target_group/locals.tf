@@ -12,7 +12,7 @@ locals {
     SubService  = lower(local._subservice_name)
   }
 
-  _resource_identifier = "${var.service_name}-${local.subservice_name}"
+  _resource_identifier = "${var.service_name}-${local._subservice_name}"
   resource_identifier  = replace(lower(local._resource_identifier), "_", "-")
 }
 
