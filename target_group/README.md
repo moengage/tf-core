@@ -34,7 +34,7 @@
 | slow\_start | The amount time for targets to warm up before the load balancer sends them a full share of requests. The range is 30-900 seconds or 0 to disable. The default value is 0 seconds. | `number` | `0` | no |
 | stickiness\_cookie\_duration | The time period, in seconds, during which requests from a client should be routed to the same target. After this time period expires, the load balancer-generated cookie is considered stale. The range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400 seconds). | `number` | `86400` | no |
 | stickiness\_enabled | Boolean to enable / disable stickiness. Default is true | `bool` | `true` | no |
-| subservice\_name | Service Name | `any` | n/a | yes |
+| subservice\_name | SubService Name | `any` | n/a | yes |
 | vpc\_id | VPC ID | `any` | n/a | yes |
 
 ## Outputs
