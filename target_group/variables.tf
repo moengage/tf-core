@@ -76,10 +76,6 @@ variable "service_name" {
   description = "Service Name"
 }
 
-variable "subservice_name" {
-  description = "SubService Name"
-}
-
 variable "slow_start" {
   description = "The amount time for targets to warm up before the load balancer sends them a full share of requests. The range is 30-900 seconds or 0 to disable. The default value is 0 seconds."
   default     = 0
