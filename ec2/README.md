@@ -20,11 +20,11 @@ No requirements.
 | ebs\_volume\_count | No of EBS volumes to be attached per instance | `number` | `0` | no |
 | ebs\_volume\_size | Disk Volume Size for all ebs attached disks | `number` | `20` | no |
 | ebs\_volume\_type | n/a | `string` | `"gp3"` | no |
-| ec2\_device\_names | n/a | `list` | <pre>[<br>  "/dev/sdc",<br>  "/dev/sdd",<br>  "/dev/sde",<br>  "/dev/sdf"<br>]</pre> | no |
+| ec2\_device\_names | Name of the EBS device to mount | `list(string)` | <pre>[<br>  "/dev/xvdb",<br>  "/dev/xvdc",<br>  "/dev/xvdd",<br>  "/dev/xvde",<br>  "/dev/xvdf",<br>  "/dev/xvdg",<br>  "/dev/xvdh",<br>  "/dev/xvdi",<br>  "/dev/xvdj",<br>  "/dev/xvdk",<br>  "/dev/xvdl",<br>  "/dev/xvdm",<br>  "/dev/xvdn",<br>  "/dev/xvdo",<br>  "/dev/xvdp",<br>  "/dev/xvdq",<br>  "/dev/xvdr",<br>  "/dev/xvds",<br>  "/dev/xvdt",<br>  "/dev/xvdu",<br>  "/dev/xvdv",<br>  "/dev/xvdw",<br>  "/dev/xvdx",<br>  "/dev/xvdy",<br>  "/dev/xvdz"<br>]</pre> | no |
 | ec2\_instance\_count | the numbers of EC2 instances to be launched | `any` | n/a | yes |
 | environment | An environment tag will be used on aws resources | `any` | n/a | yes |
 | extra\_instance\_tags | Extra tags for instances to be launched in ASG | `map(string)` | `{}` | no |
-| fabtag | Promewtheus will use this for scrapping metrics | `any` | n/a | yes |
+| iam\_instance\_profile | IAM role for this instance | `any` | n/a | yes |
 | instance\_keyname | SSH KeyPair name for this instance | `any` | n/a | yes |
 | instance\_type | AWS Instance Type for the instance - eg c6g.xlarge/m5.2xlarge | `any` | n/a | yes |
 | root\_volume\_size | Size of the Root Disk Volume | `number` | `20` | no |
