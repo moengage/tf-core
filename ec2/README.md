@@ -24,7 +24,7 @@ No requirements.
 | ec2\_instance\_count | the numbers of EC2 instances to be launched | `any` | n/a | yes |
 | environment | An environment tag will be used on aws resources | `any` | n/a | yes |
 | extra\_instance\_tags | Extra tags for instances to be launched in ASG | `map(string)` | `{}` | no |
-| iam\_instance\_profile | IAM role for this instance | `any` | n/a | yes |
+| iam\_instance\_profile | IAM role for this instance | `string` | `""` | no |
 | instance\_keyname | SSH KeyPair name for this instance | `any` | n/a | yes |
 | instance\_type | AWS Instance Type for the instance - eg c6g.xlarge/m5.2xlarge | `any` | n/a | yes |
 | root\_volume\_size | Size of the Root Disk Volume | `number` | `20` | no |
