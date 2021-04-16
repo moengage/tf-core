@@ -80,6 +80,7 @@ variable "ami_id" {
 
 variable "iam_instance_profile" {
   description = "IAM role for this instance"
+  default     = ""
 }
 
 variable "extra_instance_tags" {
