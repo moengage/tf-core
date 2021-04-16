@@ -7,7 +7,6 @@ locals {
     Business    = lower(var.business_name)
     Service     = lower(var.service_name)
     SubService  = lower(var.subservice_name)
-    FabTag      = lower(var.fabtag)
   }
 
   _resource_identifier = "${var.environment}-${var.business_name}-${var.service_name}-${var.subservice_name}"

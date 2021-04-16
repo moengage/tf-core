@@ -78,10 +78,10 @@ variable "ami_id" {
   description = "AMI ID to use for launching this instance"
 }
 
-variable "fabtag" {
-  description = "Promewtheus will use this for scrapping metrics"
-}
+variable "iam_instance_profile" {
+  description = "IAM role for this instance"
 
+}
 variable "extra_instance_tags" {
   type        = map(string)
   description = "Extra tags for instances to be launched in ASG"
@@ -91,5 +91,5 @@ variable "extra_instance_tags" {
 variable "ec2_device_names" {
   type        = list(string)
   description = "Name of the EBS device to mount"
-  default     = ["/dev/xvdb", "/dev/xvdc", "/dev/xvdd", "/dev/xvde", "/dev/xvdf", "/dev/xvdg", "/dev/xvdh", "/dev/xvdi", "/dev/xvdj", "/dev/xvdk", "/dev/xvdl", "/dev/xvdm", "/dev/xvdn", "/dev/xvdo", "/dev/xvdp", "/dev/xvdq", "/dev/xvdr", "/dev/xvds", "/dev/xvdt", "/dev/xvdu", "/dev/xvdv", "/dev/xvdw", "/dev/xvdx", "/dev/xvdy", "/dev/xvdz"]  
+  default     = ["/dev/xvdb", "/dev/xvdc", "/dev/xvdd", "/dev/xvde", "/dev/xvdf", "/dev/xvdg", "/dev/xvdh", "/dev/xvdi", "/dev/xvdj", "/dev/xvdk", "/dev/xvdl", "/dev/xvdm", "/dev/xvdn", "/dev/xvdo", "/dev/xvdp", "/dev/xvdq", "/dev/xvdr", "/dev/xvds", "/dev/xvdt", "/dev/xvdu", "/dev/xvdv", "/dev/xvdw", "/dev/xvdx", "/dev/xvdy", "/dev/xvdz"]
 }

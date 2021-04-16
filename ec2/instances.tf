@@ -7,6 +7,7 @@ resource "aws_instance" "ec2" {
   vpc_security_group_ids      = var.security_group_ids
   subnet_id                   = element(var.subnet_ids, length(var.subnet_ids) % var.ec2_instance_count)
   associate_public_ip_address = var.associate_public_ip_address
+  iam_instance_profile        = var.iam_instance_profile
 
   root_block_device {
     volume_type = var.root_volume_type
