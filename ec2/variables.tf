@@ -80,8 +80,8 @@ variable "ami_id" {
 
 variable "iam_instance_profile" {
   description = "IAM role for this instance"
-
 }
+
 variable "extra_instance_tags" {
   type        = map(string)
   description = "Extra tags for instances to be launched in ASG"
