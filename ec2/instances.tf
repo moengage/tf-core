@@ -22,6 +22,7 @@ resource "aws_instance" "ec2" {
   tags = merge(
     local.default_tags,
     map("Name", "${local.resource_identifier}-${count.index + 1}"),
+    var.extra_instance_tags
   )
 }
 
@@ -32,7 +33,8 @@ resource "aws_ebs_volume" "ebs_volume" {
 
   tags = merge(
     local.default_tags,
-    map("Name", "${local.resource_identifier}-ebs-${(count.index) % var.ebs_volume_count + 1}")
+    map("Name", "${local.resource_identifier}-ebs-${(count.index) % var.ebs_volume_count + 1}"),
+    var.extra_instance_tags
   )
 }
 
