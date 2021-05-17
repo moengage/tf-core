@@ -18,6 +18,8 @@ locals {
 
   _resource_identifier = "${var.business_name}-${var.service_name}-"
   resource_identifier  = lower(local._resource_identifier)
+
+  _lifecycle = var.on_demand_percentage_above_base_capacity == 100 ? "ondemand" : "spot"
   _asg_tags = [
     {
       "key"                 = "kubernetes.io/cluster/${var.cluster_name}"
@@ -46,12 +48,14 @@ locals {
     },
     {
       "key"                 = "k8s.io/cluster-autoscaler/node-template/label/eks.moengage.io/lifecycle"
-      "value"               = var.on_demand_percentage_above_base_capacity == 100 ? "ondemand" : "spot"
+      "value"               = local._lifecycle
       "propagate_at_launch" = false
     }
   ]
 
   asg_tags = concat(local._asg_tags, var.extra_asg_tags)
+
+  bootstrap_extra_args = coalesce(var.bootstrap_extra_args, "--node-labels=eks.moengage.io/namespace=${var.kubernetes_namespace},eks.moengage.io/lifecycle=${local._lifecycle}")
 
 }
 
