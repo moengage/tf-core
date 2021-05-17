@@ -71,6 +71,7 @@ variable "min_size" {
 }
 
 variable "on_demand_percentage_above_base_capacity" {
+  type = number
 }
 
 variable "service_name" {
@@ -107,7 +108,7 @@ variable "ecr_cross_account_registry_ids" {
 }
 
 variable "target_group_arns" {
-  type        = list(string)
+  type    = list(string)
   default = []
 }
 

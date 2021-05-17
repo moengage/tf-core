@@ -41,7 +41,12 @@ locals {
     },
     {
       "key"                 = "k8s.io/cluster-autoscaler/node-template/label/eks.moengage.io/service"
-      "value"               = var.fab_tag
+      "value"               = var.service_name
+      "propagate_at_launch" = false
+    },
+    {
+      "key"                 = "k8s.io/cluster-autoscaler/node-template/label/eks.moengage.io/lifecycle"
+      "value"               = var.on_demand_percentage_above_base_capacity == 100 ? "ondemand" : "spot"
       "propagate_at_launch" = false
     }
   ]
