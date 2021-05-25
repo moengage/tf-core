@@ -34,7 +34,9 @@ module "nodegroup" {
   spot_instance_pools                      = var.spot_instance_pools
   service_name                             = var.service_name
   subservice_name                          = var.subservice_name
+  device_name                              = var.device_name
   volume_size                              = var.volume_size
+  volume_type                              = var.volume_type
   vpc_id                                   = var.vpc_id
   user_data                                = data.template_file.userdata.rendered
   target_group_arns                        = var.target_group_arns

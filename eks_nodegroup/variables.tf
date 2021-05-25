@@ -87,6 +87,14 @@ variable "volume_size" {
 variable "vpc_id" {
 }
 
+variable "volume_type" {
+  default = "gp2"      
+}
+
+variable "device_name" {
+  default = "/dev/xvda"
+}
+
 variable "cluster_name" {
 }
 
