@@ -88,7 +88,7 @@ variable "vpc_id" {
 }
 
 variable "volume_type" {
-  default = "gp2"      
+  default = "gp3"      
 }
 
 variable "device_name" {
