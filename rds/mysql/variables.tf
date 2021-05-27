@@ -51,15 +51,9 @@ variable "apply_immediately" {
   description = "Specifies whether any database modifications are applied immediately, or during the next maintenance window."
 }
 
-variable "availability_zone" {
-  type        = string
-  default     = null
-  description = "The AZ for the RDS instance. Specify one of `subnet_ids`, `db_subnet_group_name` or `availability_zone`. If `availability_zone` is provided, the instance will be placed into the default VPC or EC2 Classic"
-}
-
 variable "multi_az" {
   default     = false
-  type        = string
+  type        = bool
   description = "Specifies if the RDS instance is multi-AZ."
 }
 
@@ -81,13 +75,9 @@ variable "service_name" {
 
 variable "subservice_name" {
   type        = string
-  description = "The subservice name of the database to create when the DB instance is created."
+  description = "The subservice name tag of database."
 }
 
-variable "created_by" {
-  type        = string
-  description = "Business name."
-}
 
 variable "environment" {
   description = "environment to deploy into, should typically dev/staging/prod"
@@ -107,7 +97,7 @@ variable "iops" {
 }
 
 variable "auto_minor_version_upgrade" {
-  default     = true
+  default     = false
   type        = string
   description = "Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window.."
 }
@@ -125,7 +115,7 @@ variable "backup_retention_period" {
 }
 
 variable "storage_encrypted" {
-  default     = false
+  default     = true
   type        = string
   description = "Specifies whether the DB instance is encrypted."
 }
@@ -203,7 +193,7 @@ variable "license_model" {
 }
 
 variable "major_engine_version" {
-  default     = ""
+  default     = "5.7"
   type        = string
   description = "Specifies the major version of the engine that this option group should be associated with."
 }
@@ -251,7 +241,6 @@ variable "ca_cert_identifier" {
 }
 
 variable "vpc_security_group_ids" {
-  default     = []
   type        = list(string)
   description = "List of security groups"
 }

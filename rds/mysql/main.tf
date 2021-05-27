@@ -14,8 +14,7 @@ resource "aws_db_instance" "default" {
   maintenance_window                  = var.maintenance_window
   backup_window                       = var.backup_window
   apply_immediately                   = var.apply_immediately
-  availability_zone                   = var.availability_zone
-  multi_az                            = var.multi_az ? null : var.availability_zone
+  multi_az                            = var.multi_az 
   port                                = var.port
   name                                = var.service_name
   storage_type                        = var.storage_type
@@ -123,3 +122,5 @@ resource "aws_db_subnet_group" "default" {
 
   tags = local.default_tags
 }
+
+
