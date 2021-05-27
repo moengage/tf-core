@@ -80,13 +80,12 @@ variable "auto_minor_version_upgrade" {
 variable "availability_zones" {
   description = "A list of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not important"
   type        = list(string)
-  default     = []
 }
 
 variable "at_rest_encryption_enabled" {
   description = "Whether to enable encryption at rest"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kms_key_id" {
@@ -143,11 +142,6 @@ variable "service_name" {
 variable "subservice_name" {
   type        = string
   description = "Sub Service name"
-}
-
-variable "created_by" {
-  type        = string
-  description = "Created by"
 }
 
 variable "cluster_mode_enabled" {
