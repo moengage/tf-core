@@ -13,14 +13,13 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | apply\_immediately | Specifies whether any modifications are applied immediately, or during the next maintenance window. Default is false. | `bool` | `false` | no |
-| at\_rest\_encryption\_enabled | Whether to enable encryption at rest | `bool` | `false` | no |
+| at\_rest\_encryption\_enabled | Whether to enable encryption at rest | `bool` | `true` | no |
 | auth\_token | The password used to access a password protected server. Can be specified only if transit\_encryption\_enabled = true. If specified must contain from 16 to 128 alphanumeric characters or symbols | `string` | `""` | no |
 | auto\_minor\_version\_upgrade | Specifies whether a minor engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window | `bool` | `true` | no |
 | automatic\_failover\_enabled | Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. | `bool` | `true` | no |
-| availability\_zones | A list of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not important | `list(string)` | `[]` | no |
+| availability\_zones | A list of EC2 availability zones in which the replication group's cache clusters will be created. The order of the availability zones in the list is not important | `list(string)` | n/a | yes |
 | business\_name | Business Name | `string` | n/a | yes |
 | cluster\_mode\_enabled | Enable creation of a native redis cluster. | `bool` | `false` | no |
-| created\_by | Created by | `string` | n/a | yes |
 | environment | environment to deploy into, should typically dev/staging/prod | `string` | n/a | yes |
 | kms\_key\_id | The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if at\_rest\_encryption\_enabled = true | `string` | `""` | no |
 | notification\_topic\_arn | An Amazon Resource Name (ARN) of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my\_sns\_topic | `string` | `""` | no |
