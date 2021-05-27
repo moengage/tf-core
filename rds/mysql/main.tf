@@ -14,7 +14,7 @@ resource "aws_db_instance" "default" {
   maintenance_window                  = var.maintenance_window
   backup_window                       = var.backup_window
   apply_immediately                   = var.apply_immediately
-  multi_az                            = var.multi_az 
+  multi_az                            = var.multi_az
   port                                = var.port
   name                                = var.service_name
   storage_type                        = var.storage_type

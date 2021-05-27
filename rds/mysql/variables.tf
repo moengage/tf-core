@@ -103,7 +103,7 @@ variable "auto_minor_version_upgrade" {
 }
 
 variable "allow_major_version_upgrade" {
-  default     = true
+  default     = false
   type        = string
   description = "Indicates that major version upgrades are allowed."
 }
@@ -159,7 +159,7 @@ variable "enabled_cloudwatch_logs_exports" {
 variable "monitoring_interval" {
   default     = 0
   type        = string
-  description = "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance."
+  description = "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0."
 }
 
 variable "monitoring_role_arn" {
