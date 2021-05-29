@@ -184,29 +184,3 @@ variable "vpc_id" {
   description = "VPC ID"
 }
 
-variable "alb_default_alarm_creation" {
-  default     = 0
-  description = "1 to enable default alarms for the alb. 0 to ignore"
-}
-
-variable "alarm_actions" {
-  type        = list(any)
-  description = "AWS SNS topic or AutoScaling policy ARN or any other supported action's ARNs in List"
-}
-variable "error_rate_threshold" {
-  type        = number
-  default     = 0.5
-  description = "The threshold for Error rate in percentage"
-}
-
-variable "evaluation_periods" {
-  type        = number
-  default     = 2
-  description = "The number of periods over which data is compared to the specified threshold"
-}
-
-variable "metric_period" {
-  type        = number
-  default     = 300
-  description = "The period in seconds over which the specified statistic is applied"
-}
