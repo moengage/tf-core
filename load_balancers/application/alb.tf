@@ -98,7 +98,7 @@ resource "aws_lb_listener" "http" {
 
 module "alb_default_alarm" {
   count                   = var.create_default_alarms ? 1 : 0
-  source                  = "git@github.com:moengage/tf-core.git//cloudwatch/alb_alarms?ref=master"
+  source                  = "git@github.com:moengage/tf-core.git//cloudwatch/alarm/application_lb?ref=master"
   alb_name                = aws_lb.default.name
   error_rate_threshold    = var.error_rate_threshold
   evaluation_periods      = var.evaluation_periods
