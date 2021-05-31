@@ -1,4 +1,4 @@
-resource "aws_cloudwatch_metric_alarm" "alb-5xx-alarm" {
+resource "aws_cloudwatch_metric_alarm" "alb_5xx_alarm" {
   alarm_name          = format("%s-Error-Rate-In-Percentage", var.alb_name)
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.evaluation_periods

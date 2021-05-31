@@ -1,4 +1,4 @@
-resource "aws_cloudwatch_metric_alarm" "tg-5xx-alarm" {
+resource "aws_cloudwatch_metric_alarm" "tg_5xx_alarm" {
   alarm_name          = format("%s-TargetGroup-Error-Rate-In-Percentage", var.tg_name)
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.evaluation_periods
@@ -42,7 +42,7 @@ resource "aws_cloudwatch_metric_alarm" "tg-5xx-alarm" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "tg-response-time-alarm" {
+resource "aws_cloudwatch_metric_alarm" "tg_response_time_alarm" {
   alarm_name          = format("%s-TargetResponseTime", var.tg_name)
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.evaluation_periods
@@ -59,7 +59,7 @@ resource "aws_cloudwatch_metric_alarm" "tg-response-time-alarm" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "tg-health-hosts-alarm" {
+resource "aws_cloudwatch_metric_alarm" "tg_health_hosts_alarm" {
   alarm_name          = format("%s-HealthyHostCount", var.tg_name)
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = var.evaluation_periods
