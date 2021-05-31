@@ -33,7 +33,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_alarm_actions"></a> [alarm\_actions](#input\_alarm\_actions) | AWS SNS topic or AutoScaling policy ARN or any other supported action's ARNs in List | `list(any)` | n/a | yes |
-| <a name="input_alb_default_alarm_creation"></a> [alb\_default\_alarm\_creation](#input\_alb\_default\_alarm\_creation) | 1 to enable default alarms for the alb. 0 to ignore | `number` | `0` | no |
+| <a name="input_create_default_alarms"></a> [alb\_default\_alarm\_creation](#input\_alb\_default\_alarm\_creation) | 1 to enable default alarms for the alb. 0 to ignore | `number` | `0` | no |
 | <a name="input_aws_lb_accounts"></a> [aws\_lb\_accounts](#input\_aws\_lb\_accounts) | Use the account ID that corresponds to the region for your load balancer and bucket | `map(string)` | <pre>{<br>  "ap-east-1": "754344448648",<br>  "ap-northeast-1": "582318560864",<br>  "ap-northeast-2": "600734575887",<br>  "ap-northeast-3": "383597477331",<br>  "ap-south-1": "718504428378",<br>  "ap-southeast-1": "114774131450",<br>  "ap-southeast-2": "783225319266",<br>  "ca-central-1": "985666609251",<br>  "eu-central-1": "054676820928",<br>  "eu-north-1": "897822967062",<br>  "eu-west-1": "156460612806",<br>  "eu-west-2": "652711504416",<br>  "eu-west-3": "009996457667",<br>  "sa-east-1": "507241528517",<br>  "us-east-1": "127311923021",<br>  "us-east-2": "033677994240",<br>  "us-west-1": "027434742980",<br>  "us-west-2": "797873946194"<br>}</pre> | no |
 | <a name="input_business_name"></a> [business\_name](#input\_business\_name) | Business Name | `any` | n/a | yes |
 | <a name="input_cluster"></a> [cluster](#input\_cluster) | Cluster Name | `string` | `"default"` | no |

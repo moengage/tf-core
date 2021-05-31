@@ -16,7 +16,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_cloudwatch_metric_alarm.reports-sqs-msgs-alarm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm) | resource |
+| [aws_cloudwatch_metric_alarm.sqs-msgs-alarm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm) | resource |
 
 ## Inputs
 

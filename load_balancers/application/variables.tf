@@ -184,7 +184,7 @@ variable "vpc_id" {
   description = "VPC ID"
 }
 
-variable "alb_default_alarm_creation" {
+variable "create_default_alarms" {
   default     = 0
   description = "1 to enable default alarms for the alb. 0 to ignore"
 }

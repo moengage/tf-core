@@ -1,4 +1,4 @@
-resource "aws_cloudwatch_metric_alarm" "reports-sqs-msgs-alarm" {
+resource "aws_cloudwatch_metric_alarm" "sqs-msgs-alarm" {
   alarm_name          = format("%s-ApproximateNumberOfMessagesVisible", var.dimensions_queuename)
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = var.evaluation_periods
