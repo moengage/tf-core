@@ -123,3 +123,12 @@ variable "spot_instance_pools" {
 variable "fab_tag" {
   default = "kubernetes"
 }
+
+
+variable "volume_type" {
+  default = "gp3"
+}
+
+variable "device_name" {
+  default = "/dev/xvda"
+}

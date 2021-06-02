@@ -39,5 +39,7 @@ module "nodegroup" {
   user_data                                = data.template_file.userdata.rendered
   target_group_arns                        = var.target_group_arns
   extra_asg_tags                           = local.asg_tags
+  device_name                              = var.device_name
+  volume_type                              = var.volume_type
 }
 
