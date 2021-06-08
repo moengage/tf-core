@@ -78,6 +78,7 @@ variable "service_name" {
 
 variable "subservice_name" {
   description = "SubService Name"
+  default = ""
 }
 
 variable "slow_start" {
