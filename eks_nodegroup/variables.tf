@@ -57,6 +57,11 @@ variable "instance_types" {
   type        = list(string)
 }
 
+variable "instance_group" {
+  description = "Logical group name of instances"
+  type        = string
+}
+
 variable "instance_subnet_ids" {
   type = list(string)
 }
@@ -78,7 +83,6 @@ variable "service_name" {
 }
 
 variable "subservice_name" {
-  default = ""
 }
 
 variable "volume_size" {
