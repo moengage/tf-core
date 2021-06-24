@@ -30,13 +30,13 @@ variable "allocated_storage" {
 }
 
 variable "engine_version" {
-  default     = "11.5"
+  default     = "12.5"
   type        = string
   description = "Database engine version"
 }
 
 variable "instance_type" {
-  default     = "db.t3.micro"
+  default     = "db.t2.medium"
   type        = string
   description = "Instance type for database instance"
 }
@@ -130,7 +130,7 @@ variable "monitoring_interval" {
 }
 
 variable "deletion_protection" {
-  default     = false
+  default     = true
   type        = bool
   description = "Flag to protect the database instance from deletion"
 }
