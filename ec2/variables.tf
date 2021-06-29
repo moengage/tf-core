@@ -45,6 +45,11 @@ variable "subnet_ids" {
   description = "Subnets where this instance can be launched"
 }
 
+variable "user_data" {
+  description = "user data for the instance"
+  default     = ""
+}
+
 variable "associate_public_ip_address" {
   description = "Whether to associate a public IP to this instance"
 }
