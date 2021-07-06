@@ -114,6 +114,10 @@ FILE='/etc/crontab'
 echo "0 */6 * * * ec2-user \$(aws ecr get-login --no-include-email --region us-east-1 --registry-ids ${registry_ids})" >> "$FILE"
 %{ endif }
 
+%{ if custom_dns_enabled }
+export DNS_CLUSTER_IP=${custom_dns_ip}
+%{ endif }
+
 /etc/eks/bootstrap.sh --apiserver-endpoint '${cluster_endpoint}' \
     --b64-cluster-ca '${certificate_authority_data}' '${cluster_name}' \
     --kubelet-extra-args \

@@ -12,6 +12,8 @@ data "template_file" "userdata" {
     bootstrap_extra_args       = local.bootstrap_extra_args
     registry_ids               = join(" ", var.ecr_cross_account_registry_ids)
     cross_account_ecr_enabled  = length(var.ecr_cross_account_registry_ids) > 0
+    custom_dns_enabled         = var.enable_custom_dns
+    custom_dns_ip              = var.custom_dns_ip
   }
 }
 
