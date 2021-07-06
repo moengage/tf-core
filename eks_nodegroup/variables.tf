@@ -136,3 +136,13 @@ variable "volume_type" {
 variable "device_name" {
   default = "/dev/xvda"
 }
+
+variable "enable_custom_dns" {
+  default     = true
+  description = "Enable custom DNS name server flag to override custom dns ip"
+}
+
+variable "custom_dns_ip" {
+  description = "If enable_custom_dns_ip set to true use this ip"
+  default     = "169.254.20.10"
+}
