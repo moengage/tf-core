@@ -7,6 +7,15 @@
 #iptables-save | tee /etc/sysconfig/iptables
 #systemctl enable --now iptables
 
+# Enable IPVS
+yum install -y ipvsadm
+ipvsadm -l
+modprobe ip_vs
+modprobe ip_vs_rr
+modprobe ip_vs_wrr
+modprobe ip_vs_sh
+modprobe nf_conntrack_ipv4
+
 # Sysctl changes
 ## Disable IPv6
 cat <<EOF > /etc/sysctl.d/10-disable-ipv6.conf
