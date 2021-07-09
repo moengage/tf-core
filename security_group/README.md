@@ -1,24 +1,32 @@
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| cluster | Cluster Name | string | n/a | yes |
-| created\_by | Created By | string | n/a | yes |
-| environment | Environment | string | n/a | yes |
-| vpc_id | VPC ID | string | n/a | yes |
-| resource_type | Resource Type (public/private/cluster) | string | n/a | yes |
-| resource_group | Resource Group | string | n/a | yes |
-| sg_description | The security group description | string | n/a | yes |
-| allow_all_egress | Add an allow all egress rule to the SG | bool | true | no |
-
+|------|-------------|------|---------|:--------:|
+| allow\_all\_egress | Add an allow all egress rule to the SG | `bool` | `true` | no |
+| business\_name | business\_name tag | `any` | n/a | yes |
+| environment | Environment | `any` | n/a | yes |
+| ingress\_rules | List of ingress rules to create. | `list(map(string))` | `[]` | no |
+| service\_name | service\_name | `any` | n/a | yes |
+| sg\_description | The security group description | `any` | n/a | yes |
+| subservice\_name | subservice\_name | `any` | n/a | yes |
+| vpc\_id | VPC ID | `any` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| id | The ID of the security group |
-| arn | The ARN of the security group |
-| vpc_id | The VPC ID |
-| owner_id | The owner ID |
-| name | The name of the security group |
-| description | The description of the security group |
+| id | n/a |
+| name | n/a |
+| owner\_id | n/a |
+| vpc\_id | n/a |
+
