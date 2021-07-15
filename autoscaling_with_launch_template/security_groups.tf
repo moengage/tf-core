@@ -18,6 +18,7 @@ resource "aws_security_group" "instances" {
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes        = [name_prefix]
   }
 }
 

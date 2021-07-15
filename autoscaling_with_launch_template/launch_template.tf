@@ -55,6 +55,10 @@ resource "aws_launch_template" "default" {
     )
   }
 
+  lifecycle {
+    ignore_changes = [name]
+  }
+
   tags = merge(local.default_tags)
 }
 
