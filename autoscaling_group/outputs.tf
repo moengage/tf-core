@@ -6,3 +6,6 @@ output "id" {
   value = join(",", aws_autoscaling_group.default.*.id)
 }
 
+output "name" {
+  value = join(",", aws_autoscaling_group.default.*.name)
+}
