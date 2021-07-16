@@ -3,12 +3,20 @@ resource "random_id" "iam_instance_profile_id" {
     name = local.resource_identifier
   }
 
+  lifecycle {
+    ignore_changes = [keepers]
+  }
+
   byte_length = 4
 }
 
 resource "aws_iam_instance_profile" "default" {
   name = "${local.resource_identifier}-${random_id.iam_instance_profile_id.hex}-instance-role"
   role = data.aws_iam_role.default.name
+
+  lifecycle {
+    ignore_changes = [name]
+  }
 }
 
 module "nodegroup" {

@@ -121,7 +121,7 @@ variable "spot_allocation_strategy" {
 }
 
 variable "spot_instance_pools" {
-  default = 0
+  default = 3
 }
 
 variable "fab_tag" {

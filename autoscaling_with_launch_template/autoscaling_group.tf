@@ -79,7 +79,7 @@ resource "aws_autoscaling_group" "default" {
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes        = [desired_capacity]
+    ignore_changes        = [desired_capacity, name, target_group_arns]
   }
 
   tags = local.asg_tags
