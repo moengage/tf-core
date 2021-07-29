@@ -86,6 +86,7 @@ variable "subservice_name" {
 }
 
 variable "volume_size" {
+  default = "20"
 }
 
 variable "vpc_id" {
