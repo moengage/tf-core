@@ -4,10 +4,11 @@ locals {
     "amd64"             = "",
     "amd64-accelerated" = "-gpu"
   }
+  _business_name        = lower(var.business_name)
   _service              = lower(var.service_name)
   _subservice           = lower(var.subservice_name)
   _instance_group       = lower(var.instance_group)
-  _kubernetes_namespace = var.kubernetes_namespace == "default" ? var.business_name : var.kubernetes_namespace
+  _kubernetes_namespace = var.kubernetes_namespace == "default" ? local._business_name : var.kubernetes_namespace
   _lifecycle            = var.on_demand_percentage_above_base_capacity == 100 ? "ondemand" : "spot"
 
   default_tags = {
@@ -23,7 +24,7 @@ locals {
     Lifecycle     = local._lifecycle
   }
 
-  _resource_identifier = "${var.business_name}-${local._service}-${local._subservice}-${local._instance_group}-${local._lifecycle}"
+  _resource_identifier = "${local._business_name}-${local._service}-${local._subservice}-${local._instance_group}-${local._lifecycle}"
   resource_identifier  = lower(local._resource_identifier)
 
   _asg_tags = [
