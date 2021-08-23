@@ -4,10 +4,11 @@ locals {
     "amd64"             = "",
     "amd64-accelerated" = "-gpu"
   }
-  _service        = lower(var.service_name)
-  _subservice     = lower(var.subservice_name)
-  _instance_group = lower(var.instance_group)
-  _lifecycle      = var.on_demand_percentage_above_base_capacity == 100 ? "ondemand" : "spot"
+  _service              = lower(var.service_name)
+  _subservice           = lower(var.subservice_name)
+  _instance_group       = lower(var.instance_group)
+  _kubernetes_namespace = var.kubernetes_namespace == "default" ? var.business_name : var.kubernetes_namespace
+  _lifecycle            = var.on_demand_percentage_above_base_capacity == 100 ? "ondemand" : "spot"
 
   default_tags = {
     ManagedBy     = "terraform"
@@ -43,7 +44,7 @@ locals {
     },
     {
       "key"                 = "k8s.io/cluster-autoscaler/node-template/label/eks.moengage.io/namespace"
-      "value"               = var.kubernetes_namespace
+      "value"               = local._kubernetes_namespace
       "propagate_at_launch" = false
     },
     {
@@ -70,7 +71,7 @@ locals {
 
   asg_tags = concat(local._asg_tags, var.extra_asg_tags)
 
-  bootstrap_extra_args = coalesce(var.bootstrap_extra_args, "--node-labels=eks.moengage.io/namespace=${var.kubernetes_namespace},eks.moengage.io/lifecycle=${local._lifecycle},eks.moengage.io/service=${local._service},eks.moengage.io/subservice=${local._subservice},eks.moengage.io/instancegroup=${local._instance_group}")
+  bootstrap_extra_args = coalesce(var.bootstrap_extra_args, "--node-labels=eks.moengage.io/namespace=${local._kubernetes_namespace},eks.moengage.io/lifecycle=${local._lifecycle},eks.moengage.io/service=${local._service},eks.moengage.io/subservice=${local._subservice},eks.moengage.io/instancegroup=${local._instance_group}")
 
 }
 
