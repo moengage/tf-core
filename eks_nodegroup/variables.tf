@@ -139,7 +139,7 @@ variable "device_name" {
 }
 
 variable "enable_custom_dns" {
-  default     = true
+  default     = false
   description = "Enable custom DNS name server flag to override custom dns ip"
 }
 
