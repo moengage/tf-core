@@ -118,7 +118,7 @@ variable "target_group_arns" {
 }
 
 variable "spot_allocation_strategy" {
-  default = "lowest-price"
+  default = "capacity-optimized"
 }
 
 variable "spot_instance_pools" {
