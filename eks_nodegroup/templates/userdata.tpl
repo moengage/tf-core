@@ -105,8 +105,8 @@ kernel.sched_migration_cost_ns=5000000
 EOF
 
 cat <<EOT >> /etc/security/limits.conf
-*               soft    nofile          65535
-*               hard    nofile          65535
+*               soft    nofile          1048576
+*               hard    nofile          1048576
 EOT
 
 # Disable THP
