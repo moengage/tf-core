@@ -133,5 +133,5 @@ export DNS_CLUSTER_IP=${custom_dns_ip}
         "--kube-reserved cpu=100m,memory=0.5Gi,ephemeral-storage=1Gi \
         --system-reserved cpu=100m,memory=0.2Gi,ephemeral-storage=1Gi \
         --eviction-hard memory.available<500Mi,nodefs.available<10% \
-        --allowed-unsafe-sysctls net.core.somaxconn \
+        --allowed-unsafe-sysctls 'net.core.somaxconn,fs.file-max' \
         ${bootstrap_extra_args}"
