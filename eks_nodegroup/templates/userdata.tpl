@@ -93,13 +93,12 @@ net.ipv4.neigh.default.gc_thresh3=16384
 
 # Increase size of file handles and inode cache
 fs.file-max=2097152
+fs.inotify.max_user_watches=1048576
 
 # Do less swapping
 vm.swappiness=10
 vm.dirty_ratio=60
 vm.dirty_background_ratio=2
-
-fs.file-max=65536
 
 # Sets the time before the kernel considers migrating a proccess to another core
 kernel.sched_migration_cost_ns=5000000
