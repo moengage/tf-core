@@ -33,7 +33,7 @@ module "nodegroup" {
   iam_instance_profile                     = aws_iam_instance_profile.default.arn
   image_id                                 = coalesce(var.image_id, data.aws_ssm_parameter.default.value)
   instance_subnet_ids                      = var.instance_subnet_ids
-  instance_security_group_ids              = concat(instance_security_group_ids, [data.aws_security_group.default.id])
+  instance_security_group_ids              = concat(var.instance_security_group_ids, [data.aws_security_group.default.id])
   key_name                                 = var.key_name
   max_size                                 = var.max_size
   min_size                                 = var.min_size
