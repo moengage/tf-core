@@ -147,3 +147,8 @@ variable "custom_dns_ip" {
   description = "If enable_custom_dns_ip set to true use this ip"
   default     = "169.254.20.10"
 }
+
+variable "instance_security_group_ids" {
+  description = "instance_security_group_ids"
+  default     = []
+}

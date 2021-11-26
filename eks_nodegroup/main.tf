@@ -50,5 +50,6 @@ module "nodegroup" {
   extra_asg_tags                           = local.asg_tags
   device_name                              = var.device_name
   volume_type                              = var.volume_type
+  instance_security_group_ids              = var.instance_security_group_ids
 }
 
