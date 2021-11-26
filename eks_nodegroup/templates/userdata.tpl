@@ -126,6 +126,8 @@ echo "0 */6 * * * ec2-user \$(aws ecr get-login --no-include-email --region us-e
 export DNS_CLUSTER_IP=${custom_dns_ip}
 %{ endif }
 
+yum -y install bind-utils traceroute
+
 /etc/eks/bootstrap.sh --apiserver-endpoint '${cluster_endpoint}' \
     --b64-cluster-ca '${certificate_authority_data}' '${cluster_name}' \
     --kubelet-extra-args \
