@@ -151,4 +151,5 @@ variable "custom_dns_ip" {
 variable "instance_security_group_ids" {
   description = "instance_security_group_ids"
   default     = []
+  type        = list(any)
 }
