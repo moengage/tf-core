@@ -244,3 +244,14 @@ variable "vpc_security_group_ids" {
   type        = list(string)
   description = "List of security groups"
 }
+
+variable "rds_dns" {
+  description = "rds dns name"
+  type        = string
+}
+
+variable "zone_name" {
+  description = "rds dns name"
+  default     = "moeinternal.com"
+  type        = string
+}

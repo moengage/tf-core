@@ -32,3 +32,7 @@ output "db_subnet_group_id" {
   value       = aws_db_subnet_group.default.id
   description = "The db subnet group name."
 }
+
+output "dns_endpoint" {
+  value = aws_route53_record.rds_dns.fqdn
+}
