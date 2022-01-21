@@ -13,12 +13,10 @@ variable "cluster" {
 
 variable "default_cooldown" {
   description = "Time between a scaling activity and the succeeding scaling activity"
-  default = "300"
 }
 
 variable "desired_capacity" {
   description = "The number of Amazon EC2 instances that should be running in the group"
-  default     = 0
 }
 
 variable "notification_enabled" {
@@ -42,7 +40,7 @@ variable "enabled_metrics" {
 }
 
 variable "environment" {
-  description = "Production"
+  description = "Environment"
 }
 
 variable "extra_asg_tags" {
@@ -61,13 +59,12 @@ variable "force_delete" {
 
 variable "health_check_grace_period" {
   description = "Time (in seconds) after instance comes into service before checking health. Default: 300"
-  default     = 300
+  default     = 30
 }
 
 variable "health_check_type" {
   description = "EC2 or ELB. Controls how health checking is done."
   type = string
-  default = "EC2"
 }
 
 variable "instance_subnet_ids" {
@@ -86,12 +83,11 @@ variable "launch_template_id" {
 
 variable "launch_template_version" {
   description = "Template version. Can be version number, $Latest, or $Default."
-  default     = "$Default"
+  default     = "$Latest"
 }
 
 variable "max_size" {
   description = "The maximum size of the auto scale group"
-  default     = 0
 }
 
 variable "metrics_granularity" {
@@ -101,7 +97,6 @@ variable "metrics_granularity" {
 
 variable "min_size" {
   description = "The minimum size of the auto scale group"
-  default     = 0
 }
 
 variable "min_elb_capacity" {
@@ -223,10 +218,4 @@ variable "create_asg_security_group" {
   description = "True to create asg sg"
   default     = false
   type        = bool
-}
-
-variable "key_name" {
-  type        = string
-  description = "The SSH key name that should be used for the instance"
-  default     = ""
 }
