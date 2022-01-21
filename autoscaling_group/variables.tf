@@ -42,7 +42,7 @@ variable "enabled_metrics" {
 }
 
 variable "environment" {
-  description = "Environment"
+  description = "Production"
 }
 
 variable "extra_asg_tags" {
@@ -86,7 +86,7 @@ variable "launch_template_id" {
 
 variable "launch_template_version" {
   description = "Template version. Can be version number, $Latest, or $Default."
-  default     = "$Latest"
+  default     = "$Default"
 }
 
 variable "max_size" {
