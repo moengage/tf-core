@@ -56,7 +56,7 @@ locals {
     },
     {
       "key"                 = "Name"
-      "value"               = local.resource_identifier
+      "value"               = "${local.resource_identifier}-asg"
       "propagate_at_launch" = var.propagate_tags_at_launch
     },
     {

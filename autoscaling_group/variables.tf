@@ -13,10 +13,12 @@ variable "cluster" {
 
 variable "default_cooldown" {
   description = "Time between a scaling activity and the succeeding scaling activity"
+  default = "300"
 }
 
 variable "desired_capacity" {
   description = "The number of Amazon EC2 instances that should be running in the group"
+  default     = 0
 }
 
 variable "notification_enabled" {
@@ -59,11 +61,13 @@ variable "force_delete" {
 
 variable "health_check_grace_period" {
   description = "Time (in seconds) after instance comes into service before checking health. Default: 300"
-  default     = 30
+  default     = 300
 }
 
 variable "health_check_type" {
   description = "EC2 or ELB. Controls how health checking is done."
+  type = string
+  default = "EC2"
 }
 
 variable "instance_subnet_ids" {
@@ -87,6 +91,7 @@ variable "launch_template_version" {
 
 variable "max_size" {
   description = "The maximum size of the auto scale group"
+  default     = 0
 }
 
 variable "metrics_granularity" {
@@ -96,6 +101,7 @@ variable "metrics_granularity" {
 
 variable "min_size" {
   description = "The minimum size of the auto scale group"
+  default     = 0
 }
 
 variable "min_elb_capacity" {
@@ -116,6 +122,12 @@ variable "on_demand_base_capacity" {
 variable "on_demand_percentage_above_base_capacity" {
   description = "Percentage split between on-demand and Spot instances above the base on-demand capacity. Default: 100"
   default     = 100
+}
+
+variable "service_linked_role_arn" {
+  type        = string
+  description = "The ARN of the service-linked role that the ASG will use to call other AWS services"
+  default     = ""
 }
 
 variable "protect_from_scale_in" {
@@ -169,6 +181,18 @@ variable "termination_policies" {
   default     = ["OldestInstance"]
 }
 
+variable "initial_lifecycle_hooks" {
+  description = "One or more Lifecycle Hooks to attach to the Auto Scaling Group before instances are launched. The syntax is exactly the same as the sepa    rate `aws_autoscaling_lifecycle_hook` resource, without the `autoscaling_group_name` attribute. Please note that this will only work when creating a new A    uto Scaling Group. For all other use-cases, please use `aws_autoscaling_lifecycle_hook` resource"
+  type        = list(map(string))
+  default     = []
+  }
+
+variable "capacity_rebalance" {
+  type        = bool
+  default     = false
+  description = "Indicates whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled."
+}
+
 variable "vpc_id" {
   description = "VPC ID"
 }
@@ -198,4 +222,16 @@ variable "create_asg_security_group" {
   description = "True to create asg sg"
   default     = false
   type        = bool
+}
+
+variable "key_name" {
+  type        = string
+  description = "The SSH key name that should be used for the instance"
+  default     = ""
+}
+
+variable "capacity_rebalance" {
+  type        = bool
+  default     = false
+  description = "Indicates whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled."
 }
