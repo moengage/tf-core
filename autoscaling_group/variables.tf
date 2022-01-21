@@ -195,6 +195,7 @@ variable "capacity_rebalance" {
 
 variable "vpc_id" {
   description = "VPC ID"
+  default = ""
 }
 
 variable "wait_for_capacity_timeout" {
