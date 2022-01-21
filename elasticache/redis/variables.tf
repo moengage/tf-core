@@ -170,3 +170,8 @@ variable "parameter" {
   default     = []
   description = "A list of Redis parameters to apply. Note that parameters may differ from one Redis family to another"
 }
+
+variable "redis_dns" {
+  description = "redis dns name"
+  type        = string
+}
