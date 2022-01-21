@@ -230,9 +230,3 @@ variable "key_name" {
   description = "The SSH key name that should be used for the instance"
   default     = ""
 }
-
-variable "capacity_rebalance" {
-  type        = bool
-  default     = false
-  description = "Indicates whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled."
-}
