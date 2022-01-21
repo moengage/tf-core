@@ -175,3 +175,9 @@ variable "redis_dns" {
   description = "redis dns name"
   type        = string
 }
+
+variable "zone_name" {
+  description = "redis dns name"
+  default     = "moeinternal.com"
+  type        = string
+}
