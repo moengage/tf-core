@@ -8,5 +8,5 @@ resource "aws_route53_record" "redis_dns" {
   name    = var.redis_dns
   type    = "CNAME"
   ttl     = "300"
-  records = [aws_elasticache_replication_group.redis.primary_endpoint_address]
+  records = var.cluster_mode_enabled ? [join("", aws_elasticache_replication_group.redis.*.configuration_endpoint_address)] : [join("", aws_elasticache_replication_group.redis.*.primary_endpoint_address)]
 }
