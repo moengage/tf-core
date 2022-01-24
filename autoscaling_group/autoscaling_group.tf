@@ -23,10 +23,10 @@ resource "aws_autoscaling_group" "default" {
   dynamic "initial_lifecycle_hook" {
     for_each = var.initial_lifecycle_hooks
     content {
-      name                    = initial_lifecycle_hook.value.name
-      default_result          = lookup(initial_lifecycle_hook.value, "default_result", null)
-      heartbeat_timeout       = lookup(initial_lifecycle_hook.value, "heartbeat_timeout", null)
-      lifecycle_transition    = initial_lifecycle_hook.value.lifecycle_transition
+      name                 = initial_lifecycle_hook.value.name
+      default_result       = lookup(initial_lifecycle_hook.value, "default_result", null)
+      heartbeat_timeout    = lookup(initial_lifecycle_hook.value, "heartbeat_timeout", null)
+      lifecycle_transition = initial_lifecycle_hook.value.lifecycle_transition
     }
   }
 
