@@ -255,8 +255,3 @@ variable "zone_name" {
   default     = "moeinternal.com"
   type        = string
 }
-
-variable "vpc_id" {
-  description = "vpc id"
-  type        = string
-}

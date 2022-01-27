@@ -162,3 +162,8 @@ variable "extra_tags" {
   type        = map(any)
   description = "extra tags"
 }
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC Id to associate with RDS MySQL."
+}
