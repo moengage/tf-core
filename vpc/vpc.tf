@@ -1,3 +1,6 @@
+################################################################################
+# VPC
+################################################################################
 resource "aws_vpc" "default" {
   cidr_block           = var.vpc_cidr
   instance_tenancy     = "default"
@@ -16,6 +19,9 @@ resource "aws_vpc" "default" {
   )
 }
 
+################################################################################
+# Internet Gateway
+################################################################################
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.default.id
 
@@ -27,6 +33,9 @@ resource "aws_internet_gateway" "igw" {
   )
 }
 
+################################################################################
+# Publiс routes
+################################################################################
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.default.id
 
@@ -44,6 +53,19 @@ resource "aws_route_table" "public" {
   )
 }
 
+resource "aws_route" "public_internet_gateway" {
+  route_table_id = aws_route_table.public.id
+  depends_on = [
+    aws_route_table.public,
+    aws_internet_gateway.igw,
+  ]
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.igw.id
+}
+
+################################################################################
+# Private routes
+################################################################################
 resource "aws_route_table" "private" {
   count = length(var.management_private_subnets)
   vpc_id = aws_vpc.default.id
@@ -62,6 +84,16 @@ resource "aws_route_table" "private" {
   )
 }
 
+resource "aws_route" "private_nat_gateway" {
+  count                   = length(var.management_private_subnets)
+  route_table_id         = element(aws_route_table.private[*].id, count.index)
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = element(aws_nat_gateway.nat_gw[*].id, count.index)
+}
+
+################################################################################
+# Intra routes
+################################################################################
 resource "aws_route_table" "intra" {
   vpc_id = aws_vpc.default.id
 
@@ -79,31 +111,9 @@ resource "aws_route_table" "intra" {
   )
 }
 
-resource "aws_route" "public_internet_gateway" {
-  route_table_id = aws_route_table.public.id
-  depends_on = [
-    aws_route_table.public,
-    aws_internet_gateway.igw,
-  ]
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.igw.id
-}
-
-resource "aws_route" "private_nat_gateway" {
-  count                   = length(var.management_private_subnets)
-  route_table_id         = element(aws_route_table.private[*].id, count.index)
-  destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = element(aws_nat_gateway.nat_gw[*].id, count.index)
-}
-
-# if ipv6 enabled vpc enable below
-#resource "aws_route" "public_internet_gateway_ipv6" {
-#  route_table_id              = "${aws_route_table.public.id}"
-#  depends_on                  = ["aws_route_table.public", "aws_internet_gateway.igw"]
-#  destination_ipv6_cidr_block = "::/0"
-#  gateway_id                  = "${aws_internet_gateway.igw.id}"
-#}
-
+################################################################################
+# Public subnet
+################################################################################
 resource "aws_subnet" "public" {
   count                   = length(var.availability_zones)
   vpc_id                  = aws_vpc.default.id
@@ -129,6 +139,9 @@ resource "aws_subnet" "public" {
   )
 }
 
+################################################################################
+# Private subnet
+################################################################################
 resource "aws_subnet" "private" {
   count                   = length(var.availability_zones)
   vpc_id                  = aws_vpc.default.id
@@ -154,6 +167,9 @@ resource "aws_subnet" "private" {
   )
 }
 
+################################################################################
+# Intra subnet
+################################################################################
 resource "aws_subnet" "intra" {
   count                   = length(var.availability_zones)
   vpc_id                  = aws_vpc.default.id
@@ -179,6 +195,9 @@ resource "aws_subnet" "intra" {
   )
 }
 
+################################################################################
+# NAT Gateway
+################################################################################
 resource "aws_eip" "nat_gw_eip" {
   count = length(var.availability_zones)
   vpc   = true
@@ -189,24 +208,6 @@ resource "aws_eip" "nat_gw_eip" {
       "Name" = "${local.resource_identifier}-vpc-nat-gw-eip-${count.index}"
     },
   )
-}
-
-resource "aws_route_table_association" "public" {
-  count          = length(var.availability_zones)
-  subnet_id      = element(aws_subnet.public.*.id, count.index)
-  route_table_id = aws_route_table.public.id
-}
-
-resource "aws_route_table_association" "private" {
-  count          = length(var.management_private_subnets)
-  subnet_id      = element(aws_subnet.private[*].id, count.index)
-  route_table_id = element(aws_route_table.private[*].id, count.index)
-}
-
-resource "aws_route_table_association" "intra" {
-  count          = length(var.management_intra_subnets)
-  subnet_id      = element(aws_subnet.intra[*].id, count.index)
-  route_table_id = aws_route_table.intra.id
 }
 
 resource "aws_nat_gateway" "nat_gw" {
@@ -229,6 +230,28 @@ resource "aws_nat_gateway" "nat_gw" {
   lifecycle {
     ignore_changes = [subnet_id]
   }
+}
+
+################################################################################
+# Route table association
+################################################################################
+
+resource "aws_route_table_association" "public" {
+  count          = length(var.availability_zones)
+  subnet_id      = element(aws_subnet.public.*.id, count.index)
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "private" {
+  count          = length(var.management_private_subnets)
+  subnet_id      = element(aws_subnet.private[*].id, count.index)
+  route_table_id = element(aws_route_table.private[*].id, count.index)
+}
+
+resource "aws_route_table_association" "intra" {
+  count          = length(var.management_intra_subnets)
+  subnet_id      = element(aws_subnet.intra[*].id, count.index)
+  route_table_id = aws_route_table.intra.id
 }
 
 # If ipv6 enabled vpc, enable below
