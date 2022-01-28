@@ -1,5 +1,5 @@
 resource "aws_security_group" "instances" {
-  count = var.create_asg_security_group ? 1: 0
+  count       = var.create_asg_security_group ? 1 : 0
   name_prefix = "${local.resource_identifier}-instance-sg"
   vpc_id      = var.vpc_id
 

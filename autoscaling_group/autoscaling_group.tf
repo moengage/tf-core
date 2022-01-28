@@ -18,6 +18,17 @@ resource "aws_autoscaling_group" "default" {
   min_elb_capacity          = var.min_elb_capacity
   wait_for_elb_capacity     = var.wait_for_elb_capacity
   protect_from_scale_in     = var.protect_from_scale_in
+  capacity_rebalance        = var.capacity_rebalance
+
+  dynamic "initial_lifecycle_hook" {
+    for_each = var.initial_lifecycle_hooks
+    content {
+      name                 = initial_lifecycle_hook.value.name
+      default_result       = lookup(initial_lifecycle_hook.value, "default_result", null)
+      heartbeat_timeout    = lookup(initial_lifecycle_hook.value, "heartbeat_timeout", null)
+      lifecycle_transition = initial_lifecycle_hook.value.lifecycle_transition
+    }
+  }
 
   mixed_instances_policy {
     launch_template {

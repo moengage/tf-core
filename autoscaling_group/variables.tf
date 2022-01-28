@@ -64,6 +64,7 @@ variable "health_check_grace_period" {
 
 variable "health_check_type" {
   description = "EC2 or ELB. Controls how health checking is done."
+  type        = string
 }
 
 variable "instance_subnet_ids" {
@@ -118,6 +119,7 @@ variable "on_demand_percentage_above_base_capacity" {
   default     = 100
 }
 
+
 variable "protect_from_scale_in" {
   description = "Allows setting instance protection. The autoscaling group will not select instances with this setting for terminination during scale in events."
   default     = false
@@ -167,6 +169,18 @@ variable "termination_policies" {
   type        = list(string)
   description = "A list of policies to decide how the instances in the auto scale group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default"
   default     = ["OldestInstance"]
+}
+
+variable "initial_lifecycle_hooks" {
+  description = "One or more Lifecycle Hooks to attach to the Auto Scaling Group before instances are launched. The syntax is exactly the same as the sepa    rate `aws_autoscaling_lifecycle_hook` resource, without the `autoscaling_group_name` attribute. Please note that this will only work when creating a new A    uto Scaling Group. For all other use-cases, please use `aws_autoscaling_lifecycle_hook` resource"
+  type        = list(map(string))
+  default     = []
+}
+
+variable "capacity_rebalance" {
+  type        = bool
+  default     = false
+  description = "Indicates whether capacity rebalance is enabled. Otherwise, capacity rebalance is disabled."
 }
 
 variable "vpc_id" {
