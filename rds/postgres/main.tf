@@ -12,8 +12,13 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
   }
 }
 
+data "aws_iam_role" "enhanced_monitoring" {
+  name = "rds-${local.resource_identifier}-EnhancedMonitoringRole"
+}
+
 resource "aws_iam_role" "enhanced_monitoring" {
   name               = "rds-${local.resource_identifier}-EnhancedMonitoringRole"
+  count              = data.aws_iam_role.enhanced_monitoring.id == "" ? 1 : 0
   assume_role_policy = data.aws_iam_policy_document.enhanced_monitoring.json
 }
 
