@@ -165,5 +165,10 @@ variable "extra_tags" {
 
 variable "vpc_id" {
   type        = string
-  description = "VPC Id to associate with RDS MySQL."
+  description = "VPC Id to associate with RDS Postgres"
+}
+
+variable "zone_name" {
+  type        = string
+  description = "R53 Zone name"
 }
