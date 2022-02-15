@@ -172,3 +172,8 @@ variable "zone_name" {
   type        = string
   description = "R53 Zone name"
 }
+
+variable "rds_dns" {
+  type        = string
+  description = "R53 Zone name"
+}
