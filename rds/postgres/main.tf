@@ -12,18 +12,19 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
   }
 }
 
-data "aws_iam_role" "enhanced_monitoring" {
+data "aws_iam_role" "enhanced_monitoring_present" {
   name = "rds-${local.resource_identifier}-EnhancedMonitoringRole"
 }
 
 resource "aws_iam_role" "enhanced_monitoring" {
   name               = "rds-${local.resource_identifier}-EnhancedMonitoringRole"
-  count              = data.aws_iam_role.enhanced_monitoring.id == "" ? 1 : 0
+  count              = data.aws_iam_role.enhanced_monitoring_present.id == "" ? 1 : 0
   assume_role_policy = data.aws_iam_policy_document.enhanced_monitoring.json
 }
 
 resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
-  role       = aws_iam_role.enhanced_monitoring.name
+  role       = aws_iam_role.enhanced_monitoring[0].name
+  count      = data.aws_iam_role.enhanced_monitoring_present.id == "" ? 1 : 0
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
 }
 
@@ -60,7 +61,7 @@ resource "aws_db_instance" "postgresql" {
   parameter_group_name       = var.parameter_group
   storage_encrypted          = var.storage_encrypted
   monitoring_interval        = var.monitoring_interval
-  monitoring_role_arn        = var.monitoring_interval > 0 ? aws_iam_role.enhanced_monitoring.arn : ""
+  monitoring_role_arn        = data.aws_iam_role.enhanced_monitoring_present.id == "" ? aws_iam_role.enhanced_monitoring[0].arn : data.aws_iam_role.enhanced_monitoring_present.id
   deletion_protection        = var.deletion_protection
   tags                       = merge(local.default_tags, var.extra_tags)
 }
