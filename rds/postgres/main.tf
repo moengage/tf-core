@@ -61,7 +61,7 @@ resource "aws_db_instance" "postgresql" {
   parameter_group_name       = var.parameter_group
   storage_encrypted          = var.storage_encrypted
   monitoring_interval        = var.monitoring_interval
-  monitoring_role_arn        = data.aws_iam_role.enhanced_monitoring_present.id == "" ? aws_iam_role.enhanced_monitoring[0].arn : data.aws_iam_role.enhanced_monitoring_present.id
+  monitoring_role_arn        = data.aws_iam_role.enhanced_monitoring_present.id == "" ? aws_iam_role.enhanced_monitoring[0].arn : data.aws_iam_role.enhanced_monitoring_present.arn
   deletion_protection        = var.deletion_protection
   tags                       = merge(local.default_tags, var.extra_tags)
 }
