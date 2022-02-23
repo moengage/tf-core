@@ -6,8 +6,9 @@ locals {
     Cluster     = lower(var.cluster)
     Environment = lower(var.environment)
     Business    = "sre"
+    Service     = "vpc-module"
+    SubService  = "vpc-module"
   }
 
   resource_identifier = "${lower(var.environment)}-${lower(var.cluster)}"
 }
-

@@ -238,7 +238,7 @@ resource "aws_nat_gateway" "nat_gw" {
 
 resource "aws_route_table_association" "public" {
   count          = length(var.availability_zones)
-  subnet_id      = element(aws_subnet.public.*.id, count.index)
+  subnet_id      = element(aws_subnet.public[*].id, count.index)
   route_table_id = aws_route_table.public.id
 }
 
