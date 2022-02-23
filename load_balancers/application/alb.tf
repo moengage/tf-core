@@ -23,7 +23,7 @@ resource "aws_lb" "default" {
   ip_address_type                  = var.lb_ip_address_type
 
   access_logs {
-    bucket  = aws_s3_bucket.logs[0].id
+    bucket  = aws_s3_bucket.logs.bucket
     enabled = var.lb_access_logs_enabled
   }
 
