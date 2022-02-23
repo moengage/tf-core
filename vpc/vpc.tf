@@ -115,7 +115,7 @@ resource "aws_route_table" "intra" {
 # Public subnet
 ################################################################################
 resource "aws_subnet" "public" {
-  count                   = length(var.availability_zones)
+  count                   = length(var.management_public_subnets)
   vpc_id                  = aws_vpc.default.id
   cidr_block              = var.management_public_subnets[element(var.availability_zones, count.index)]
   availability_zone       = element(var.availability_zones, count.index)
@@ -143,7 +143,7 @@ resource "aws_subnet" "public" {
 # Private subnet
 ################################################################################
 resource "aws_subnet" "private" {
-  count                   = length(var.availability_zones)
+  count                   = length(var.management_private_subnets)
   vpc_id                  = aws_vpc.default.id
   cidr_block              = var.management_private_subnets[element(var.availability_zones, count.index)]
   availability_zone       = element(var.availability_zones, count.index)
@@ -171,7 +171,7 @@ resource "aws_subnet" "private" {
 # Intra subnet
 ################################################################################
 resource "aws_subnet" "intra" {
-  count                   = length(var.availability_zones)
+  count                   = length(var.management_intra_subnets)
   vpc_id                  = aws_vpc.default.id
   cidr_block              = var.management_intra_subnets[element(var.availability_zones, count.index)]
   availability_zone       = element(var.availability_zones, count.index)
