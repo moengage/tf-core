@@ -210,3 +210,9 @@ variable "metric_period" {
   default     = 300
   description = "The period in seconds over which the specified statistic is applied"
 }
+
+variable "access_log_bucket_id" {
+  type        = string
+  default     = null
+  description = "An external S3 Bucket name to store access logs in. If specified, no logging bucket will be created."
+}
