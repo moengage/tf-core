@@ -48,3 +48,8 @@ variable "management_intra_subnets" {
   type        = map(string)
   description = "intra subnets"
 }
+
+variable "route53_zone_list" {
+  type = list
+  description = "List of route53 hostes zone to be created"
+}
