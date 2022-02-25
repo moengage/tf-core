@@ -39,3 +39,17 @@ variable "management_public_subnets" {
   description = "Public subnets where NAT gateways will be launched"
 }
 
+variable "management_private_subnets" {
+  type        = map(string)
+  description = "Private subnets"
+}
+
+variable "management_intra_subnets" {
+  type        = map(string)
+  description = "intra subnets"
+}
+
+variable "route53_zone_list" {
+  type = list
+  description = "List of route53 hostes zone to be created"
+}

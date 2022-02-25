@@ -17,3 +17,13 @@ data "aws_subnet_ids" "management" {
   depends_on = [aws_subnet.public]
 }
 
+data "aws_subnet_ids" "management_private" {
+  vpc_id = aws_vpc.default.id
+
+  tags = {
+    ResourceGroup = "management"
+    ResourceType  = "private"
+  }
+
+  depends_on = [aws_subnet.private]
+}
