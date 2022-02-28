@@ -213,3 +213,151 @@ variable "create_asg_security_group" {
   default     = false
   type        = bool
 }
+
+variable "autoscaling_policies_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether to create policy & alarm resources"
+}
+
+variable "scale_up_adjustment_type" {
+  type        = string
+  default     = "ChangeInCapacity"
+  description = "Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values are `ChangeInCapacity`, `ExactCapacity` and `PercentChangeInCapacity`"
+}
+
+variable "scale_up_policy_type" {
+  type        = string
+  default     = "StepScaling"
+  description = "The scaling policy type"
+}
+
+variable "scale_down_scaling_adjustment" {
+  type        = number
+  default     = -1
+  description = "The number of instances by which to scale. `scale_down_scaling_adjustment` determines the interpretation of this number. A positive increment adds to the current capacity and a negative value removes from the current capacity"
+}
+
+variable "scale_down_adjustment_type" {
+  type        = string
+  default     = "ChangeInCapacity"
+  description = "Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values are `ChangeInCapacity`, `ExactCapacity` and `PercentChangeInCapacity`"
+}
+
+variable "scale_down_policy_type" {
+  type        = string
+  default     = "SimpleScaling"
+  description = "The scaling policy type. Currently only `SimpleScaling` is supported"
+}
+
+variable "scale_down_cooldown_seconds" {
+  type        = number
+  default     = 300
+  description = "The amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start"
+}
+
+variable "cpu_utilization_high_evaluation_periods" {
+  type        = number
+  default     = 2
+  description = "The number of periods over which data is compared to the specified threshold"
+}
+
+variable "cpu_utilization_high_period_seconds" {
+  type        = number
+  default     = 300
+  description = "The period in seconds over which the specified statistic is applied"
+}
+
+variable "cpu_utilization_high_statistic" {
+  type        = string
+  default     = "Average"
+  description = "The statistic to apply to the alarm's associated metric. Either of the following is supported: `SampleCount`, `Average`, `Sum`, `Minimum`, `Maximum`"
+}
+
+variable "cpu_utilization_high_threshold_percent" {
+  type        = number
+  default     = 90
+  description = "The value against which the specified statistic is compared"
+}
+
+variable "cpu_utilization_low_evaluation_periods" {
+  type        = number
+  default     = 2
+  description = "The number of periods over which data is compared to the specified threshold"
+}
+
+variable "cpu_utilization_low_period_seconds" {
+  type        = number
+  default     = 300
+  description = "The period in seconds over which the specified statistic is applied"
+}
+
+variable "cpu_utilization_low_statistic" {
+  type        = string
+  default     = "Average"
+  description = "The statistic to apply to the alarm's associated metric. Either of the following is supported: `SampleCount`, `Average`, `Sum`, `Minimum`, `Maximum`"
+}
+
+variable "cpu_utilization_low_threshold_percent" {
+  type        = number
+  default     = 10
+  description = "The value against which the specified statistic is compared"
+}
+
+variable "default_alarms_enabled" {
+  type        = bool
+  default     = true
+  description = "Enable or disable Cloudwatch alarm creation"
+}
+
+variable "custom_alarms" {
+  type = map(object({
+    alarm_name                = string
+    comparison_operator       = string
+    evaluation_periods        = string
+    metric_name               = string
+    namespace                 = string
+    period                    = string
+    statistic                 = string
+    threshold                 = string
+    treat_missing_data        = string
+    ok_actions                = list(string)
+    insufficient_data_actions = list(string)
+    dimensions_name           = string
+    dimensions_target         = string
+    alarm_description         = string
+    alarm_actions             = list(string)
+  }))
+  default     = {}
+  description = "Map of custom CloudWatch alarms configurations"
+}
+
+variable "sns_topic_alarms_arn" {
+  type        = string
+  description = "ARN of SNS topic that will be subscribed to an alarm."
+  default     = ""
+}
+
+variable "scaling_policies" {
+  description = "Map of target scaling policy schedule to create"
+  type        = any
+  default     = {}
+}
+
+variable "create_schedule" {
+  description = "Determines whether to create autoscaling group schedule or not"
+  type        = bool
+  default     = false
+}
+
+variable "schedules" {
+  description = "Map of autoscaling group schedule to create"
+  type        = map(any)
+  default     = {}
+}
+
+variable "step_adjustment" {
+  description = "Map of target scaling policy schedule to create"
+  type        = any
+  default     = {}
+}
