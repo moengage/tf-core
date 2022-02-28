@@ -30,6 +30,6 @@ variable "allow_all_egress" {
 
 variable "ingress_rules" {
   description = "List of ingress rules to create."
-  type        = list(map(string))
+  type        = any
   default     = []
 }
