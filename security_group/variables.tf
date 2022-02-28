@@ -33,3 +33,9 @@ variable "ingress_rules" {
   type        = any
   default     = []
 }
+
+variable "sg_name" {
+  description = "Name of the security group"
+  type        = string
+  default     = ""
+}
