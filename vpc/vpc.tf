@@ -213,7 +213,7 @@ resource "aws_eip" "nat_gw_eip" {
 resource "aws_nat_gateway" "nat_gw" {
   count         = length(var.availability_zones)
   allocation_id = element(aws_eip.nat_gw_eip[*].id, count.index)
-  subnet_id     = element(aws_subnet.private[*].id, count.index)
+  subnet_id     = element(aws_subnet.public[*].id, count.index)
 
   depends_on = [aws_internet_gateway.igw]
 
