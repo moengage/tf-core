@@ -1,5 +1,5 @@
 resource "aws_security_group" "default" {
-  name        = local.resource_identifier
+  name        = var.sg_name != "" ? var.sg_name : local.resource_identifier
   vpc_id      = var.vpc_id
   description = var.sg_description
   tags        = local.default_tags
