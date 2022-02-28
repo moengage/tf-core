@@ -64,7 +64,7 @@ resource "aws_autoscaling_policy" "targetandpredictive" {
 
 resource "aws_autoscaling_policy" "scale_up" {
   count                  = local.autoscaling_enabled ? 1 : 0
-  name                   = join("", aws_autoscaling_group.default.*.name) - "up"
+  name                   = join("", aws_autoscaling_group.default.*.name)-"up"
   autoscaling_group_name = join("", aws_autoscaling_group.default.*.name)
   adjustment_type        = var.scale_up_adjustment_type
   policy_type            = var.scale_up_policy_type
@@ -81,7 +81,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 
 resource "aws_autoscaling_policy" "scale_down" {
   count                  = local.autoscaling_enabled ? 1 : 0
-  name                   = join("", aws_autoscaling_group.default.*.name) - "down"
+  name                   = join("", aws_autoscaling_group.default.*.name)-"down"
   scaling_adjustment     = var.scale_down_scaling_adjustment
   adjustment_type        = var.scale_down_adjustment_type
   policy_type            = var.scale_down_policy_type
@@ -94,7 +94,7 @@ locals {
 
   default_ec2_alarms = {
     cpu_high = {
-      alarm_name                = join("", aws_autoscaling_group.default.*.name) - "cpu-high"
+      alarm_name                = join("", aws_autoscaling_group.default.*.name)-"cpu-high"
       comparison_operator       = "GreaterThanOrEqualToThreshold"
       evaluation_periods        = var.cpu_utilization_high_evaluation_periods
       metric_name               = "CPUUtilization"
@@ -111,7 +111,7 @@ locals {
       insufficient_data_actions = [var.sns_topic_alarms_arn]
     },
     cpu_low = {
-      alarm_name                = join("", aws_autoscaling_group.default.*.name) - "cpu-low"
+      alarm_name                = join("", aws_autoscaling_group.default.*.name)-"cpu-low"
       comparison_operator       = "LessThanOrEqualToThreshold"
       evaluation_periods        = var.cpu_utilization_low_evaluation_periods
       metric_name               = "CPUUtilization"
