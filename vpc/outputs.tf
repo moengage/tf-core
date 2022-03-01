@@ -13,6 +13,16 @@ output "igw_id" {
   description = "Internet Gateway ID"
 }
 
+output "public_subnet_ids" {
+  value       = aws_subnet.public[*].id
+  description = "public subnet ids"
+}
+
+output "private_subnet_ids" {
+  value       = aws_subnet.private[*].id
+  description = "private subnet ids"
+}
+
 output "nat_gws" {
   value = formatlist(
     "%v - %v - %v",

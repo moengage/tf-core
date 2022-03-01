@@ -1,5 +1,5 @@
 resource "aws_lb" "default" {
-  name = "${substr(
+  name = var.lb_name != "" ? var.lb_name : "${substr(
     local.resource_identifier,
     0,
     min(28, length(local.resource_identifier)),
@@ -42,7 +42,7 @@ resource "aws_lb" "default" {
 }
 
 resource "aws_lb_target_group" "default" {
-  name = "${substr(
+  name = var.tg_name != "" ? var.tg_name : "${substr(
     local.resource_identifier,
     0,
     min(25, length(local.resource_identifier)),

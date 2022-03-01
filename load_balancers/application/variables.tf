@@ -25,7 +25,15 @@ variable "aws_lb_accounts" {
 }
 
 variable "business_name" {
-  description = "Business Name"
+  description = "Business name"
+}
+
+variable "lb_name" {
+  description = "loadbalancer name"
+}
+
+variable "tg_name" {
+  description = "target-group Name"
 }
 
 variable "created_by" {
