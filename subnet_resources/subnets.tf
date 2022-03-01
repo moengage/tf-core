@@ -59,7 +59,7 @@ resource "aws_route_table_association" "private" {
 }
 
 resource "aws_subnet" "public" {
-  count                   = length(var.availability_zones)
+  count                   = length(var.public_subnets)
   vpc_id                  = data.aws_vpc.selected.id
   cidr_block              = var.public_subnets[element(var.availability_zones, count.index)]
   availability_zone       = element(var.availability_zones, count.index)
@@ -80,7 +80,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  count          = length(var.availability_zones)
+  count          = length(var.public_subnets)
   subnet_id      = element(aws_subnet.public.*.id, count.index)
   route_table_id = data.aws_route_table.selected.id
 
