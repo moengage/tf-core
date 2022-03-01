@@ -4,7 +4,7 @@ locals {
 
   default_ec2_alarms = {
     cpu_high = {
-      alarm_name                = "${local.asgname}cpuhigh"
+      alarm_name                = "${local.asg_name}cpuhigh"
       comparison_operator       = "GreaterThanOrEqualToThreshold"
       evaluation_periods        = var.cpu_utilization_high_evaluation_periods
       metric_name               = "CPUUtilization"
@@ -21,7 +21,7 @@ locals {
       insufficient_data_actions = [var.sns_topic_alarms_arn]
     },
     cpu_low = {
-      alarm_name                = "${local.asgname}cpulow"
+      alarm_name                = "${local.asg_name}cpulow"
       comparison_operator       = "LessThanOrEqualToThreshold"
       evaluation_periods        = var.cpu_utilization_low_evaluation_periods
       metric_name               = "CPUUtilization"
@@ -109,7 +109,7 @@ resource "aws_autoscaling_policy" "targetandpredictive" {
 
 resource "aws_autoscaling_policy" "scale_up" {
   count                  = local.autoscaling_enabled ? 1 : 0
-  name                   = "${local.asgname}scaleup"
+  name                   = "${local.asg_name}scaleup"
   autoscaling_group_name = join("", aws_autoscaling_group.default.*.name)
   adjustment_type        = var.scale_up_adjustment_type
   policy_type            = var.scale_up_policy_type
@@ -126,7 +126,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 
 resource "aws_autoscaling_policy" "scale_down" {
   count                  = local.autoscaling_enabled ? 1 : 0
-  name                   = "${local.asgname}scaledown"
+  name                   = "${local.asg_name}scaledown"
   scaling_adjustment     = var.scale_down_scaling_adjustment
   adjustment_type        = var.scale_down_adjustment_type
   policy_type            = var.scale_down_policy_type
