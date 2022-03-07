@@ -315,8 +315,8 @@ variable "step_adjustment" {
 }
 
 variable "metric_aggregation_type" {
-  type        = string
-  default     = "Average"
+  type    = string
+  default = "Average"
 }
 
 variable "sqs_period" {
