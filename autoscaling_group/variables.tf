@@ -273,12 +273,12 @@ variable "custom_alarms" {
     statistic                 = string
     threshold                 = number
     treat_missing_data        = string
-    ok_actions                = string
-    insufficient_data_actions = string
+    ok_actions                = list(string)
+    insufficient_data_actions = list(string)
     dimensions_name           = string
     dimensions_target         = string
     alarm_description         = string
-    alarm_actions             = string
+    alarm_actions             = list(string)
   }))
   default     = {}
   description = "Map of custom CloudWatch alarms configurations"
