@@ -1,45 +1,44 @@
 locals {
   asg_name = join("", aws_autoscaling_group.default.*.name)
 
-  default_sqs_alarms = {
-    sqs_high = {
-      alarm_name                = "${local.asg_name}-sqs-high"
-      comparison_operator       = "GreaterThanOrEqualToThreshold"
-      evaluation_periods        = var.sqs_high_evaluation_periods
-      metric_name               = "ApproximateNumberOfMessagesVisible"
-      namespace                 = "AWS/SQS"
-      period                    = var.sqs_period
-      statistic                 = var.sqs_statistic
-      threshold                 = var.sqs_high_threshold
-      dimensions_name           = "QueueName"
-      dimensions_target         = var.sqs_queue_name
-      alarm_description         = "Scale up Autoscaling Group ${local.asg_name},if SQS Queue ${var.sqs_queue_name} Greater than ${var.sqs_high_threshold} for ${var.sqs_period} * ${var.sqs_high_evaluation_periods} seconds"
+  default_alarms = {
+    alarm_high = {
+      alarm_name                = "${local.asg_name}-high"
+      comparison_operator       = var.comparison_operator_high
+      evaluation_periods        = var.high_evaluation_periods
+      metric_name               = var.metric_name
+      namespace                 = var.namespace
+      period                    = var.period
+      statistic                 = var.statistic
+      threshold                 = var.high_threshold
+      dimensions_name           = var.dimensions_name
+      dimensions_target         = var.dimensions_target
+      alarm_description         = "Scale up Autoscaling Group ${local.asg_name},${var.dimensions_target} Greater than ${var.high_threshold} for ${var.period} * ${var.high_evaluation_periods} seconds"
       alarm_actions             = [join("", aws_autoscaling_policy.scale_up.*.arn)]
-      treat_missing_data        = "missing"
+      treat_missing_data        = var.treat_missing_data
       ok_actions                = [var.sns_topic_alarms_arn]
       insufficient_data_actions = [var.sns_topic_alarms_arn]
     },
-    sqs_low = {
-      alarm_name                = "${local.asg_name}-sqs-low"
-      comparison_operator       = "LessThanOrEqualToThreshold"
-      evaluation_periods        = var.sqs_low_evaluation_periods
-      metric_name               = "ApproximateNumberOfMessagesVisible"
-      namespace                 = "AWS/SQS"
-      period                    = var.sqs_period
-      statistic                 = var.sqs_statistic
-      threshold                 = var.sqs_low_threshold
-      dimensions_name           = "QueueName"
-      dimensions_target         = var.sqs_queue_name
-      alarm_description         = "Scale down Autoscaling Group ${local.asg_name},if SQS Queue ${var.sqs_queue_name} below ${var.sqs_low_threshold} for ${var.sqs_period} * ${var.sqs_low_evaluation_periods} seconds"
+    alarm_low = {
+      alarm_name                = "${local.asg_name}-low"
+      comparison_operator       = var.comparison_operator_low
+      evaluation_periods        = var.low_evaluation_periods
+      metric_name               = var.metric_name
+      namespace                 = var.namespace
+      period                    = var.period
+      statistic                 = var.statistic
+      threshold                 = var.low_threshold
+      dimensions_name           = var.dimensions_name
+      dimensions_target         = var.dimensions_target
+      alarm_description         = "Scale down Autoscaling Group ${local.asg_name},${var.dimensions_target} below ${var.low_threshold} for ${var.period} * ${var.low_evaluation_periods} seconds"
       alarm_actions             = [join("", aws_autoscaling_policy.scale_down.*.arn)]
-      treat_missing_data        = "missing"
+      treat_missing_data        = var.treat_missing_data
       ok_actions                = [var.sns_topic_alarms_arn]
       insufficient_data_actions = [var.sns_topic_alarms_arn]
     }
   }
 
-  default_alarms = local.default_sqs_alarms
-  all_alarms     = merge(local.default_alarms, var.custom_alarms)
+  all_alarms = merge(local.default_alarms, var.custom_alarms)
 }
 
 resource "aws_autoscaling_schedule" "schedulers" {

@@ -214,12 +214,6 @@ variable "create_asg_security_group" {
   type        = bool
 }
 
-variable "autoscaling_policies_enabled" {
-  type        = bool
-  default     = false
-  description = "Whether to create policy & alarm resources"
-}
-
 variable "scale_up_adjustment_type" {
   type        = string
   default     = "ChangeInCapacity"
@@ -319,43 +313,73 @@ variable "metric_aggregation_type" {
   default = "Average"
 }
 
-variable "sqs_period" {
+variable "period" {
   description = "The period in seconds over which the specified statistic is applied"
   type        = number
 }
 
-variable "sqs_statistic" {
+variable "statistic" {
   description = "The statistic to apply to the alarm's associated metric, supported: SampleCount, Average, Sum, Minimum, Maximum"
   type        = string
   default     = "Average"
 }
 
-variable "sqs_high_evaluation_periods" {
+variable "high_evaluation_periods" {
   description = "The number of periods over which data is compared to the specified threshold"
   type        = number
 }
 
-variable "sqs_low_evaluation_periods" {
+variable "low_evaluation_periods" {
   description = "The number of periods over which data is compared to the specified threshold"
   type        = number
 }
 
-variable "sqs_high_threshold" {
+variable "high_threshold" {
   description = "The value against which the specified statistic is compared"
   type        = number
 }
 
-variable "sqs_low_threshold" {
+variable "low_threshold" {
   description = "The value against which the specified statistic is compared"
   type        = number
 }
 
-variable "sqs_queue_name" {
-  description = "Name of the SQS Queue created"
+variable "dimensions_target" {
+  description = "Autoscaling Group target OR SQS Queue Name"
   type        = string
 }
 
 variable "estimated_instance_warmup" {
   description = "The estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics. Without a value, AWS will default to the group's specified cooldown period."
+  type        = string
+}
+
+variable "comparison_operator_high" {
+  description = "The arithmetic operation to use when comparing the specified Statistic and Threshold. Supported LessThanOrEqualToThreshold , GreaterThanOrEqualToThreshold"
+  type        = string
+}
+
+variable "comparison_operator_low" {
+  description = "The arithmetic operation to use when comparing the specified Statistic and Threshold. Supported LessThanOrEqualToThreshold , GreaterThanOrEqualToThreshold"
+  type        = string
+}
+
+variable "metric_name" {
+  description = "The name for the alarm's associated metric. Supported CPUUtilization , ApproximateNumberOfMessagesVisible"
+  type        = string
+}
+
+variable "namespace" {
+  description = "The namespace of the metric, supported AWS/EC2 , AWS/SQS "
+  type        = string
+}
+
+variable "dimensions_name" {
+  description = "AutoScalingGroupName or QueueName"
+  type        = string
+}
+
+variable "treat_missing_data" {
+  description = "Sets how this alarm is to handle missing data points. The following values are supported: missing, ignore, breaching and notBreaching. Defaults to missing."
   type        = string
 }
