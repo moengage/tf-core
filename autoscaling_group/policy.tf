@@ -1,6 +1,5 @@
 locals {
-  autoscaling_enabled = var.autoscaling_policies_enabled
-  asg_name            = join("", aws_autoscaling_group.default.*.name)
+  asg_name = join("", aws_autoscaling_group.default.*.name)
 
   default_sqs_alarms = {
     sqs_high = {
@@ -39,8 +38,8 @@ locals {
     }
   }
 
-  default_alarms = var.autoscaling_policies_enabled && var.default_alarms_enabled ? local.default_sqs_alarms : {}
-  all_alarms     = var.autoscaling_policies_enabled ? merge(local.default_alarms, var.custom_alarms) : {}
+  default_alarms = local.default_sqs_alarms
+  all_alarms     = merge(local.default_alarms, var.custom_alarms)
 }
 
 resource "aws_autoscaling_schedule" "schedulers" {
@@ -60,7 +59,7 @@ resource "aws_autoscaling_schedule" "schedulers" {
 }
 
 resource "aws_autoscaling_policy" "targetandpredictive" {
-  for_each = { for k, v in var.scaling_policies : k => v if local.autoscaling_enabled }
+  for_each = { for k, v in var.scaling_policies : k => v }
 
   name                   = lookup(each.value, "name", each.key)
   autoscaling_group_name = join("", aws_autoscaling_group.default.*.name)
@@ -108,7 +107,6 @@ resource "aws_autoscaling_policy" "targetandpredictive" {
 }
 
 resource "aws_autoscaling_policy" "scale_up" {
-  count                     = local.autoscaling_enabled ? 1 : 0
   name                      = "${local.asg_name}scaleup"
   autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
   adjustment_type           = var.scale_up_adjustment_type
@@ -127,7 +125,6 @@ resource "aws_autoscaling_policy" "scale_up" {
 }
 
 resource "aws_autoscaling_policy" "scale_down" {
-  count                  = local.autoscaling_enabled ? 1 : 0
   name                   = "${local.asg_name}scaledown"
   scaling_adjustment     = var.scale_down_scaling_adjustment
   adjustment_type        = var.scale_down_adjustment_type
@@ -137,7 +134,7 @@ resource "aws_autoscaling_policy" "scale_down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "all_alarms" {
-  for_each                  = local.autoscaling_enabled ? local.all_alarms : {}
+  for_each                  = local.all_alarms
   alarm_name                = format("%s", each.value.alarm_name)
   comparison_operator       = each.value.comparison_operator
   evaluation_periods        = each.value.evaluation_periods
