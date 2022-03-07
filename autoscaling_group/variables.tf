@@ -263,7 +263,23 @@ variable "default_alarms_enabled" {
 }
 
 variable "custom_alarms" {
-  type        = map(any)
+  type = map(object({
+    alarm_name                = string
+    comparison_operator       = string
+    evaluation_periods        = number
+    metric_name               = string
+    namespace                 = string
+    period                    = number
+    statistic                 = string
+    threshold                 = number
+    treat_missing_data        = string
+    ok_actions                = string
+    insufficient_data_actions = string
+    dimensions_name           = string
+    dimensions_target         = string
+    alarm_description         = string
+    alarm_actions             = string
+  }))
   default     = {}
   description = "Map of custom CloudWatch alarms configurations"
 }
