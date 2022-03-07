@@ -114,6 +114,7 @@ resource "aws_autoscaling_policy" "scale_up" {
   adjustment_type         = var.scale_up_adjustment_type
   policy_type             = var.scale_up_policy_type
   metric_aggregation_type = var.metric_aggregation_type
+  estimated_instance_warmup = var.estimated_instance_warmup
 
   dynamic "step_adjustment" {
     for_each = var.step_adjustment
