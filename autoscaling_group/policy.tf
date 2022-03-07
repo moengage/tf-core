@@ -108,12 +108,12 @@ resource "aws_autoscaling_policy" "targetandpredictive" {
 }
 
 resource "aws_autoscaling_policy" "scale_up" {
-  count                   = local.autoscaling_enabled ? 1 : 0
-  name                    = "${local.asg_name}scaleup"
-  autoscaling_group_name  = join("", aws_autoscaling_group.default.*.name)
-  adjustment_type         = var.scale_up_adjustment_type
-  policy_type             = var.scale_up_policy_type
-  metric_aggregation_type = var.metric_aggregation_type
+  count                     = local.autoscaling_enabled ? 1 : 0
+  name                      = "${local.asg_name}scaleup"
+  autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
+  adjustment_type           = var.scale_up_adjustment_type
+  policy_type               = var.scale_up_policy_type
+  metric_aggregation_type   = var.metric_aggregation_type
   estimated_instance_warmup = var.estimated_instance_warmup
 
   dynamic "step_adjustment" {
