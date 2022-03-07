@@ -2,36 +2,36 @@ locals {
   autoscaling_enabled = var.autoscaling_policies_enabled
   asg_name            = join("", aws_autoscaling_group.default.*.name)
 
-  default_ec2_alarms = {
-    cpu_high = {
-      alarm_name                = "${local.asg_name}cpuhigh"
+  default_sqs_alarms = {
+    sqs_high = {
+      alarm_name                = "${local.asg_name}-sqs-high"
       comparison_operator       = "GreaterThanOrEqualToThreshold"
-      evaluation_periods        = var.cpu_utilization_high_evaluation_periods
-      metric_name               = "CPUUtilization"
-      namespace                 = "AWS/EC2"
-      period                    = var.cpu_utilization_high_period_seconds
-      statistic                 = var.cpu_utilization_high_statistic
-      threshold                 = var.cpu_utilization_high_threshold_percent
-      dimensions_name           = "AutoScalingGroupName"
-      dimensions_target         = join("", aws_autoscaling_group.default.*.name)
-      alarm_description         = "Scale up if CPU utilization is above ${var.cpu_utilization_high_threshold_percent} for ${var.cpu_utilization_high_period_seconds} * ${var.cpu_utilization_high_evaluation_periods} seconds"
+      evaluation_periods        = var.sqs_high_evaluation_periods
+      metric_name               = "ApproximateNumberOfMessagesVisible"
+      namespace                 = "AWS/SQS"
+      period                    = var.sqs_period
+      statistic                 = var.sqs_statistic
+      threshold                 = var.sqs_high_threshold
+      dimensions_name           = "QueueName"
+      dimensions_target         = var.sqs_queue_name
+      alarm_description         = "Scale up Autoscaling Group ${local.asg_name},if SQS Queue ${var.sqs_queue_name} Greater than ${var.sqs_high_threshold} for ${var.sqs_period} * ${var.sqs_high_evaluation_periods} seconds"
       alarm_actions             = [join("", aws_autoscaling_policy.scale_up.*.arn)]
       treat_missing_data        = "missing"
       ok_actions                = [var.sns_topic_alarms_arn]
       insufficient_data_actions = [var.sns_topic_alarms_arn]
     },
-    cpu_low = {
-      alarm_name                = "${local.asg_name}cpulow"
+    sqs_low = {
+      alarm_name                = "${local.asg_name}-sqs-low"
       comparison_operator       = "LessThanOrEqualToThreshold"
-      evaluation_periods        = var.cpu_utilization_low_evaluation_periods
-      metric_name               = "CPUUtilization"
-      namespace                 = "AWS/EC2"
-      period                    = var.cpu_utilization_low_period_seconds
-      statistic                 = var.cpu_utilization_low_statistic
-      threshold                 = var.cpu_utilization_low_threshold_percent
-      dimensions_name           = "AutoScalingGroupName"
-      dimensions_target         = join("", aws_autoscaling_group.default.*.name)
-      alarm_description         = "Scale down if the CPU utilization is below ${var.cpu_utilization_low_threshold_percent} for ${var.cpu_utilization_low_period_seconds} * ${var.cpu_utilization_high_evaluation_periods} seconds"
+      evaluation_periods        = var.sqs_low_evaluation_periods
+      metric_name               = "ApproximateNumberOfMessagesVisible"
+      namespace                 = "AWS/SQS"
+      period                    = var.sqs_period
+      statistic                 = var.sqs_statistic
+      threshold                 = var.sqs_low_threshold
+      dimensions_name           = "QueueName"
+      dimensions_target         = var.sqs_queue_name
+      alarm_description         = "Scale down Autoscaling Group ${local.asg_name},if SQS Queue ${var.sqs_queue_name} below ${var.sqs_low_threshold} for ${var.sqs_period} * ${var.sqs_low_evaluation_periods} seconds"
       alarm_actions             = [join("", aws_autoscaling_policy.scale_down.*.arn)]
       treat_missing_data        = "missing"
       ok_actions                = [var.sns_topic_alarms_arn]
@@ -39,7 +39,7 @@ locals {
     }
   }
 
-  default_alarms = var.autoscaling_policies_enabled && var.default_alarms_enabled ? local.default_ec2_alarms : {}
+  default_alarms = var.autoscaling_policies_enabled && var.default_alarms_enabled ? local.default_sqs_alarms : {}
   all_alarms     = var.autoscaling_policies_enabled ? merge(local.default_alarms, var.custom_alarms) : {}
 }
 
@@ -113,6 +113,7 @@ resource "aws_autoscaling_policy" "scale_up" {
   autoscaling_group_name = join("", aws_autoscaling_group.default.*.name)
   adjustment_type        = var.scale_up_adjustment_type
   policy_type            = var.scale_up_policy_type
+  metric_aggregation_type = var.metric_aggregation_type
 
   dynamic "step_adjustment" {
     for_each = var.step_adjustment

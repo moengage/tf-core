@@ -256,54 +256,6 @@ variable "scale_down_cooldown_seconds" {
   description = "The amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start"
 }
 
-variable "cpu_utilization_high_evaluation_periods" {
-  type        = number
-  default     = 2
-  description = "The number of periods over which data is compared to the specified threshold"
-}
-
-variable "cpu_utilization_high_period_seconds" {
-  type        = number
-  default     = 300
-  description = "The period in seconds over which the specified statistic is applied"
-}
-
-variable "cpu_utilization_high_statistic" {
-  type        = string
-  default     = "Average"
-  description = "The statistic to apply to the alarm's associated metric. Either of the following is supported: `SampleCount`, `Average`, `Sum`, `Minimum`, `Maximum`"
-}
-
-variable "cpu_utilization_high_threshold_percent" {
-  type        = number
-  default     = 90
-  description = "The value against which the specified statistic is compared"
-}
-
-variable "cpu_utilization_low_evaluation_periods" {
-  type        = number
-  default     = 2
-  description = "The number of periods over which data is compared to the specified threshold"
-}
-
-variable "cpu_utilization_low_period_seconds" {
-  type        = number
-  default     = 300
-  description = "The period in seconds over which the specified statistic is applied"
-}
-
-variable "cpu_utilization_low_statistic" {
-  type        = string
-  default     = "Average"
-  description = "The statistic to apply to the alarm's associated metric. Either of the following is supported: `SampleCount`, `Average`, `Sum`, `Minimum`, `Maximum`"
-}
-
-variable "cpu_utilization_low_threshold_percent" {
-  type        = number
-  default     = 10
-  description = "The value against which the specified statistic is compared"
-}
-
 variable "default_alarms_enabled" {
   type        = bool
   default     = true
@@ -360,4 +312,45 @@ variable "step_adjustment" {
   description = "Map of target scaling policy schedule to create"
   type        = any
   default     = {}
+}
+
+variable "metric_aggregation_type" {
+  type        = string
+  default     = "Average"
+}
+
+variable "sqs_period" {
+  description = "The period in seconds over which the specified statistic is applied"
+  type        = number
+}
+
+variable "sqs_statistic" {
+  description = "The statistic to apply to the alarm's associated metric, supported: SampleCount, Average, Sum, Minimum, Maximum"
+  type        = string
+  default     = "Average"
+}
+
+variable "sqs_high_evaluation_periods" {
+  description = "The number of periods over which data is compared to the specified threshold"
+  type        = number
+}
+
+variable "sqs_low_evaluation_periods" {
+  description = "The number of periods over which data is compared to the specified threshold"
+  type        = number
+}
+
+variable "sqs_high_threshold" {
+  description = "The value against which the specified statistic is compared"
+  type        = number
+}
+
+variable "sqs_low_threshold" {
+  description = "The value against which the specified statistic is compared"
+  type        = number
+}
+
+variable "sqs_queue_name" {
+  description = "Name of the SQS Queue created"
+  type        = string
 }
