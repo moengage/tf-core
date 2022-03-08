@@ -39,3 +39,9 @@ variable "sg_name" {
   type        = string
   default     = ""
 }
+
+variable "tags" {
+  description = "Tags for the security groups"
+  type        = map
+  default     = {}
+}

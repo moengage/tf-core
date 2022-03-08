@@ -2,7 +2,7 @@ resource "aws_security_group" "default" {
   name        = var.sg_name != "" ? var.sg_name : local.resource_identifier
   vpc_id      = var.vpc_id
   description = var.sg_description
-  tags        = local.default_tags
+  tags        = local.tags
 
   lifecycle {
     create_before_destroy = true
@@ -20,16 +20,23 @@ resource "aws_security_group_rule" "all_egress" {
 }
 
 resource "aws_security_group_rule" "ingress_rules" {
-  count                    = length(var.ingress_rules)
-  security_group_id        = aws_security_group.default.id
-  type                     = "ingress"
-  description              = var.ingress_rules[count.index]["description"]
-  from_port                = var.ingress_rules[count.index]["from_port"]
-  to_port                  = var.ingress_rules[count.index]["to_port"]
-  protocol                 = var.ingress_rules[count.index]["protocol"]
-  self                     = lookup(var.ingress_rules[count.index], "self", null)
-  source_security_group_id = lookup(var.ingress_rules[count.index], "source_security_group_id", null)
-  cidr_blocks              = lookup(var.ingress_rules[count.index], "cidr_blocks", null)
-  ipv6_cidr_blocks         = lookup(var.ingress_rules[count.index], "ipv6_cidr_blocks", null)
-  prefix_list_ids          = lookup(var.ingress_rules[count.index], "prefix_list_ids", null)
+  for_each = local.keyed_rules
+
+  security_group_id = aws_security_group.default.id
+
+  type        = each.value.type
+  from_port   = each.value.from_port
+  to_port     = each.value.to_port
+  protocol    = each.value.protocol
+  description = each.value.description
+
+  cidr_blocks              = length(each.value.cidr_blocks) == 0 ? null : each.value.cidr_blocks
+  ipv6_cidr_blocks         = length(each.value.ipv6_cidr_blocks) == 0 ? null : each.value.ipv6_cidr_blocks
+  prefix_list_ids          = length(each.value.prefix_list_ids) == 0 ? [] : each.value.prefix_list_ids
+  self                     = each.value.self
+  source_security_group_id = each.value.source_security_group_id
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
