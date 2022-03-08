@@ -302,7 +302,7 @@ variable "schedules" {
   default     = {}
 }
 
-variable "stepup_adjustment" {
+variable "step_adjustment" {
   description = "Map of target scaling policy schedule to create"
   type        = any
   default     = {}
