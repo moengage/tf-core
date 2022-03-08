@@ -131,12 +131,12 @@ resource "aws_autoscaling_policy" "scale_down" {
   cooldown               = var.scale_down_cooldown_seconds
   autoscaling_group_name = join("", aws_autoscaling_group.default.*.name)
 
-  dynamic "stepdown_adjustment" {
-    for_each = var.stepdown_adjustment
+  dynamic "step_adjustment" {
+    for_each = var.step_adjustment
     content {
-      scaling_adjustment          = stepdown_adjustment.value.scaling_adjustment
-      metric_interval_lower_bound = lookup(stepdown_adjustment.value, "metric_interval_lower_bound", null)
-      metric_interval_upper_bound = lookup(stepdown_adjustment.value, "metric_interval_upper_bound", null)
+      scaling_adjustment          = step_adjustment.value.scaling_adjustment
+      metric_interval_lower_bound = lookup(step_adjustment.value, "metric_interval_lower_bound", null)
+      metric_interval_upper_bound = lookup(step_adjustment.value, "metric_interval_upper_bound", null)
     }
   }
 }
