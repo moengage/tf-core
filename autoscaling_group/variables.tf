@@ -216,31 +216,26 @@ variable "create_asg_security_group" {
 
 variable "scale_up_adjustment_type" {
   type        = string
-  default     = "ChangeInCapacity"
   description = "Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values are `ChangeInCapacity`, `ExactCapacity` and `PercentChangeInCapacity`"
 }
 
 variable "scale_up_policy_type" {
   type        = string
-  default     = "StepScaling"
-  description = "The scaling policy type"
+  description = "The scaling policy type required for the usecase"
 }
 
 variable "scale_down_scaling_adjustment" {
   type        = number
-  default     = -1
   description = "The number of instances by which to scale. `scale_down_scaling_adjustment` determines the interpretation of this number. A positive increment adds to the current capacity and a negative value removes from the current capacity"
 }
 
 variable "scale_down_adjustment_type" {
   type        = string
-  default     = "ChangeInCapacity"
   description = "Specifies whether the adjustment is an absolute number or a percentage of the current capacity. Valid values are `ChangeInCapacity`, `ExactCapacity` and `PercentChangeInCapacity`"
 }
 
 variable "scale_down_policy_type" {
   type        = string
-  default     = "SimpleScaling"
   description = "The scaling policy type. Currently only `SimpleScaling` is supported"
 }
 
@@ -248,12 +243,6 @@ variable "scale_down_cooldown_seconds" {
   type        = number
   default     = 300
   description = "The amount of time, in seconds, after a scaling activity completes and before the next scaling activity can start"
-}
-
-variable "default_alarms_enabled" {
-  type        = bool
-  default     = true
-  description = "Enable or disable Cloudwatch alarm creation"
 }
 
 variable "custom_alarms" {
