@@ -130,15 +130,6 @@ resource "aws_autoscaling_policy" "scale_down" {
   policy_type            = var.scale_down_policy_type
   cooldown               = var.scale_down_cooldown_seconds
   autoscaling_group_name = join("", aws_autoscaling_group.default.*.name)
-
-  dynamic "step_adjustment" {
-    for_each = var.step_adjustment
-    content {
-      scaling_adjustment          = step_adjustment.value.scaling_adjustment
-      metric_interval_lower_bound = lookup(step_adjustment.value, "metric_interval_lower_bound", null)
-      metric_interval_upper_bound = lookup(step_adjustment.value, "metric_interval_upper_bound", null)
-    }
-  }
 }
 
 resource "aws_cloudwatch_metric_alarm" "all_alarms" {
