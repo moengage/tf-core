@@ -107,7 +107,7 @@ resource "aws_autoscaling_policy" "targetandpredictive" {
 }
 
 resource "aws_autoscaling_policy" "scale_up" {
-  for_each = { for k, v in var.scaling_up_policies : k => v }
+  for_each = var.scaling_up_policies
 
   name                      = lookup(each.value, "name", each.key)
   autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
