@@ -33,7 +33,7 @@ locals {
       dimensions_name           = var.dimensions_name
       dimensions_target         = local.target
       alarm_description         = "Scale down Autoscaling Group ${local.asg_name},${var.dimensions_target} below ${var.low_threshold} for ${var.period} * ${var.low_evaluation_periods} seconds"
-      alarm_actions             = [join("", aws_autoscaling_policy.scale_down.*.arn)]
+      alarm_actions             = values(aws_autoscaling_policy.scale_down)[*].arn
       treat_missing_data        = var.treat_missing_data
       ok_actions                = [var.sns_topic_alarms_arn]
       insufficient_data_actions = [var.sns_topic_alarms_arn]
@@ -130,12 +130,25 @@ resource "aws_autoscaling_policy" "scale_up" {
 }
 
 resource "aws_autoscaling_policy" "scale_down" {
-  name                   = "${local.asg_name}scaledown"
-  scaling_adjustment     = var.scale_down_scaling_adjustment
-  adjustment_type        = var.scale_down_adjustment_type
-  policy_type            = var.scale_down_policy_type
-  cooldown               = var.scale_down_cooldown_seconds
-  autoscaling_group_name = join("", aws_autoscaling_group.default.*.name)
+  for_each = { for k, v in var.scaling_down_policies : k => v }
+
+  name                      = lookup(each.value, "name", each.key)
+  autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
+  adjustment_type           = lookup(each.value, "adjustment_type", null)
+  policy_type               = lookup(each.value, "policy_type", null)
+  estimated_instance_warmup = lookup(each.value, "estimated_instance_warmup", null)
+  cooldown                  = lookup(each.value, "cooldown", null)
+  min_adjustment_magnitude  = lookup(each.value, "min_adjustment_magnitude", null)
+  metric_aggregation_type   = lookup(each.value, "metric_aggregation_type", null)
+
+  dynamic "step_adjustment" {
+    for_each = lookup(each.value, "step_adjustment", null) != null ? [each.value.step_adjustment] : []
+    content {
+      scaling_adjustment          = step_adjustment.value.scaling_adjustment
+      metric_interval_lower_bound = lookup(step_adjustment.value, "metric_interval_lower_bound", null)
+      metric_interval_upper_bound = lookup(step_adjustment.value, "metric_interval_upper_bound", null)
+    }
+  }
 }
 
 resource "aws_cloudwatch_metric_alarm" "all_alarms" {
