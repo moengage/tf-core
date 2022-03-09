@@ -120,9 +120,9 @@ resource "aws_autoscaling_policy" "scale_up" {
   scaling_adjustment        = lookup(each.value, "scaling_adjustment", null)
 
   dynamic "step_adjustment" {
-    for_each = try([each.value.step_adjustment], [])
+    for_each = var.step_adjustment
     content {
-      scaling_adjustment          = lookup(step_adjustment.value, "scaling_adjustment", null)
+      scaling_adjustment          = step_adjustment.value.scaling_adjustment
       metric_interval_lower_bound = lookup(step_adjustment.value, "metric_interval_lower_bound", null)
       metric_interval_upper_bound = lookup(step_adjustment.value, "metric_interval_upper_bound", null)
     }
