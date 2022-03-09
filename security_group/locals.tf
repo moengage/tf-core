@@ -2,7 +2,6 @@ locals {
   _resource_identifier = "${var.business_name}-${var.service_name}-${var.subservice_name}"
   resource_identifier  = lower(local._resource_identifier)
 
-  default_rule_description = "Managed by Terraform"
   default_tags = {
     Name        = var.sg_name != "" ? var.sg_name : local.resource_identifier
     ManagedBy   = "terraform"
@@ -21,7 +20,7 @@ locals {
     from_port   = rule.from_port
     to_port     = rule.to_port
     protocol    = rule.protocol
-    description = lookup(rule, "description", local.default_rule_description)
+    description = "tf-${rule.description}"
 
     # Convert a missing key, a value of null, or a value of empty list to []
     cidr_blocks      = try(length(rule.cidr_blocks), 0) > 0 ? rule.cidr_blocks : []
