@@ -1,7 +1,6 @@
 locals {
-  scale_up_arn = { for k, v in aws_autoscaling_policy.scale_up : k => v }
-  asg_name     = join("", aws_autoscaling_group.default.*.name)
-  target       = var.dimensions_name == "QueueName" ? var.dimensions_target : local.asg_name
+  asg_name = join("", aws_autoscaling_group.default.*.name)
+  target   = var.dimensions_name == "QueueName" ? var.dimensions_target : local.asg_name
 
   default_alarms = {
     alarm_high = {
@@ -140,6 +139,7 @@ resource "aws_autoscaling_policy" "scale_down" {
   cooldown                  = lookup(each.value, "cooldown", null)
   min_adjustment_magnitude  = lookup(each.value, "min_adjustment_magnitude", null)
   metric_aggregation_type   = lookup(each.value, "metric_aggregation_type", null)
+  scaling_adjustment        = lookup(each.value, "scaling_adjustment", null)
 
   dynamic "step_adjustment" {
     for_each = lookup(each.value, "step_adjustment", null) != null ? [each.value.step_adjustment] : []
