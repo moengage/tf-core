@@ -123,8 +123,8 @@ resource "aws_autoscaling_policy" "scale_up" {
     for_each = toset(lookup(each.value, "step_adjustment", null) != null ? [each.value.step_adjustment] : [])
     content {
       scaling_adjustment          = step_adjustment.value.scaling_adjustment
-      metric_interval_lower_bound = lookup(step_adjustment.value, "metric_interval_lower_bound", null)
-      metric_interval_upper_bound = lookup(step_adjustment.value, "metric_interval_upper_bound", null)
+      metric_interval_lower_bound = step_adjustment.value.metric_interval_lower_bound
+      metric_interval_upper_bound = step_adjustment.value.metric_interval_upper_bound
     }
   }
 }
