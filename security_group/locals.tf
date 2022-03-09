@@ -20,7 +20,7 @@ locals {
     from_port   = rule.from_port
     to_port     = rule.to_port
     protocol    = rule.protocol
-    description = "tf-${rule.description}"
+    description = "[TF]${rule.description}"
 
     # Convert a missing key, a value of null, or a value of empty list to []
     cidr_blocks      = try(length(rule.cidr_blocks), 0) > 0 ? rule.cidr_blocks : []
