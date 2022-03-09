@@ -1,5 +1,5 @@
 locals {
-  scale_up_arn = { for k, v in aws_autoscaling_policy.scale_up : k => v.arn }
+  scale_up_arn = { for k, v in aws_autoscaling_policy.scale_up : k => v }
   asg_name     = join("", aws_autoscaling_group.default.*.name)
   target       = var.dimensions_name == "QueueName" ? var.dimensions_target : local.asg_name
 
