@@ -279,6 +279,12 @@ variable "scaling_policies" {
   default     = {}
 }
 
+variable "scaling_up_policies" {
+  description = "Map of target scaling policy schedule to create"
+  type        = any
+  default     = {}
+}
+
 variable "create_schedule" {
   description = "Determines whether to create autoscaling group schedule or not"
   type        = bool

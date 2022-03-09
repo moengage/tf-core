@@ -107,15 +107,19 @@ resource "aws_autoscaling_policy" "targetandpredictive" {
 }
 
 resource "aws_autoscaling_policy" "scale_up" {
-  name                      = "${local.asg_name}scaleup"
+  for_each = { for k, v in var.scaling_up_policies : k => v }
+
+  name                      = lookup(each.value, "name", each.key)
   autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
-  adjustment_type           = var.scale_up_adjustment_type
-  policy_type               = var.scale_up_policy_type
-  metric_aggregation_type   = var.metric_aggregation_type
-  estimated_instance_warmup = var.estimated_instance_warmup
+  adjustment_type           = lookup(each.value, "adjustment_type", null)
+  policy_type               = lookup(each.value, "policy_type", null)
+  estimated_instance_warmup = lookup(each.value, "estimated_instance_warmup", null)
+  cooldown                  = lookup(each.value, "cooldown", null)
+  min_adjustment_magnitude  = lookup(each.value, "min_adjustment_magnitude", null)
+  metric_aggregation_type   = lookup(each.value, "metric_aggregation_type", null)
 
   dynamic "step_adjustment" {
-    for_each = var.step_adjustment
+    for_each = try([each.value.step_adjustment], [])
     content {
       scaling_adjustment          = step_adjustment.value.scaling_adjustment
       metric_interval_lower_bound = lookup(step_adjustment.value, "metric_interval_lower_bound", null)
