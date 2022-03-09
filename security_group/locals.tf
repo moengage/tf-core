@@ -16,7 +16,7 @@ locals {
 
 # generate map from ingress_rules list for aws_security_group_rule for_each argument
   rules = [for i, rule in var.ingress_rules : {
-    unique_key  = lookup(rule, "unique_key", null)
+    unique_key  = rule.unique_key
     type        = "ingress"
     from_port   = rule.from_port
     to_port     = rule.to_port
