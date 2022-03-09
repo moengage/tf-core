@@ -117,6 +117,7 @@ resource "aws_autoscaling_policy" "scale_up" {
   cooldown                  = lookup(each.value, "cooldown", null)
   min_adjustment_magnitude  = lookup(each.value, "min_adjustment_magnitude", null)
   metric_aggregation_type   = lookup(each.value, "metric_aggregation_type", null)
+  scaling_adjustment        = lookup(each.value, "scaling_adjustment", null)
 
   dynamic "step_adjustment" {
     for_each = lookup(each.value, "step_adjustment", null) != null ? [each.value.step_adjustment] : []
