@@ -281,7 +281,7 @@ variable "scaling_policies" {
 
 variable "scaling_up_policies" {
   description = "Map of target scaling policy schedule to create"
-  type        = any
+  type        = list(map(string))
   default     = {}
 }
 
