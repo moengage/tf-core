@@ -384,3 +384,23 @@ variable "treat_missing_data" {
   description = "Sets how this alarm is to handle missing data points. The following values are supported: missing, ignore, breaching and notBreaching. Defaults to missing."
   type        = string
 }
+
+variable "estimated_instance_warmup" {
+  description = "The estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics"
+  type        = number
+}
+
+variable "predefined_metric_type" {
+  description = "The metric type for track tracking policy "
+  type        = string
+}
+
+variable "target_value" {
+  description = "The target value for the metric for target tracking policy"
+  type        = any
+}
+
+variable "disable_scale_in" {
+  description = "Indicates whether scale in by the target tracking policy is disabled"
+  type        = bool
+}

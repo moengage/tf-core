@@ -58,56 +58,24 @@ resource "aws_autoscaling_schedule" "schedulers" {
   recurrence = lookup(each.value, "recurrence", null)
 }
 
-resource "aws_autoscaling_policy" "targetandpredictive" {
-  for_each = { for k, v in var.scaling_policies : k => v }
+resource "aws_autoscaling_policy" "target_tracking" {
 
-  name                   = lookup(each.value, "name", each.key)
-  autoscaling_group_name = join("", aws_autoscaling_group.default.*.name)
+  name                      = "${local.asg_name}-target-tracking-${var.target_value}"
+  autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
+  policy_type               = "TargetTrackingScaling"
+  estimated_instance_warmup = var.estimated_instance_warmup
 
-  adjustment_type           = lookup(each.value, "adjustment_type", null)
-  policy_type               = lookup(each.value, "policy_type", null)
-  estimated_instance_warmup = lookup(each.value, "estimated_instance_warmup", null)
-  cooldown                  = lookup(each.value, "cooldown", null)
-  min_adjustment_magnitude  = lookup(each.value, "min_adjustment_magnitude", null)
-  metric_aggregation_type   = lookup(each.value, "metric_aggregation_type", null)
-
-  dynamic "target_tracking_configuration" {
-    for_each = lookup(each.value, "target_tracking_configuration", null) != null ? [each.value.target_tracking_configuration] : []
-    content {
-      target_value     = target_tracking_configuration.value.target_value
-      disable_scale_in = lookup(target_tracking_configuration.value, "disable_scale_in", null)
-
-      dynamic "predefined_metric_specification" {
-        for_each = lookup(target_tracking_configuration.value, "predefined_metric_specification", null) != null ? [target_tracking_configuration.value.predefined_metric_specification] : []
-        content {
-          predefined_metric_type = predefined_metric_specification.value.predefined_metric_type
-        }
-      }
-
-      dynamic "customized_metric_specification" {
-        for_each = lookup(target_tracking_configuration.value, "customized_metric_specification", null) != null ? [target_tracking_configuration.value.customized_metric_specification] : []
-        content {
-
-          dynamic "metric_dimension" {
-            for_each = lookup(customized_metric_specification.value, "metric_dimension", null) != null ? [customized_metric_specification.value.metric_dimension] : []
-            content {
-              name  = lookup(metric_dimension.value, "name", null)
-              value = lookup(metric_dimension.value, "value", null)
-            }
-          }
-
-          metric_name = customized_metric_specification.value.metric_name
-          namespace   = customized_metric_specification.value.namespace
-          statistic   = customized_metric_specification.value.statistic
-          unit        = lookup(customized_metric_specification.value, "unit", null)
-        }
-      }
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = var.predefined_metric_type
     }
+    target_value     = var.target_value
+    disable_scale_in = var.disable_scale_in
   }
 }
 
 resource "aws_autoscaling_policy" "scale_up" {
-  for_each = var.scaling_up_policies
+  for_each = { for k, v in var.scaling_up_policies : k => v }
 
   name                      = lookup(each.value, "name", each.key)
   autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
@@ -143,7 +111,7 @@ resource "aws_autoscaling_policy" "scale_down" {
   scaling_adjustment        = lookup(each.value, "scaling_adjustment", null)
 
   dynamic "step_adjustment" {
-    for_each = lookup(each.value, "step_adjustment", null) != null ? [each.value.step_adjustment] : []
+    for_each = lookup(each.value, "step_adjustment", null) != null ? [each.value.step_adjustment][0] : []
     content {
       scaling_adjustment          = step_adjustment.value.scaling_adjustment
       metric_interval_lower_bound = lookup(step_adjustment.value, "metric_interval_lower_bound", null)
