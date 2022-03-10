@@ -66,11 +66,12 @@ resource "aws_autoscaling_policy" "target_tracking" {
   estimated_instance_warmup = var.estimated_instance_warmup
 
   target_tracking_configuration {
+    target_value     = var.target_value
+    disable_scale_in = var.disable_scale_in
+
     predefined_metric_specification {
       predefined_metric_type = var.predefined_metric_type
     }
-    target_value     = var.target_value
-    disable_scale_in = var.disable_scale_in
   }
 }
 

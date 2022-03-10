@@ -350,11 +350,6 @@ variable "dimensions_target" {
   type        = string
 }
 
-variable "estimated_instance_warmup" {
-  description = "The estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics. Without a value, AWS will default to the group's specified cooldown period."
-  type        = string
-}
-
 variable "comparison_operator_high" {
   description = "The arithmetic operation to use when comparing the specified Statistic and Threshold. Supported LessThanOrEqualToThreshold , GreaterThanOrEqualToThreshold"
   type        = string
