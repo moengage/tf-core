@@ -19,5 +19,5 @@ output "autoscaling_policy_scaleup_arns" {
 }
 
 output "alarm_arns" {
-  value = { for k, v in aws_cloudwatch_metric_alarm.all_alarms : k => v }
+  value = { for k, v in aws_cloudwatch_metric_alarm.all_alarms : k => v.arn }
 }
