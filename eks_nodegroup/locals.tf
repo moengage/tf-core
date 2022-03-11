@@ -22,6 +22,7 @@ locals {
     K8SCluster    = lower(var.cluster_name)
     InstanceGroup = local._instance_group
     Lifecycle     = local._lifecycle
+    FabTag        = "k8s"
   }
 
   _resource_identifier = "${local._business_name}-${local._service}-${local._subservice}-${local._instance_group}-${local._lifecycle}"
