@@ -64,14 +64,14 @@ resource "aws_autoscaling_policy" "target_tracking" {
   name                      = "${local.asg_name}-target-tracking-${var.target_value}"
   autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
   policy_type               = "TargetTrackingScaling"
-  estimated_instance_warmup = var.estimated_instance_warmup
+  estimated_instance_warmup = var.enable_target_tracking ? var.estimated_instance_warmup : {}
 
   target_tracking_configuration {
-    target_value     = var.target_value
-    disable_scale_in = var.disable_scale_in
+    target_value     = var.enable_target_tracking ? var.target_value : {}
+    disable_scale_in = var.enable_target_tracking ? var.disable_scale_in : {}
 
     predefined_metric_specification {
-      predefined_metric_type = var.predefined_metric_type
+      predefined_metric_type = var.enable_target_tracking ? var.predefined_metric_type : {}
     }
   }
 }
