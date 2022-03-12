@@ -59,6 +59,7 @@ resource "aws_autoscaling_schedule" "schedulers" {
 }
 
 resource "aws_autoscaling_policy" "target_tracking" {
+  count = var.enable_target_tracking ? 1 : 0
 
   name                      = "${local.asg_name}-target-tracking-${var.target_value}"
   autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
