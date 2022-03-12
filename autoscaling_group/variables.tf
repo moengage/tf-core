@@ -370,7 +370,7 @@ variable "disable_scale_in" {
 }
 
 variable "enable_target_tracking" {
-  description = "If enabled SNS notification will be sent out"
+  description = "Enable target Tracking Policy"
   default     = false
   type        = bool
 }
