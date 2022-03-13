@@ -1,6 +1,6 @@
 locals {
   asg_name = join("", aws_autoscaling_group.default.*.name)
-  target   = var.dimensions_name == "QueueName" ? var.dimensions_target : local.asg_name
+  #  target   = var.dimensions_name == "QueueName" ? var.dimensions_target : local.asg_name
 
   default_alarms = {
     alarm_high = {
@@ -13,7 +13,7 @@ locals {
       statistic                 = var.statistic
       threshold                 = var.high_threshold
       dimensions_name           = var.dimensions_name
-      dimensions_target         = local.target
+      dimensions_target         = var.dimensions_target
       alarm_description         = "Scale up Autoscaling Group ${local.asg_name},${var.dimensions_target} Greater than ${var.high_threshold} for ${var.period} * ${var.high_evaluation_periods} seconds"
       alarm_actions             = values(aws_autoscaling_policy.scale_up)[*].arn
       treat_missing_data        = var.treat_missing_data
@@ -30,7 +30,7 @@ locals {
       statistic                 = var.statistic
       threshold                 = var.low_threshold
       dimensions_name           = var.dimensions_name
-      dimensions_target         = local.target
+      dimensions_target         = var.dimensions_target
       alarm_description         = "Scale down Autoscaling Group ${local.asg_name},${var.dimensions_target} below ${var.low_threshold} for ${var.period} * ${var.low_evaluation_periods} seconds"
       alarm_actions             = values(aws_autoscaling_policy.scale_down)[*].arn
       treat_missing_data        = var.treat_missing_data
