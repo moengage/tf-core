@@ -283,7 +283,12 @@ variable "metric_aggregation_type" {
   default = "Average"
 }
 
-variable "period" {
+variable "high_period" {
+  description = "The period in seconds over which the specified statistic is applied"
+  type        = number
+}
+
+variable "low_period" {
   description = "The period in seconds over which the specified statistic is applied"
   type        = number
 }

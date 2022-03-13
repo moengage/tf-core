@@ -1,7 +1,6 @@
 locals {
   asg_name            = join("", aws_autoscaling_group.default.*.name)
   autoscaling_enabled = var.autoscaling_policies_enabled
-  #  target   = var.dimensions_name == "QueueName" ? var.dimensions_target : local.asg_name
 
   default_alarms = {
     alarm_high = {
@@ -10,7 +9,7 @@ locals {
       evaluation_periods        = var.high_evaluation_periods
       metric_name               = var.metric_name
       namespace                 = var.namespace
-      period                    = var.period
+      period                    = var.high_period
       statistic                 = var.statistic
       threshold                 = var.high_threshold
       dimensions_name           = var.dimensions_name
@@ -27,7 +26,7 @@ locals {
       evaluation_periods        = var.low_evaluation_periods
       metric_name               = var.metric_name
       namespace                 = var.namespace
-      period                    = var.period
+      period                    = var.low_period
       statistic                 = var.statistic
       threshold                 = var.low_threshold
       dimensions_name           = var.dimensions_name
