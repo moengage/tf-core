@@ -1,5 +1,6 @@
 locals {
-  asg_name = join("", aws_autoscaling_group.default.*.name)
+  asg_name            = join("", aws_autoscaling_group.default.*.name)
+  autoscaling_enabled = var.autoscaling_policies_enabled
   #  target   = var.dimensions_name == "QueueName" ? var.dimensions_target : local.asg_name
 
   default_alarms = {
@@ -123,7 +124,7 @@ resource "aws_autoscaling_policy" "scale_down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "all_alarms" {
-  for_each                  = local.all_alarms
+  for_each                  = local.autoscaling_enabled ? local.all_alarms : {}
   alarm_name                = format("%s", each.value.alarm_name)
   comparison_operator       = each.value.comparison_operator
   evaluation_periods        = each.value.evaluation_periods

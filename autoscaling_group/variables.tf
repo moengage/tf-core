@@ -374,3 +374,9 @@ variable "enable_target_tracking" {
   default     = false
   type        = bool
 }
+
+variable "autoscaling_policies_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether to create `aws_autoscaling_policy` and `aws_cloudwatch_metric_alarm` resources to control Auto Scaling"
+}
