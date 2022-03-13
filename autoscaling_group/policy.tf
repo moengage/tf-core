@@ -14,7 +14,7 @@ locals {
       threshold                 = var.high_threshold
       dimensions_name           = var.dimensions_name
       dimensions_target         = var.dimensions_target
-      alarm_description         = "Scale up Autoscaling Group ${local.asg_name},${var.dimensions_target} Greater than ${var.high_threshold} for ${var.period} * ${var.high_evaluation_periods} seconds"
+      alarm_description         = "Scale up Autoscaling Group ${local.asg_name},${var.dimensions_target} Greater than ${var.high_threshold} for ${var.high_period} * ${var.high_evaluation_periods} seconds"
       alarm_actions             = values(aws_autoscaling_policy.scale_up)[*].arn
       treat_missing_data        = var.treat_missing_data
       ok_actions                = [var.sns_topic_alarms_arn]
@@ -31,7 +31,7 @@ locals {
       threshold                 = var.low_threshold
       dimensions_name           = var.dimensions_name
       dimensions_target         = var.dimensions_target
-      alarm_description         = "Scale down Autoscaling Group ${local.asg_name},${var.dimensions_target} below ${var.low_threshold} for ${var.period} * ${var.low_evaluation_periods} seconds"
+      alarm_description         = "Scale down Autoscaling Group ${local.asg_name},${var.dimensions_target} below ${var.low_threshold} for ${var.low_period} * ${var.low_evaluation_periods} seconds"
       alarm_actions             = values(aws_autoscaling_policy.scale_down)[*].arn
       treat_missing_data        = var.treat_missing_data
       ok_actions                = [var.sns_topic_alarms_arn]
