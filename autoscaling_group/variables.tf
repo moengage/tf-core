@@ -214,28 +214,6 @@ variable "create_asg_security_group" {
   type        = bool
 }
 
-variable "custom_alarms" {
-  type = map(object({
-    alarm_name                = string
-    comparison_operator       = string
-    evaluation_periods        = number
-    metric_name               = string
-    namespace                 = string
-    period                    = number
-    statistic                 = string
-    threshold                 = number
-    treat_missing_data        = string
-    ok_actions                = list(string)
-    insufficient_data_actions = list(string)
-    dimensions_name           = string
-    dimensions_target         = string
-    alarm_description         = string
-    alarm_actions             = list(string)
-  }))
-  default     = {}
-  description = "Map of custom CloudWatch alarms configurations"
-}
-
 variable "sns_topic_alarms_arn" {
   type        = string
   description = "ARN of SNS topic that will be subscribed to an alarm."

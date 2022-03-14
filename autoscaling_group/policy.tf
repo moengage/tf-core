@@ -38,8 +38,6 @@ locals {
       insufficient_data_actions = [var.sns_topic_alarms_arn]
     }
   }
-
-  all_alarms = merge(local.default_alarms, var.custom_alarms)
 }
 
 resource "aws_autoscaling_schedule" "schedulers" {
@@ -123,7 +121,7 @@ resource "aws_autoscaling_policy" "scale_down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "all_alarms" {
-  for_each                  = local.autoscaling_enabled ? local.all_alarms : {}
+  for_each                  = local.autoscaling_enabled ? local.default_alarms : {}
   alarm_name                = format("%s", each.value.alarm_name)
   comparison_operator       = each.value.comparison_operator
   evaluation_periods        = each.value.evaluation_periods
