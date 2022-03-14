@@ -213,3 +213,153 @@ variable "create_asg_security_group" {
   default     = false
   type        = bool
 }
+
+variable "sns_topic_alarms_arn" {
+  type        = string
+  description = "ARN of SNS topic that will be subscribed to an alarm."
+  default     = ""
+}
+
+variable "scaling_policies" {
+  description = "Map of target scaling policy schedule to create"
+  type        = any
+  default     = {}
+}
+
+variable "scaling_up_policies" {
+  description = "Map of target scaling policy schedule to create"
+  type        = any
+  default     = {}
+}
+
+variable "scaling_down_policies" {
+  description = "Map of target scaling policy schedule to create"
+  type        = any
+  default     = {}
+}
+
+variable "create_schedule" {
+  description = "Determines whether to create autoscaling group schedule or not"
+  type        = bool
+  default     = false
+}
+
+variable "schedules" {
+  description = "Map of autoscaling group schedule to create"
+  type        = map(any)
+  default     = {}
+}
+
+variable "step_adjustment" {
+  description = "Map of target scaling policy schedule to create"
+  type        = any
+  default     = {}
+}
+
+variable "metric_aggregation_type" {
+  type    = string
+  default = "Average"
+}
+
+variable "high_period" {
+  description = "The period in seconds over which the specified statistic is applied"
+  type        = number
+}
+
+variable "low_period" {
+  description = "The period in seconds over which the specified statistic is applied"
+  type        = number
+}
+
+variable "statistic" {
+  description = "The statistic to apply to the alarm's associated metric, supported: SampleCount, Average, Sum, Minimum, Maximum"
+  type        = string
+  default     = "Average"
+}
+
+variable "high_evaluation_periods" {
+  description = "The number of periods over which data is compared to the specified threshold"
+  type        = number
+}
+
+variable "low_evaluation_periods" {
+  description = "The number of periods over which data is compared to the specified threshold"
+  type        = number
+}
+
+variable "high_threshold" {
+  description = "The value against which the specified statistic is compared"
+  type        = number
+}
+
+variable "low_threshold" {
+  description = "The value against which the specified statistic is compared"
+  type        = number
+}
+
+variable "dimensions_target" {
+  description = "Autoscaling Group target OR SQS Queue Name"
+  type        = string
+}
+
+variable "comparison_operator_high" {
+  description = "The arithmetic operation to use when comparing the specified Statistic and Threshold. Supported LessThanOrEqualToThreshold , GreaterThanOrEqualToThreshold"
+  type        = string
+}
+
+variable "comparison_operator_low" {
+  description = "The arithmetic operation to use when comparing the specified Statistic and Threshold. Supported LessThanOrEqualToThreshold , GreaterThanOrEqualToThreshold"
+  type        = string
+}
+
+variable "metric_name" {
+  description = "The name for the alarm's associated metric. Supported CPUUtilization , ApproximateNumberOfMessagesVisible"
+  type        = string
+}
+
+variable "namespace" {
+  description = "The namespace of the metric, supported AWS/EC2 , AWS/SQS "
+  type        = string
+}
+
+variable "dimensions_name" {
+  description = "AutoScalingGroupName or QueueName"
+  type        = string
+}
+
+variable "treat_missing_data" {
+  description = "Sets how this alarm is to handle missing data points. The following values are supported: missing, ignore, breaching and notBreaching. Defaults to missing."
+  type        = string
+}
+
+variable "estimated_instance_warmup" {
+  description = "The estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics"
+  type        = number
+}
+
+variable "predefined_metric_type" {
+  description = "The metric type for track tracking policy "
+  type        = string
+}
+
+variable "target_value" {
+  description = "The target value for the metric for target tracking policy"
+  type        = any
+}
+
+variable "disable_scale_in" {
+  description = "Indicates whether scale in by the target tracking policy is disabled"
+  type        = bool
+}
+
+variable "enable_target_tracking" {
+  description = "Enable target Tracking Policy"
+  default     = false
+  type        = bool
+}
+
+variable "autoscaling_policies_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether to create `aws_autoscaling_policy` and `aws_cloudwatch_metric_alarm` resources to control Auto Scaling"
+}
