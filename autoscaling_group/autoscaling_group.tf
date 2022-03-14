@@ -18,6 +18,7 @@ resource "aws_autoscaling_group" "default" {
   min_elb_capacity          = var.min_elb_capacity
   wait_for_elb_capacity     = var.wait_for_elb_capacity
   protect_from_scale_in     = var.protect_from_scale_in
+  capacity_rebalance        = var.capacity_rebalance
 
   dynamic "initial_lifecycle_hook" {
     for_each = var.initial_lifecycle_hooks
