@@ -34,3 +34,6 @@ output "target_group_arn" {
   value = aws_lb_target_group.default.arn
 }
 
+output "dns_names" {
+  value = values(aws_route53_record.dns)[*].fqdn
+}
