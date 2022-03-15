@@ -264,11 +264,13 @@ variable "metric_aggregation_type" {
 variable "high_period" {
   description = "The period in seconds over which the specified statistic is applied"
   type        = number
+  default     = 120
 }
 
 variable "low_period" {
   description = "The period in seconds over which the specified statistic is applied"
   type        = number
+  default     = 60
 }
 
 variable "statistic" {
@@ -280,76 +282,91 @@ variable "statistic" {
 variable "high_evaluation_periods" {
   description = "The number of periods over which data is compared to the specified threshold"
   type        = number
+  default     = 0
 }
 
 variable "low_evaluation_periods" {
   description = "The number of periods over which data is compared to the specified threshold"
   type        = number
+  default     = 0
 }
 
 variable "high_threshold" {
   description = "The value against which the specified statistic is compared"
   type        = number
+  default     = 0
 }
 
 variable "low_threshold" {
   description = "The value against which the specified statistic is compared"
   type        = number
+  default     = 0
 }
 
 variable "dimensions_target" {
   description = "Autoscaling Group target OR SQS Queue Name"
   type        = string
+  default     = ""
 }
 
 variable "comparison_operator_high" {
   description = "The arithmetic operation to use when comparing the specified Statistic and Threshold. Supported LessThanOrEqualToThreshold , GreaterThanOrEqualToThreshold"
   type        = string
+  default     = "GreaterThanOrEqualToThreshold"
 }
 
 variable "comparison_operator_low" {
   description = "The arithmetic operation to use when comparing the specified Statistic and Threshold. Supported LessThanOrEqualToThreshold , GreaterThanOrEqualToThreshold"
   type        = string
+  default     = "LessThanOrEqualToThreshold"
 }
 
 variable "metric_name" {
   description = "The name for the alarm's associated metric. Supported CPUUtilization , ApproximateNumberOfMessagesVisible"
   type        = string
+  default     = "ApproximateNumberOfMessagesVisible"
 }
 
 variable "namespace" {
   description = "The namespace of the metric, supported AWS/EC2 , AWS/SQS "
   type        = string
+  default     = ""
 }
 
 variable "dimensions_name" {
   description = "AutoScalingGroupName or QueueName"
   type        = string
+  default     = ""
 }
 
 variable "treat_missing_data" {
   description = "Sets how this alarm is to handle missing data points. The following values are supported: missing, ignore, breaching and notBreaching. Defaults to missing."
   type        = string
+  default     = "missing"
 }
 
 variable "estimated_instance_warmup" {
   description = "The estimated time, in seconds, until a newly launched instance will contribute CloudWatch metrics"
   type        = number
+  default     = 300
 }
 
 variable "predefined_metric_type" {
   description = "The metric type for track tracking policy "
   type        = string
+  default     = ""
 }
 
 variable "target_value" {
   description = "The target value for the metric for target tracking policy"
   type        = any
+  default     = 50.0
 }
 
 variable "disable_scale_in" {
   description = "Indicates whether scale in by the target tracking policy is disabled"
   type        = bool
+  default     = false
 }
 
 variable "enable_target_tracking" {
