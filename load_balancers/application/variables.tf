@@ -227,7 +227,7 @@ variable "access_log_bucket_id" {
   description = "An external S3 Bucket name to store access logs in. If specified, no logging bucket will be created."
 }
 
-variable "dns_names" {
+variable "r53_dns_names" {
   type = map(object({
     dns_name = string
     zone_id  = string
