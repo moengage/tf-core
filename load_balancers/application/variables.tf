@@ -30,10 +30,12 @@ variable "business_name" {
 
 variable "lb_name" {
   description = "loadbalancer name"
+  default     = ""
 }
 
 variable "tg_name" {
   description = "target-group Name"
+  default     = ""
 }
 
 variable "created_by" {
@@ -223,4 +225,14 @@ variable "access_log_bucket_id" {
   type        = string
   default     = null
   description = "An external S3 Bucket name to store access logs in. If specified, no logging bucket will be created."
+}
+
+variable "r53_dns_names" {
+  type = map(object({
+    dns_name = string
+    zone_id  = string
+    }
+  ))
+  default = {}
+  description = "dns record name for the ALB"
 }

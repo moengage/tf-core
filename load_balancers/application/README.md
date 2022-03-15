@@ -1,20 +1,22 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 3.74.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 3.74.2 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_alb_default_alarm"></a> [alb\_default\_alarm](#module\_alb\_default\_alarm) | git@github.com:moengage/tf-core.git//cloudwatch/alb_alarms?ref=master |  |
+| <a name="module_alb_default_alarm"></a> [alb\_default\_alarm](#module\_alb\_default\_alarm) | git@github.com:moengage/tf-core.git//cloudwatch/alarm/application_lb | master |
 
 ## Resources
 
@@ -24,6 +26,7 @@
 | [aws_lb_listener.http](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
 | [aws_lb_listener.https](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener) | resource |
 | [aws_lb_target_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group) | resource |
+| [aws_route53_record.dns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_s3_bucket.logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_security_group.alb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
@@ -32,11 +35,12 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_access_log_bucket_id"></a> [access\_log\_bucket\_id](#input\_access\_log\_bucket\_id) | An external S3 Bucket name to store access logs in. If specified, no logging bucket will be created. | `string` | `null` | no |
 | <a name="input_alarm_actions"></a> [alarm\_actions](#input\_alarm\_actions) | AWS SNS topic or AutoScaling policy ARN or any other supported action's ARNs in List | `list(any)` | n/a | yes |
-| <a name="input_create_default_alarms"></a> [alb\_default\_alarm\_creation](#input\_alb\_default\_alarm\_creation) | 1 to enable default alarms for the alb. 0 to ignore | `number` | `0` | no |
 | <a name="input_aws_lb_accounts"></a> [aws\_lb\_accounts](#input\_aws\_lb\_accounts) | Use the account ID that corresponds to the region for your load balancer and bucket | `map(string)` | <pre>{<br>  "ap-east-1": "754344448648",<br>  "ap-northeast-1": "582318560864",<br>  "ap-northeast-2": "600734575887",<br>  "ap-northeast-3": "383597477331",<br>  "ap-south-1": "718504428378",<br>  "ap-southeast-1": "114774131450",<br>  "ap-southeast-2": "783225319266",<br>  "ca-central-1": "985666609251",<br>  "eu-central-1": "054676820928",<br>  "eu-north-1": "897822967062",<br>  "eu-west-1": "156460612806",<br>  "eu-west-2": "652711504416",<br>  "eu-west-3": "009996457667",<br>  "sa-east-1": "507241528517",<br>  "us-east-1": "127311923021",<br>  "us-east-2": "033677994240",<br>  "us-west-1": "027434742980",<br>  "us-west-2": "797873946194"<br>}</pre> | no |
-| <a name="input_business_name"></a> [business\_name](#input\_business\_name) | Business Name | `any` | n/a | yes |
+| <a name="input_business_name"></a> [business\_name](#input\_business\_name) | Business name | `any` | n/a | yes |
 | <a name="input_cluster"></a> [cluster](#input\_cluster) | Cluster Name | `string` | `"default"` | no |
+| <a name="input_create_default_alarms"></a> [create\_default\_alarms](#input\_create\_default\_alarms) | 1 to enable default alarms for the alb. 0 to ignore | `number` | `0` | no |
 | <a name="input_created_by"></a> [created\_by](#input\_created\_by) | Created By | `any` | n/a | yes |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment | `any` | n/a | yes |
 | <a name="input_error_rate_threshold"></a> [error\_rate\_threshold](#input\_error\_rate\_threshold) | The threshold for Error rate in percentage | `number` | `0.5` | no |
@@ -64,12 +68,15 @@
 | <a name="input_lb_ip_address_type"></a> [lb\_ip\_address\_type](#input\_lb\_ip\_address\_type) | The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack | `string` | `"ipv4"` | no |
 | <a name="input_lb_is_internal"></a> [lb\_is\_internal](#input\_lb\_is\_internal) | If true, the LB will be internal | `any` | n/a | yes |
 | <a name="input_lb_logs_retention_days"></a> [lb\_logs\_retention\_days](#input\_lb\_logs\_retention\_days) | Specifies the number of days after object creation when the specific rule action takes effect | `number` | `7` | no |
+| <a name="input_lb_name"></a> [lb\_name](#input\_lb\_name) | loadbalancer name | `string` | `""` | no |
 | <a name="input_lb_security_groups"></a> [lb\_security\_groups](#input\_lb\_security\_groups) | Security group IDs which will be associated with load balancer | `list(string)` | `[]` | no |
 | <a name="input_lb_subnets"></a> [lb\_subnets](#input\_lb\_subnets) | Subnet IDS where AWS will launch load balancer | `list(string)` | n/a | yes |
 | <a name="input_lb_update_timeout"></a> [lb\_update\_timeout](#input\_lb\_update\_timeout) | Used for LB modifications (Default 10 minutes) | `string` | `"10m"` | no |
 | <a name="input_metric_period"></a> [metric\_period](#input\_metric\_period) | The period in seconds over which the specified statistic is applied | `number` | `300` | no |
+| <a name="input_r53_dns_names"></a> [r53\_dns\_names](#input\_r53\_dns\_names) | dns record name for the ALB | <pre>map(object({<br>    dns_name = string<br>    zone_id  = string<br>    }<br>  ))</pre> | `{}` | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Service Name | `any` | n/a | yes |
 | <a name="input_subservice_name"></a> [subservice\_name](#input\_subservice\_name) | Sub Service Name | `string` | `""` | no |
+| <a name="input_tg_name"></a> [tg\_name](#input\_tg\_name) | target-group Name | `string` | `""` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC ID | `any` | n/a | yes |
 
 ## Outputs
@@ -82,6 +89,8 @@
 | <a name="output_http_listener_arn"></a> [http\_listener\_arn](#output\_http\_listener\_arn) | n/a |
 | <a name="output_https_listener_arn"></a> [https\_listener\_arn](#output\_https\_listener\_arn) | n/a |
 | <a name="output_id"></a> [id](#output\_id) | n/a |
+| <a name="output_route_53_dns_names"></a> [route\_53\_dns\_names](#output\_route\_53\_dns\_names) | n/a |
 | <a name="output_security_group"></a> [security\_group](#output\_security\_group) | n/a |
 | <a name="output_target_group_arn"></a> [target\_group\_arn](#output\_target\_group\_arn) | n/a |
 | <a name="output_zone_id"></a> [zone\_id](#output\_zone\_id) | n/a |
+<!-- END_TF_DOCS -->
