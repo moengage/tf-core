@@ -42,7 +42,6 @@
 | <a name="input_cluster"></a> [cluster](#input\_cluster) | Cluster Name | `string` | `"default"` | no |
 | <a name="input_create_default_alarms"></a> [create\_default\_alarms](#input\_create\_default\_alarms) | 1 to enable default alarms for the alb. 0 to ignore | `number` | `0` | no |
 | <a name="input_created_by"></a> [created\_by](#input\_created\_by) | Created By | `any` | n/a | yes |
-| <a name="input_dns_names"></a> [dns\_names](#input\_dns\_names) | dns record name for the ALB | <pre>map(object({<br>    dns_name = string<br>    zone_id  = string<br>    }<br>  ))</pre> | `{}` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment | `any` | n/a | yes |
 | <a name="input_error_rate_threshold"></a> [error\_rate\_threshold](#input\_error\_rate\_threshold) | The threshold for Error rate in percentage | `number` | `0.5` | no |
 | <a name="input_evaluation_periods"></a> [evaluation\_periods](#input\_evaluation\_periods) | The number of periods over which data is compared to the specified threshold | `number` | `2` | no |
@@ -74,6 +73,7 @@
 | <a name="input_lb_subnets"></a> [lb\_subnets](#input\_lb\_subnets) | Subnet IDS where AWS will launch load balancer | `list(string)` | n/a | yes |
 | <a name="input_lb_update_timeout"></a> [lb\_update\_timeout](#input\_lb\_update\_timeout) | Used for LB modifications (Default 10 minutes) | `string` | `"10m"` | no |
 | <a name="input_metric_period"></a> [metric\_period](#input\_metric\_period) | The period in seconds over which the specified statistic is applied | `number` | `300` | no |
+| <a name="input_r53_dns_names"></a> [r53\_dns\_names](#input\_r53\_dns\_names) | dns record name for the ALB | <pre>map(object({<br>    dns_name = string<br>    zone_id  = string<br>    }<br>  ))</pre> | `{}` | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Service Name | `any` | n/a | yes |
 | <a name="input_subservice_name"></a> [subservice\_name](#input\_subservice\_name) | Sub Service Name | `string` | `""` | no |
 | <a name="input_tg_name"></a> [tg\_name](#input\_tg\_name) | target-group Name | `string` | `""` | no |
