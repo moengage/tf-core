@@ -234,4 +234,5 @@ variable "dns_names" {
     }
   ))
   default = {}
+  description = "dns record name for the ALB"
 }
