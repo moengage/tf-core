@@ -27,6 +27,7 @@ resource "aws_launch_template" "default" {
   }
 
   network_interfaces {
+    device_index = 0
     associate_public_ip_address = var.associate_public_ip_address
     security_groups = concat(
       [aws_security_group.instances.id],
