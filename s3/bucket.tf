@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "default" {
-  bucket = local.resource_identifier
+  bucket = var.use_unique_prefix ? local.resource_identifier : lower(var.bucket_name)
   acl    = var.acl
 
   versioning {
@@ -17,4 +17,3 @@ resource "aws_s3_bucket" "default" {
     },
   )
 }
-

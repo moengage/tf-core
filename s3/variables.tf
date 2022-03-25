@@ -50,3 +50,9 @@ variable "versioning_enabled" {
   default     = true
   type        = bool
 }
+
+variable "use_unique_prefix" {
+  description = "Bool condition whether to use unique_prefix in resource name"
+  default     = true
+  type        = bool
+}
