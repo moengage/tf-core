@@ -6,6 +6,12 @@ variable "created_by" {
   description = "Created By"
 }
 
+variable "asg_name" {
+  description = "name that need to be assigned for asg"
+  type = string
+  default = ""
+}
+
 variable "cluster" {
   description = "Cluster Name"
   default     = "default"
