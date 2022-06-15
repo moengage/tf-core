@@ -12,6 +12,8 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
   }
 }
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_role" "enhanced_monitoring" {
   name               = "rds-${local.resource_identifier}-EnhancedMonitoringIAMRole"
   assume_role_policy = data.aws_iam_policy_document.enhanced_monitoring.json
@@ -55,7 +57,7 @@ resource "aws_db_instance" "postgresql" {
   parameter_group_name       = var.parameter_group
   storage_encrypted          = var.storage_encrypted
   monitoring_interval        = var.monitoring_interval
-  monitoring_role_arn        = var.monitoring_interval > 0 ? aws_iam_role.enhanced_monitoring.arn : ""
+  monitoring_role_arn        = arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/AmazonRDSEnhancedMonitoringRole
   deletion_protection        = var.deletion_protection
   tags                       = merge(local.default_tags, var.extra_tags)
 }
