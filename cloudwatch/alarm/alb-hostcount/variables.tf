@@ -4,7 +4,7 @@ variable "alb_name" {
 }
 
 variable "alarm_actions" {
-  type        = string
+  type        = list(any)
   description = "AWS SNS topic arn"
 }
 
