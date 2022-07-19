@@ -4,9 +4,8 @@ variable "alb_name" {
 }
 
 variable "alarm_actions" {
-  type        = list(any)
-  description = "AWS SNS topic or AutoScaling policy ARN or any other supported action's ARNs in List"
-  default     = []
+  type        = string
+  description = "AWS SNS topic arn"
 }
 
 variable "dimensions_loadbalancer" {
@@ -30,4 +29,9 @@ variable "metric_period" {
   type        = number
   default     = 300
   description = "The period in seconds over which the specified statistic is applied"
+}
+
+variable "tags" {
+  type        = map
+  description = "Tags to associate"
 }

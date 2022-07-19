@@ -16,6 +16,7 @@ resource "aws_cloudwatch_metric_alarm" "unhealthy_host_count_percentage" {
   alarm_description   = "This metric monitors unhealthy host count percentage"
   treat_missing_data  = "notBreaching"
   alarm_actions       = var.alarm_actions
+  tags                = var.tags
 
   metric_query {
     id          = "e1"
