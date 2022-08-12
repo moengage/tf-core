@@ -2,6 +2,12 @@ variable "business_name" {
   description = "Business Name"
 }
 
+variable "tg_name" {
+  description = "name that need to be assigned for tg"
+  type = string
+  default = ""
+}
+
 variable "cluster" {
   description = "Cluster Name"
 }
