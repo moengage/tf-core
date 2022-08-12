@@ -13,7 +13,7 @@ locals {
   }
 
   _resource_identifier = "${var.business_name}-${var.service_name}-${local._subservice_name}"
-  resource_identifier  = replace(lower(local._resource_identifier), "_", "-")
-  resource_identifier = coalesce(var.tg_name, local.resource_identifier)
+  resource_identifier_temp  = replace(lower(local._resource_identifier), "_", "-")
+  resource_identifier = coalesce(var.tg_name, local.resource_identifier_temp)
 }
 
