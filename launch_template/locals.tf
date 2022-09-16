@@ -11,7 +11,7 @@ locals {
     Service     = lower(var.service_name)
     SubService  = lower(local._subservice_name)
     FabTag      = var.fab_tag
-    cost_tracking = "enabled"
+    cost_tracking = "true"
   }
 
   _service_type        = var.service_type != "" ? format("%s-", var.service_type) : ""

@@ -67,7 +67,7 @@ locals {
     },
     {
       "key"                 = "cost_tracking"
-      "value"               = "enabled"
+      "value"               = "true"
       "propagate_at_launch" = var.propagate_tags_at_launch
     },
   ]
