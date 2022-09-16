@@ -23,7 +23,7 @@ locals {
     InstanceGroup = local._instance_group
     Lifecycle     = local._lifecycle
     FabTag        = "k8s"
-    cost_tracking = "true"
+    cost_tracking = "enabled"
   }
 
   _resource_identifier = "${local._business_name}-${local._service}-${local._subservice}-${local._instance_group}-${local._lifecycle}"
