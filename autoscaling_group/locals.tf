@@ -64,6 +64,11 @@ locals {
       "value"               = var.created_by
       "propagate_at_launch" = var.propagate_tags_at_launch
     },
+    {
+      "key"                 = "cost_tracking"
+      "value"               = "enabled"
+      "propagate_at_launch" = true
+    },
   ]
 
   asg_tags = concat(local._asg_tags, var.extra_asg_tags)
