@@ -129,8 +129,8 @@ export DNS_CLUSTER_IP=${custom_dns_ip}
 /etc/eks/bootstrap.sh --apiserver-endpoint '${cluster_endpoint}' \
     --b64-cluster-ca '${certificate_authority_data}' '${cluster_name}' \
     --kubelet-extra-args \
-        "--kube-reserved cpu=100m,memory=0.5Gi,ephemeral-storage=1Gi \
-        --system-reserved cpu=100m,memory=0.2Gi,ephemeral-storage=1Gi \
-        --eviction-hard memory.available<500Mi,nodefs.available<10% \
+        "--kube-reserved cpu=250m,memory=0.5Gi,ephemeral-storage=2Gi \
+        --system-reserved cpu=250m,memory=0.5Gi,ephemeral-storage=2Gi \
+        --eviction-hard memory.available<1000Mi,nodefs.available<15% \
         --allowed-unsafe-sysctls net.core.somaxconn \
         ${bootstrap_extra_args}"
