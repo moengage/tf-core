@@ -1,5 +1,4 @@
 resource "aws_lambda_function" "lambda_with_image" {
-  count =  1 
   function_name                  = var.function_name
   description                    = var.description
   role                           = var.lambda_role
