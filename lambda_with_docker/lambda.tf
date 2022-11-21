@@ -4,7 +4,6 @@ resource "aws_lambda_function" "lambda_with_image" {
   description                    = var.description
   role                           = var.lambda_role
   memory_size                    = var.memory_size
-  runtime                        = var.runtime
   timeout                        = var.timeout
   image_uri                      = var.image_uri
 
