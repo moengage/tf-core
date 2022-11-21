@@ -3,6 +3,11 @@ variable "function_name" {
   type        = string
 }
 
+variable "image_uri" {
+  description = "ECR image to be used"
+  type        = string
+}
+
 variable "description" {
   description = "Description for your Lambda Function"
   type        = string
