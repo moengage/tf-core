@@ -5,6 +5,7 @@ resource "aws_lambda_function" "lambda_with_image" {
   memory_size                    = var.memory_size
   timeout                        = var.timeout
   image_uri                      = var.image_uri
+  package_type                   = "Image"
 
   dynamic "environment" {
     for_each = length(keys(var.environment_variables)) == 0 ? [] : [true]
