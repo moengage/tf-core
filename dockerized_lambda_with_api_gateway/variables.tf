@@ -98,3 +98,8 @@ variable "lambda_integration_type" {
   type    = string
   default = "AWS_PROXY"
 }
+
+variable "key_type" {
+  type    = string
+  default = "API_KEY"
+}
