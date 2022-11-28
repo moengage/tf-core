@@ -74,3 +74,28 @@ variable "retention_in_days" {
   type    = number
   default = 7
 }
+
+variable "stage" {
+  type    = string
+  default = "default"
+}
+
+variable "method" {
+  type    = string
+  default = "ANY"
+}
+
+variable "authorization" {
+  type    = string
+  default = "NONE"
+}
+
+variable "binary_media_types" {
+  type    = list
+  default = []
+}
+
+variable "lambda_integration_type" {
+  type    = string
+  default = "AWS_PROXY"
+}
