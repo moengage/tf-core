@@ -92,6 +92,7 @@ variable "authorization" {
 
 variable "binary_media_types" {
   default = []
+  type = list
 }
 
 variable "lambda_integration_type" {
