@@ -91,7 +91,6 @@ variable "authorization" {
 }
 
 variable "binary_media_types" {
-  type    = list
   default = []
 }
 
