@@ -1,7 +1,11 @@
 resource "aws_api_gateway_rest_api" "lambda_api" {
-  name               = "${aws_lambda_function.lambda_with_image.function_name}-api"
-  description        = "Rest Api to trigger lambda functions"
-  binary_media_types = var.binary_media_types
+  name                   = "${aws_lambda_function.lambda_with_image.function_name}-api"
+  description            = "Rest Api to trigger lambda functions"
+  binary_media_types     = var.binary_media_types
+  
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
 }
 
 resource "aws_api_gateway_resource" "lambda_api_gateway" {
@@ -32,7 +36,7 @@ resource "aws_api_gateway_usage_plan_key" "apigw_usage_plan_key" {
 }
 
 resource "aws_api_gateway_api_key" "apigw_prod_key" {
-  name = "prod_key"
+  name = "${aws_lambda_function.lambda_with_image.function_name}-key"
 }
 
 resource "aws_api_gateway_method" "take_screenshot_get" {
