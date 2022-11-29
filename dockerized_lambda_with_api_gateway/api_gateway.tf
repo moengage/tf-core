@@ -75,6 +75,7 @@ resource "aws_api_gateway_method_response" "gateway_method_response" {
   response_models = {
     "text/html" = "Empty"
   }
+}
 
 resource "aws_api_gateway_deployment" "api_gateway_deployment_get" {
   depends_on = [aws_api_gateway_integration.lambda_integration_get,  aws_api_gateway_method.take_screenshot_get, aws_api_gateway_integration.lambda_integration_get]
