@@ -62,7 +62,7 @@ resource "aws_api_gateway_integration" "lambda_integration_get" {
   resource_id = aws_api_gateway_method.take_screenshot_get.resource_id
   http_method = aws_api_gateway_method.take_screenshot_get.http_method
 
-  integration_http_method = var.method 
+  integration_http_method = "POST"
   type                    = var.lambda_integration_type
   uri                     = aws_lambda_function.lambda_with_image.invoke_arn
 }
