@@ -69,7 +69,7 @@ resource "aws_api_gateway_integration" "lambda_integration_get" {
 
 
 resource "aws_api_gateway_deployment" "api_gateway_deployment_get" {
-  depends_on = [aws_api_gateway_integration.lambda_integration_get,  aws_api_gateway_method.take_screenshot_get, aws_api_gateway_integration.lambda_integration_get, aws_api_gateway_method_response.gateway_method_response]
+  depends_on = [aws_api_gateway_integration.lambda_integration_get,  aws_api_gateway_method.take_screenshot_get, aws_api_gateway_integration.lambda_integration_get]
 
   rest_api_id = aws_api_gateway_rest_api.lambda_api.id
 }
