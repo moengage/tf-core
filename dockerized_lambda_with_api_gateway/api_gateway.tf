@@ -68,9 +68,9 @@ resource "aws_api_gateway_integration" "lambda_integration_get" {
 }
 
 resource "aws_api_gateway_method_response" "gateway_method_response" {
-  rest_api_id = "${aws_api_gateway_rest_api.lambda_api.id}"
-  resource_id = "${aws_api_gateway_rest_api.lambda_api.root_resource_id}"
-  http_method = "${aws_api_gateway_method.take_screenshot_get.http_method}"
+  rest_api_id = aws_api_gateway_rest_api.lambda_api.id
+  resource_id = aws_api_gateway_rest_api.lambda_api.root_resource_id
+  http_method = aws_api_gateway_method.take_screenshot_get.http_method
   status_code = "200"
   response_models = {
     "text/html" = "Empty"
