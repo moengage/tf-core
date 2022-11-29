@@ -53,7 +53,7 @@ resource "aws_lambda_permission" "apigw" {
   function_name = aws_lambda_function.lambda_with_image.function_name
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_api_gateway_rest_api.lambda_api.execution_arn}/*/*/${aws_lambda_function.lambda_with_image.function_name}"
+  source_arn = "${aws_api_gateway_rest_api.lambda_api.execution_arn}/*/*/}"
 }
 
 resource "aws_api_gateway_integration" "lambda_integration_get" {
@@ -66,7 +66,6 @@ resource "aws_api_gateway_integration" "lambda_integration_get" {
   type                    = var.lambda_integration_type
   uri                     = aws_lambda_function.lambda_with_image.invoke_arn
 }
-
 
 resource "aws_api_gateway_deployment" "api_gateway_deployment_get" {
   depends_on = [aws_api_gateway_integration.lambda_integration_get,  aws_api_gateway_method.take_screenshot_get, aws_api_gateway_integration.lambda_integration_get]
