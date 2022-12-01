@@ -4,5 +4,5 @@ output function_name {
 }
 
 output "api_key" {
-  value = aws_api_gateway_api_key.apigw_prod_key.value
+  value = aws_api_gateway_api_key.apigw_key.value
 }
