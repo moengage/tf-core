@@ -5,11 +5,14 @@ resource "aws_cloudwatch_metric_alarm" "sqs_msgs_alarm" {
   threshold           = var.sqs_msgs_threshold
   alarm_description   = "This metric monitors sqs approx number of messages visible"
   alarm_actions       = var.alarm_actions
+  ok_actions          = length(var.ok_actions ) > 0 ? var.ok_actions : var.alarm_actions
   datapoints_to_alarm = var.datapoints_to_alarm
   metric_name         = "ApproximateNumberOfMessagesVisible"
   namespace           = "AWS/SQS"
   period              = var.metric_period
   statistic           = "Sum"
+  treat_missing_data  = "notBreaching"
+
   dimensions = {
     QueueName = var.dimensions_queuename
   }
