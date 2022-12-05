@@ -3,6 +3,12 @@ variable "alarm_actions" {
   description = "The Alarm actions arn in list"
 }
 
+variable "ok_actions" {
+  type        = list(any)
+  default     = []
+  description = "The OK actions arn in list"
+}
+
 variable "dimensions_queuename" {
   type        = string
   description = "the SQS Queue name"
