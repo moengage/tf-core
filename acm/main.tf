@@ -9,15 +9,23 @@ resource "aws_acm_certificate" "main" {
 }
 
 resource "aws_route53_record" "validation" {
-  count = "${length(var.domain_names)}"
-  name = "${lookup(aws_acm_certificate.main.domain_validation_options[count.index], "resource_record_name")}"
-  type = "${lookup(aws_acm_certificate.main.domain_validation_options[count.index], "resource_record_type")}"
-  zone_id = "${var.zone_id != "" ? var.zone_id : lookup(var.zone_ids, element(var.domain_names, count.index), false)}"
-  records = ["${lookup(aws_acm_certificate.main.domain_validation_options[count.index], "resource_record_value")}"]
-  ttl = 60
+  for_each = {
+    for dvo in aws_acm_certificate.main.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+
+  allow_overwrite = false
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 60
+  type            = each.value.type
+  zone_id         = var.zone_ids[each.key]
 }
 
 resource "aws_acm_certificate_validation" "main" {
-  certificate_arn = "${aws_acm_certificate.main.arn}"
-  validation_record_fqdns = ["${aws_route53_record.validation.*.fqdn}"]
+  certificate_arn         = aws_acm_certificate.main.arn
+  validation_record_fqdns = [for record in aws_route53_record.example : record.fqdn]
 }
