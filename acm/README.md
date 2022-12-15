@@ -25,10 +25,15 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_business_name"></a> [business\_name](#input\_business\_name) | Business Name | `string` | n/a | yes |
 | <a name="input_domain_names"></a> [domain\_names](#input\_domain\_names) | List of domains to associate with the new certificate. ACM currently supports up to 10 domains, any or all of which can contain wildcards. The first domain should be the primary domain | `list` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | environment to deploy into, should typically dev/staging/prod | `string` | n/a | yes |
+| <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Service name | `string` | n/a | yes |
+| <a name="input_subservice_name"></a> [subservice\_name](#input\_subservice\_name) | Sub Service name | `string` | n/a | yes |
 | <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | The Route53 zone ID in which to create validation records | `string` | `""` | no |
 | <a name="input_zone_ids"></a> [zone\_ids](#input\_zone\_ids) | Map of zone IDs indexed by domain name (when issuing a certificate spanning multiple zones) | `map` | `{}` | no |
 
+Example inputs:
 domain_names = ["foo.net", "*.foo.net", "bar.org", "foo.bar.org"]
 zone_ids = {
     "foo.net" = "foo_zone_id"

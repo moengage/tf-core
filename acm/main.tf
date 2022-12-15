@@ -3,10 +3,10 @@ resource "aws_acm_certificate" "main" {
   domain_name = "${var.domain_names[0]}"
   subject_alternative_names = "${slice(var.domain_names, 1, length(var.domain_names))}"
   validation_method = "DNS"
-  tags {
-    Name = "${replace(var.domain_names[0], "*.", "star.")}"
-    terraform = "true"
-  }
+  tags = merge(
+    local.default_tags,
+    map("Name", "${replace(var.domain_names[0], "*.", "star.")}"),
+  )
 }
 
 resource "aws_route53_record" "validation" {

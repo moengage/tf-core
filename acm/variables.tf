@@ -13,3 +13,23 @@ variable "zone_ids" {
   type = "map"
   default = {}
 }
+
+variable "business_name" {
+  type        = string
+  description = "Business Name"
+}
+
+variable "service_name" {
+  type        = string
+  description = "Service name"
+}
+
+variable "subservice_name" {
+  type        = string
+  description = "Sub Service name"
+}
+
+variable "environment" {
+  description = "environment to deploy into, should typically dev/staging/prod"
+  type        = string
+}
