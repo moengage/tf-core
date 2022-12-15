@@ -2,13 +2,6 @@
 
 No requirements.
 
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_aws.acm"></a> [aws.acm](#provider\_aws.acm) | n/a |
-| <a name="provider_aws.route53"></a> [aws.route53](#provider\_aws.route53) | n/a |
-
 ## Modules
 
 No modules.
