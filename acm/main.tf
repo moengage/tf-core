@@ -17,7 +17,7 @@ resource "aws_route53_record" "validation" {
     }
   }
 
-  allow_overwrite = false
+  allow_overwrite = true
   name            = each.value.name
   records         = [each.value.record]
   ttl             = 60
