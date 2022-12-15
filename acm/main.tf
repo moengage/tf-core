@@ -10,10 +10,10 @@ resource "aws_acm_certificate" "main" {
 
 resource "aws_route53_record" "validation" {
   count = "${length(var.domain_names)}"
-  name = "${lookup(tolist(aws_acm_certificate.main.domain_validation_options)[count.index], "resource_record_name")}"
-  type = "${lookup(tolist(aws_acm_certificate.main.domain_validation_options)[count.index], "resource_record_type")}"
+  name = "${lookup(aws_acm_certificate.main.domain_validation_options[count.index], "resource_record_name")}"
+  type = "${lookup(aws_acm_certificate.main.domain_validation_options[count.index], "resource_record_type")}"
   zone_id = "${var.zone_id != "" ? var.zone_id : lookup(var.zone_ids, element(var.domain_names, count.index), false)}"
-  records = ["${lookup(tolist(aws_acm_certificate.main.domain_validation_options)[count.index], "resource_record_value")}"]
+  records = ["${lookup(aws_acm_certificate.main.domain_validation_options[count.index], "resource_record_value")}"]
   ttl = 60
 }
 
