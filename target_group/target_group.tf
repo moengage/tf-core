@@ -4,7 +4,7 @@ resource "aws_lb_target_group" "default" {
     local.resource_identifier,
     0,
     min(29, length(local.resource_identifier)),
-  )}-tg"
+  )}-arm-tg"
   port                 = var.port
   protocol             = "HTTP"
   vpc_id               = var.vpc_id
