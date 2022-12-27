@@ -3,7 +3,7 @@ resource "aws_lb_target_group" "default" {
   name = "${substr(
     local.resource_identifier,
     0,
-    min(29, length(local.resource_identifier)),
+    min(32, length(local.resource_identifier)),
   )}-arm-tg"
   port                 = var.port
   protocol             = "HTTP"
