@@ -386,3 +386,9 @@ variable "autoscaling_policies_enabled" {
   default     = false
   description = "Whether to create `aws_autoscaling_policy` and `aws_cloudwatch_metric_alarm` resources to control Auto Scaling"
 }
+
+variable "arch_type" {
+  type        = string
+  default     = "AMD"
+  description = "The Architecture type for the ASG Instances."
+}
