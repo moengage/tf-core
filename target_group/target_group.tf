@@ -1,6 +1,10 @@
 resource "aws_lb_target_group" "default" {
   count = var.enabled ? 1 : 0
-  name = "${local.resource_identifier}-arm-tg"
+  name = "${substr(
+    local.resource_identifier,
+    0,
+    min(29, length(local.resource_identifier)),
+  )}-tg"
   port                 = var.port
   protocol             = "HTTP"
   vpc_id               = var.vpc_id
