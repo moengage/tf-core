@@ -80,3 +80,9 @@ variable "restrict_public_buckets" {
   default     = true
   type        = bool
 }
+
+variable "s3_bucket_policy_json" {
+  description = "S3 bucket policy json. Multi line String can be included in between <<EOF ... EOF"
+  default     = ""
+  type        = string
+}
