@@ -56,3 +56,27 @@ variable "use_unique_prefix" {
   default     = true
   type        = bool
 }
+
+variable "block_public_acls" {
+  description = "Bool condition whether to block public ACLs for this bucket"
+  default     = true
+  type        = bool
+}
+
+variable "block_public_policy" {
+  description = "Bool condition whether to block public bucket policies for this bucket"
+  default     = true
+  type        = bool
+}
+
+variable "ignore_public_acls" {
+  description = "Bool condition whether to ignore public ACLs for this bucket"
+  default     = true
+  type        = bool
+}
+
+variable "restrict_public_buckets" {
+  description = "Bool condition whether to restrict public bucket policies for this bucket"
+  default     = true
+  type        = bool
+}
