@@ -26,3 +26,10 @@ resource "aws_s3_bucket_public_access_block" "block_public_access" {
   ignore_public_acls      = var.ignore_public_acls
   restrict_public_buckets = var.restrict_public_buckets
 }
+
+
+resource "aws_s3_bucket_policy" "bucket_policy" {
+  count = var.s3_bucket_policy_json == "" ? 0 : 1
+  bucket = aws_s3_bucket.default.id
+  policy = var.s3_bucket_policy_json
+}
