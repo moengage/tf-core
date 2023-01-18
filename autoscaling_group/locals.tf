@@ -1,6 +1,6 @@
 locals {
   _subservice_name     = coalesce(var.subservice_name, var.service_name)
-  _resource_identifier = "${var.business_name}-${var.service_name}-${local._subservice_name}"
+  _resource_identifier = "${var.business_name}-${var.service_name}-${local._subservice_name}-${var.arch_type}"
   resource_identifier  = coalesce(var.asg_name, lower(local._resource_identifier))
 
   iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"
@@ -67,6 +67,11 @@ locals {
     {
       "key"                 = "cost_tracking"
       "value"               = "enabled"
+      "propagate_at_launch" = true
+    },
+    {
+      "key"                 = "arch_type"
+      "value"               = var.arch_type
       "propagate_at_launch" = true
     },
   ]

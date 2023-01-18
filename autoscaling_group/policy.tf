@@ -4,7 +4,7 @@ locals {
 
   default_alarms = {
     alarm_high = {
-      alarm_name                = "${local.asg_name}-high"
+      alarm_name                = "${local.asg_name}-${var.arch_type}-high"
       comparison_operator       = var.comparison_operator_high
       evaluation_periods        = var.high_evaluation_periods
       metric_name               = var.metric_name
@@ -14,14 +14,14 @@ locals {
       threshold                 = var.high_threshold
       dimensions_name           = var.dimensions_name
       dimensions_target         = var.dimensions_target
-      alarm_description         = "Scale up Autoscaling Group ${local.asg_name},${var.dimensions_target} Greater than ${var.high_threshold} for ${var.high_period} * ${var.high_evaluation_periods} seconds"
+      alarm_description         = "Scale up Autoscaling Group ${local.asg_name} Arch type ${var.arch_type},${var.dimensions_target} Greater than ${var.high_threshold} for ${var.high_period} * ${var.high_evaluation_periods} seconds"
       alarm_actions             = values(aws_autoscaling_policy.scale_up)[*].arn
       treat_missing_data        = var.treat_missing_data
       ok_actions                = [var.sns_topic_alarms_arn]
       insufficient_data_actions = [var.sns_topic_alarms_arn]
     },
     alarm_low = {
-      alarm_name                = "${local.asg_name}-low"
+      alarm_name                = "${local.asg_name}-${var.arch_type}-low"
       comparison_operator       = var.comparison_operator_low
       evaluation_periods        = var.low_evaluation_periods
       metric_name               = var.metric_name
@@ -31,7 +31,7 @@ locals {
       threshold                 = var.low_threshold
       dimensions_name           = var.dimensions_name
       dimensions_target         = var.dimensions_target
-      alarm_description         = "Scale down Autoscaling Group ${local.asg_name},${var.dimensions_target} below ${var.low_threshold} for ${var.low_period} * ${var.low_evaluation_periods} seconds"
+      alarm_description         = "Scale down Autoscaling Group ${local.asg_name} Arch type ${var.arch_type},${var.dimensions_target} below ${var.low_threshold} for ${var.low_period} * ${var.low_evaluation_periods} seconds"
       alarm_actions             = values(aws_autoscaling_policy.scale_down)[*].arn
       treat_missing_data        = var.treat_missing_data
       ok_actions                = [var.sns_topic_alarms_arn]
