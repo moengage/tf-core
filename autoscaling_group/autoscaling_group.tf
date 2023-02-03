@@ -3,7 +3,6 @@ resource "aws_autoscaling_group" "default" {
   count                     = var.enabled ? 1 : 0
   max_size                  = var.max_size
   min_size                  = var.min_size
-  arch_type                 = var.arch_type
   health_check_grace_period = var.health_check_grace_period
   health_check_type         = var.health_check_type
   default_cooldown          = var.default_cooldown
