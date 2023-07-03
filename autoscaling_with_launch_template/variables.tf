@@ -67,8 +67,8 @@ variable "instance_types" {
 
 variable "burstable_performance" {
   description = "Enable burstable performance instances" 
-  type = bool 
-  default = false 
+  type = string 
+  default = "included"
 }
 
 variable "excluded_instance_types" {
