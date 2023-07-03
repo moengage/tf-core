@@ -20,7 +20,7 @@ resource "aws_autoscaling_group" "default" {
   burstable_performance     = var.burstable_performance
   excluded_instance_types   = var.excluded_instance_types
   architecture_type         = var.architecture_type
-  instance_generation       = var.instance_generation
+  instance_generations      = var.instance_generations
   memory_mib                = var.memory_mib
   vcpu_count                = var.vcpu_count
 

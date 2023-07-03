@@ -19,6 +19,12 @@ resource "aws_autoscaling_group" "default" {
   wait_for_elb_capacity     = var.wait_for_elb_capacity
   protect_from_scale_in     = var.protect_from_scale_in
   capacity_rebalance        = var.capacity_rebalance
+  burstable_performance     = var.burstable_performance
+  excluded_instance_types   = var.excluded_instance_types
+  architecture_type         = var.architecture_type
+  instance_generations      = var.instance_generations
+  memory_mib                = var.memory_mib
+  vcpu_count                = var.vcpu_count
 
   dynamic "initial_lifecycle_hook" {
     for_each = var.initial_lifecycle_hooks
@@ -75,6 +81,15 @@ resource "aws_autoscaling_group" "default" {
 
       override {
         instance_type = length(var.instance_types) >= 10 ? var.instance_types.9 : ""
+      }
+      override {
+        instance_requirements { 
+          burstable_performance = var.burstable_performance 
+          excluded_instance_types = var.excluded_instance_types
+          instance_generations = var.instance_generation 
+          memory_mib = var.memory_mib 
+          vcpu_count = var.vcpu_count 
+        }
       }
     }
     instances_distribution {
