@@ -23,6 +23,7 @@ resource "aws_autoscaling_group" "default" {
   instance_generations      = var.instance_generations
   memory_mib                = var.memory_mib
   vcpu_count                = var.vcpu_count
+  cpu_manufacturers         = var.cpu_manufacturers
 
   mixed_instances_policy {
     launch_template {
@@ -78,6 +79,7 @@ resource "aws_autoscaling_group" "default" {
           instance_generations = var.instance_generations 
           memory_mib = var.memory_mib 
           vcpu_count = var.vcpu_count 
+          cpu_manufacturers = var.cpu_manufacturers
         }
       }
     }

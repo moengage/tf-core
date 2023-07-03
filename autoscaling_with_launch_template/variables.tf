@@ -77,6 +77,12 @@ variable "excluded_instance_types" {
   default = [] 
 }
 
+variable "cpu_manufacturers" { 
+  description = "CPU manufacturer for instance selection" 
+  type = list(string) 
+  default = [] 
+}
+
 variable "architecture_type" { 
   description = "Architecture type for instance selection" 
   type = string 
