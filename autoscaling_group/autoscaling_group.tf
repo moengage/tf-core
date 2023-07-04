@@ -39,7 +39,7 @@ resource "aws_autoscaling_group" "default" {
       }
 
       override {
-      instance_requirements { 
+        instance_requirements { 
           burstable_performance = var.burstable_performance 
           excluded_instance_types = var.excluded_instance_types
           instance_generations = var.instance_generations
