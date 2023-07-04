@@ -17,6 +17,13 @@ resource "aws_autoscaling_group" "default" {
   min_elb_capacity          = var.min_elb_capacity
   wait_for_elb_capacity     = var.wait_for_elb_capacity
   protect_from_scale_in     = var.protect_from_scale_in
+  burstable_performance     = var.burstable_performance
+  excluded_instance_types   = var.excluded_instance_types
+  architecture_type         = var.architecture_type
+  instance_generations      = var.instance_generations
+  memory_mib                = var.memory_mib
+  vcpu_count                = var.vcpu_count
+  cpu_manufacturers         = var.cpu_manufacturers
 
   mixed_instances_policy {
     launch_template {
@@ -65,6 +72,16 @@ resource "aws_autoscaling_group" "default" {
         instance_type = length(var.instance_types) >= 10 ? var.instance_types.9 : ""
       }
 
+      override {
+        instance_requirements { 
+          burstable_performance = var.burstable_performance 
+          excluded_instance_types = var.excluded_instance_types
+          instance_generations = var.instance_generations 
+          memory_mib = var.memory_mib 
+          vcpu_count = var.vcpu_count 
+          cpu_manufacturers = var.cpu_manufacturers
+        }
+      }
     }
 
     instances_distribution {
