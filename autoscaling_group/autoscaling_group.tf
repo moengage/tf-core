@@ -44,12 +44,10 @@ resource "aws_autoscaling_group" "default" {
           excluded_instance_types = var.excluded_instance_types
           instance_generations = var.instance_generations
           memory_mib {
-            min = 2048
-            max = 8192
+            min = var.memory_mib
           }
           vcpu_count {
-            min = 2
-            max = 8
+            min = var.vcpu_count
           }
           cpu_manufacturers = var.cpu_manufacturers
         }
