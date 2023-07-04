@@ -109,8 +109,8 @@ variable "architecture_type" {
 
 variable "instance_generations" { 
   description = "Instance generation for instance selection" 
-  type = string 
-  default = "current" 
+  type = list(string)
+  default = ["current"]
 }
 
 variable "memory_mib" { 
