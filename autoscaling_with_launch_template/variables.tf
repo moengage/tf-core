@@ -65,48 +65,6 @@ variable "instance_types" {
   description = "List of instance type, ordered priority, less index more priority"
 }
 
-variable "burstable_performance" {
-  description = "Enable burstable performance instances" 
-  type = string 
-  default = "included"
-}
-
-variable "excluded_instance_types" {
-  description = "List of excluded instance types" 
-  type = list(string) 
-  default = [] 
-}
-
-variable "cpu_manufacturers" { 
-  description = "CPU manufacturer for instance selection" 
-  type = list(string) 
-  default = [] 
-}
-
-variable "architecture_type" { 
-  description = "Architecture type for instance selection" 
-  type = string 
-  default = "x86_64" 
-}
-
-variable "instance_generations" { 
-  description = "Instance generation for instance selection" 
-  type = string 
-  default = "current" 
-}
-
-variable "memory_mib" { 
-  description = "Minimum memory (in MiB) for ABS instance selection" 
-  type = number 
-  default = 2048 
-}
-
-variable "vcpu_count" { 
-  description = "Minimum number of vCPUs for ABS instance selection" 
-  type = number 
-  default = 2 
-}
-
 variable "notification_enabled" {
   description = "If enabled SNS notification will be sent out"
   default     = false
