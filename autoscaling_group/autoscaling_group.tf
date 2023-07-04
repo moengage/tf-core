@@ -39,53 +39,13 @@ resource "aws_autoscaling_group" "default" {
       }
 
       override {
-        instance_type = length(var.instance_types) >= 1 ? var.instance_types.0 : ""
-      }
-
-      override {
-        instance_type = length(var.instance_types) >= 2 ? var.instance_types.1 : ""
-      }
-
-      override {
-        instance_type = length(var.instance_types) >= 3 ? var.instance_types.2 : ""
-      }
-
-      override {
-        instance_type = length(var.instance_types) >= 4 ? var.instance_types.3 : ""
-      }
-
-      override {
-        instance_type = length(var.instance_types) >= 5 ? var.instance_types.4 : ""
-      }
-
-      override {
-        instance_type = length(var.instance_types) >= 6 ? var.instance_types.5 : ""
-      }
-
-      override {
-        instance_type = length(var.instance_types) >= 7 ? var.instance_types.6 : ""
-      }
-
-      override {
-        instance_type = length(var.instance_types) >= 8 ? var.instance_types.7 : ""
-      }
-
-      override {
-        instance_type = length(var.instance_types) >= 9 ? var.instance_types.8 : ""
-      }
-
-      override {
-        instance_type = length(var.instance_types) >= 10 ? var.instance_types.9 : ""
-      }
-      
-      override {
       instance_requirements { 
           burstable_performance = var.burstable_performance 
           excluded_instance_types = var.excluded_instance_types
           instance_generations = var.instance_generations
           memory_mib {
-            min = 1024
-            max = 2048
+            min = 2048
+            max = 8192
           }
           vcpu_count {
             min = 2
