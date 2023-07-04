@@ -64,7 +64,9 @@ resource "aws_autoscaling_group" "default" {
       override {
         instance_type = length(var.instance_types) >= 10 ? var.instance_types.9 : ""
       }
+
     }
+    
     instances_distribution {
       on_demand_allocation_strategy            = var.on_demand_allocation_strategy
       on_demand_base_capacity                  = var.on_demand_base_capacity
