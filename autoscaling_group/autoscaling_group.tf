@@ -55,7 +55,6 @@ resource "aws_autoscaling_group" "default" {
         }
       }
       
-      
     }
     instances_distribution {
       on_demand_allocation_strategy            = var.on_demand_allocation_strategy
