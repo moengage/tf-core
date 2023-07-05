@@ -154,7 +154,7 @@ variable "min_elb_capacity" {
 
 variable "on_demand_allocation_strategy" {
   description = "Strategy to use when launching on-demand instances. Valid values: prioritized. Default: prioritized"
-  default     = "prioritized"
+  default     = "lowest-price"
 }
 
 variable "on_demand_base_capacity" {
