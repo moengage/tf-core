@@ -39,8 +39,8 @@ resource "aws_autoscaling_group" "default" {
 
       override {
         instance_requirements { 
-          burstable_performance = var.burstable_performance 
-          excluded_instance_types = var.excluded_instance_types
+          burstable_performance = local.burstable_performance_value
+          excluded_instance_types = local.excluded_instance_types_value
           instance_generations = var.instance_generations
           memory_mib {
             min = var.memory_mib
@@ -48,7 +48,7 @@ resource "aws_autoscaling_group" "default" {
           vcpu_count {
             min = var.vcpu_count
           }
-          cpu_manufacturers = var.cpu_manufacturers
+          cpu_manufacturers = local.cpu_manufacturers_value
         }
       }
       

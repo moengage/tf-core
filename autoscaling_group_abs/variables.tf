@@ -83,28 +83,34 @@ variable "instance_types" {
   type        = list(string)
 }
 
-variable "burstable_performance" {
-  description = "Enable burstable performance instances" 
-  type = string 
-  default = "included"
-}
-
-variable "excluded_instance_types" {
-  description = "List of excluded instance types" 
-  type = list(string) 
-  default = [] 
-}
-
-variable "cpu_manufacturers" { 
-  description = "CPU manufacturer for instance selection" 
-  type = list(string) 
-  default = [] 
-}
-
 variable "architecture_type" { 
   description = "Architecture type for instance selection" 
   type = string 
   default = "x86_64" 
+}
+
+variable "cpu_manufacturers" {
+  type    = map(list)
+  default = {
+    "x86_64" = ["intel", "amd"]
+    "arm64"  = ["amazon-web-services"]
+  }
+}
+
+variable "excluded_instance_types" {
+  type    = map(list)
+  default = {
+    "x86_64" = ['a*', 'd*', 'f*', 'g*', 'h*', 'p*', 'u*', 'v*', 'x*', 'z*', 'i*', '*6.*', '*6*.*']
+    "arm64"  = ['d*', 'f*', 'g*', 'h*', 'p*', 'u*', 'v*', 'x*', 'z*', '*1.*', '*1*.*']
+  }
+}
+
+variable "burstable_performance" {
+  type    = map(string)
+  default = {
+    "x86_64" = "included"
+    "arm64"  = "excluded"
+  }
 }
 
 variable "instance_generations" { 
