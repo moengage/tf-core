@@ -59,7 +59,7 @@ variable "fab_tag" {
 }
 
 variable "force_delete" {
-  description = "Allows deleting the autoscaling group without waiting for all instances in the pool to terminate. You can force an autoscaling group to delete even if it's in the process of scaling a resource. Normally, Terraform drains all the instances before deleting the group. This bypasses that behavior and potentially leaves resources dangling."
+  description = "Allows deleting the autoscaling group without waiting for all instances in the pool to terminate. You can force an autoscaling group to delete even if it"s in the process of scaling a resource. Normally, Terraform drains all the instances before deleting the group. This bypasses that behavior and potentially leaves resources dangling."
   default     = false
 }
 
@@ -100,8 +100,8 @@ variable "cpu_manufacturers" {
 variable "excluded_instance_types" {
   type    = map(list)
   default = {
-    "x86_64" = ['a*', 'd*', 'f*', 'g*', 'h*', 'p*', 'u*', 'v*', 'x*', 'z*', 'i*', '*6.*', '*6*.*']
-    "arm64"  = ['d*', 'f*', 'g*', 'h*', 'p*', 'u*', 'v*', 'x*', 'z*', '*1.*', '*1*.*']
+    "x86_64" = ["a*", "d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "i*", "*6.*", "*6*.*"]
+    "arm64"  = ["d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "*1.*", "*1*.*"]
   }
 }
 
@@ -328,7 +328,7 @@ variable "low_period" {
 }
 
 variable "statistic" {
-  description = "The statistic to apply to the alarm's associated metric, supported: SampleCount, Average, Sum, Minimum, Maximum"
+  description = "The statistic to apply to the alarm"s associated metric, supported: SampleCount, Average, Sum, Minimum, Maximum"
   type        = string
   default     = "Average"
 }
@@ -376,7 +376,7 @@ variable "comparison_operator_low" {
 }
 
 variable "metric_name" {
-  description = "The name for the alarm's associated metric. Supported CPUUtilization , ApproximateNumberOfMessagesVisible"
+  description = "The name for the alarm"s associated metric. Supported CPUUtilization , ApproximateNumberOfMessagesVisible"
   type        = string
   default     = "ApproximateNumberOfMessagesVisible"
 }
