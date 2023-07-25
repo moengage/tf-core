@@ -43,10 +43,10 @@ resource "aws_autoscaling_group" "default" {
           excluded_instance_types = local.excluded_instance_types_value
           instance_generations = var.instance_generations
           memory_mib {
-            min = var.memory_mib
+            min = 3*(var.memory_mib)
           }
           vcpu_count {
-            min = var.vcpu_count
+            min = 2*(var.vcpu_count)
           }
           cpu_manufacturers = local.cpu_manufacturers_value
         }
