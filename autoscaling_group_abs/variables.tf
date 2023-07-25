@@ -328,7 +328,7 @@ variable "low_period" {
 }
 
 variable "statistic" {
-  description = "The statistic to apply to the alarm"s associated metric, supported: SampleCount, Average, Sum, Minimum, Maximum"
+  description = "The statistic to apply to the alarms associated metric, supported: SampleCount, Average, Sum, Minimum, Maximum"
   type        = string
   default     = "Average"
 }
@@ -376,7 +376,7 @@ variable "comparison_operator_low" {
 }
 
 variable "metric_name" {
-  description = "The name for the alarm"s associated metric. Supported CPUUtilization , ApproximateNumberOfMessagesVisible"
+  description = "The name for the alarms associated metric. Supported CPUUtilization , ApproximateNumberOfMessagesVisible"
   type        = string
   default     = "ApproximateNumberOfMessagesVisible"
 }
