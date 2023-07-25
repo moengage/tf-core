@@ -90,7 +90,7 @@ variable "architecture_type" {
 }
 
 variable "cpu_manufacturers" {
-  type    = map(list)
+  type    = map(list(string))
   default = {
     "x86_64" = ["intel", "amd"]
     "arm64"  = ["amazon-web-services"]
@@ -98,7 +98,7 @@ variable "cpu_manufacturers" {
 }
 
 variable "excluded_instance_types" {
-  type    = map(list)
+  type    = map(list(string))
   default = {
     "x86_64" = ["a*", "d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "i*", "*6.*", "*6*.*"]
     "arm64"  = ["d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "*1.*", "*1*.*"]
