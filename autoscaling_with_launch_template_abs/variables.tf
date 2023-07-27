@@ -60,11 +60,6 @@ variable "extra_volume_tags" {
   default     = {}
 }
 
-variable "instance_types" {
-  type        = list(string)
-  description = "List of instance type, ordered priority, less index more priority"
-}
-
 variable "architecture_type" { 
   description = "Architecture type for instance selection" 
   type = string 
