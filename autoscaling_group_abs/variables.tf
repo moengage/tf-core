@@ -78,11 +78,6 @@ variable "instance_subnet_ids" {
   type        = list(string)
 }
 
-variable "instance_types" {
-  description = "List of instance types, ordered priority, less index more priority"
-  type        = list(string)
-}
-
 variable "architecture_type" { 
   description = "Architecture type for instance selection" 
   type = string 
