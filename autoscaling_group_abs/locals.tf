@@ -1,8 +1,8 @@
 locals {
 
-  cpu_manufacturers_value        = lookup(var.cpu_manufacturers, var.architecture_type, [])
-  excluded_instance_types_value  = lookup(var.excluded_instance_types, var.architecture_type, [])
-  burstable_performance_value    = lookup(var.burstable_performance, var.architecture_type, "")
+  cpu_manufacturers_value        = lookup(var.cpu_manufacturers, var.arch_type, [])
+  excluded_instance_types_value  = lookup(var.excluded_instance_types, var.arch_type, [])
+  burstable_performance_value    = lookup(var.burstable_performance, var.arch_type, "")
 
   _subservice_name     = coalesce(var.subservice_name, var.service_name)
   _resource_identifier = "${var.business_name}-${var.service_name}-${local._subservice_name}-${var.arch_type}"

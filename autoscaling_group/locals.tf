@@ -3,7 +3,7 @@ locals {
   _resource_identifier = "${var.business_name}-${var.service_name}-${local._subservice_name}-${var.arch_type}"
   resource_identifier  = coalesce(var.asg_name, lower(local._resource_identifier))
 
-  instance_types_value = lookup(var.instance_types, var.architecture_type, [])
+  instance_types_value = lookup(var.instance_types, var.arch_type, [])
 
 
   iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"

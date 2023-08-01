@@ -81,8 +81,8 @@ variable "instance_subnet_ids" {
 variable "instance_types" {
   type    = map(list(string))
   default = {
-    "x86_64" = ["t3a.small","t3.small","t2.small"]
-    "arm64"  = ["t4g.small", "t4g.medium"]
+    "AMD" = ["t3a.small","t3.small","t2.small"]
+    "ARM"  = ["t4g.small", "t4g.medium"]
   }
 }
 
