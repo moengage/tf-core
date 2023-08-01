@@ -6,7 +6,7 @@ resource "aws_sns_topic" "default" {
 resource "aws_autoscaling_notification" "default" {
   count       = var.notification_enabled ? 1 : 0
   topic_arn   = aws_sns_topic.default[0].arn
-  group_names = aws_autoscaling_group_abs.default.*.id
+  group_names = aws_autoscaling_group.default.*.id
 
   notifications = [
     "autoscaling:EC2_INSTANCE_LAUNCH",
