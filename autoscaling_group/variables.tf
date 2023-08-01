@@ -86,6 +86,12 @@ variable "instance_types" {
   }
 }
 
+variable "abs_implement" {
+  description = "by default the abs configuration will be true for asg creation"
+  default     = true
+  type        = bool
+}
+
 variable "launch_template_id" {
   description = "Template ID"
 }
