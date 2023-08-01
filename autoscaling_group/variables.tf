@@ -79,8 +79,11 @@ variable "instance_subnet_ids" {
 }
 
 variable "instance_types" {
-  description = "List of instance types, ordered priority, less index more priority"
-  type        = list(string)
+  type    = map(list(string))
+  default = {
+    "AMD" = ["t3a.small","t3.small","t2.small"]
+    "ARM"  = ["t4g.small", "t4g.medium"]
+  }
 }
 
 variable "launch_template_id" {
