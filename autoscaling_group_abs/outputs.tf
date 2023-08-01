@@ -3,11 +3,11 @@ output "asg_notifications_topic_arn" {
 }
 
 output "id" {
-  value = join(",", aws_autoscaling_group.default.*.id)
+  value = join(",", aws_autoscaling_group_abs.default.*.id)
 }
 
 output "name" {
-  value = join(",", aws_autoscaling_group.default.*.name)
+  value = join(",", aws_autoscaling_group_abs.default.*.name)
 }
 
 output "autoscaling_policy_scaledown_arns" {

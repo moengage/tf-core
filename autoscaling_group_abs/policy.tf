@@ -1,5 +1,5 @@
 locals {
-  asg_name            = join("", aws_autoscaling_group.default.*.name)
+  asg_name            = join("", aws_autoscaling_group_abs.default.*.name)
   autoscaling_enabled = var.autoscaling_policies_enabled
 
   default_alarms = {
@@ -44,7 +44,7 @@ resource "aws_autoscaling_schedule" "schedulers" {
   for_each = var.create_schedule ? var.schedules : {}
 
   scheduled_action_name  = each.key
-  autoscaling_group_name = join("", aws_autoscaling_group.default.*.name)
+  autoscaling_group_name = join("", aws_autoscaling_group_abs.default.*.name)
 
   min_size         = lookup(each.value, "min_size", null)
   max_size         = lookup(each.value, "max_size", null)
@@ -60,7 +60,7 @@ resource "aws_autoscaling_policy" "target_tracking" {
   count = var.enable_target_tracking ? 1 : 0
 
   name                      = "${local.asg_name}-target-tracking-${var.target_value}"
-  autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
+  autoscaling_group_name    = join("", aws_autoscaling_group_abs.default.*.name)
   policy_type               = "TargetTrackingScaling"
   estimated_instance_warmup = var.estimated_instance_warmup
 
@@ -78,7 +78,7 @@ resource "aws_autoscaling_policy" "scale_up" {
   for_each = { for k, v in var.scaling_up_policies : k => v }
 
   name                      = lookup(each.value, "name", each.key)
-  autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
+  autoscaling_group_name    = join("", aws_autoscaling_group_abs.default.*.name)
   adjustment_type           = lookup(each.value, "adjustment_type", null)
   policy_type               = lookup(each.value, "policy_type", null)
   estimated_instance_warmup = lookup(each.value, "estimated_instance_warmup", null)
@@ -101,7 +101,7 @@ resource "aws_autoscaling_policy" "scale_down" {
   for_each = { for k, v in var.scaling_down_policies : k => v }
 
   name                      = lookup(each.value, "name", each.key)
-  autoscaling_group_name    = join("", aws_autoscaling_group.default.*.name)
+  autoscaling_group_name    = join("", aws_autoscaling_group_abs.default.*.name)
   adjustment_type           = lookup(each.value, "adjustment_type", null)
   policy_type               = lookup(each.value, "policy_type", null)
   estimated_instance_warmup = lookup(each.value, "estimated_instance_warmup", null)
