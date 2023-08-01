@@ -81,12 +81,19 @@ variable "instance_subnet_ids" {
 variable "instance_types" {
   type    = map(list(string))
   default = {
-    "AMD" = ["t3a.small","t3.small","t2.small"]
-    "ARM"  = ["t4g.small", "t4g.medium"]
+    "x86_64" = ["t3a.small","t3.small","t2.small"]
+    "arm64"  = ["t4g.small", "t4g.medium"]
   }
 }
 
-variable "abs_implement" {
+
+variable "architecture_type" { 
+  description = "Architecture type for instance selection" 
+  type = string 
+  default = "x86_64" 
+}
+
+variable "asg_with_abs" {
   description = "by default the abs configuration will be true for asg creation"
   default     = true
   type        = bool
