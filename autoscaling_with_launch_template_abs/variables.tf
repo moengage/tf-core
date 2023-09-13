@@ -238,7 +238,7 @@ variable "subservice_name" {
 
 variable "spot_allocation_strategy" {
   description = "How to allocate capacity across the Spot pools. Valid values: lowest-price. Default: lowest-price"
-  default     = "price-capacity-optimized"
+  default     = "lowest-price"
 }
 
 variable "spot_instance_pools" {
