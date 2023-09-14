@@ -1,8 +1,8 @@
 locals {
 
-  cpu_manufacturers_value        = lookup(var.cpu_manufacturers, var.architecture_type, [])
-  excluded_instance_types_value  = lookup(var.excluded_instance_types, var.architecture_type, [])
-  burstable_performance_value    = lookup(var.burstable_performance, var.architecture_type, "")
+  cpu_manufacturers_value        = lookup(var.cpu_manufacturers, var.arch_type, [])
+  excluded_instance_types_value  = lookup(var.excluded_instance_types, var.arch_type, [])
+  burstable_performance_value    = lookup(var.burstable_performance, var.arch_type, "")
   
   iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"
   iam_resource_path       = "/${replace(local.iam_resource_identifier, "-", "/")}/"
