@@ -79,8 +79,24 @@ variable "instance_subnet_ids" {
 }
 
 variable "instance_types" {
-  description = "List of instance types, ordered priority, less index more priority"
-  type        = list(string)
+  type    = map(list(string))
+  default = {
+    "AMD" = ["t3a.small","t3.small","t2.small"]
+    "ARM"  = ["t4g.small", "t4g.medium"]
+  }
+}
+
+
+variable "architecture_type" { 
+  description = "Architecture type for instance selection" 
+  type = string 
+  default = "x86_64" 
+}
+
+variable "asg_with_abs" {
+  description = "by default the abs configuration will be true for asg creation"
+  default     = true
+  type        = bool
 }
 
 variable "launch_template_id" {

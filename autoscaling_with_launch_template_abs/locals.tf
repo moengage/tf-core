@@ -3,13 +3,14 @@ locals {
   cpu_manufacturers_value        = lookup(var.cpu_manufacturers, var.arch_type, [])
   excluded_instance_types_value  = lookup(var.excluded_instance_types, var.arch_type, [])
   burstable_performance_value    = lookup(var.burstable_performance, var.arch_type, "")
-
-  _subservice_name     = coalesce(var.subservice_name, var.service_name)
-  _resource_identifier = "${var.business_name}-${var.service_name}-${local._subservice_name}-${var.arch_type}"
-  resource_identifier  = coalesce(var.asg_name, lower(local._resource_identifier))
-
+  
   iam_resource_identifier = "${lower(local._resource_identifier)}-${data.aws_region.current.name}"
   iam_resource_path       = "/${replace(local.iam_resource_identifier, "-", "/")}/"
+
+  _subservice_name = coalesce(var.subservice_name, var.service_name)
+
+  _resource_identifier = "${var.environment}-${var.business_name}-${var.service_name}-${local._subservice_name}"
+  resource_identifier  = lower(local._resource_identifier)
 
   default_tags = {
     ManagedBy   = "terraform"
@@ -27,56 +28,51 @@ locals {
     {
       "key"                 = "Business"
       "value"               = lower(var.business_name)
-      "propagate_at_launch" = var.propagate_tags_at_launch
+      "propagate_at_launch" = false
     },
     {
       "key"                 = "Service"
       "value"               = lower(var.service_name)
-      "propagate_at_launch" = var.propagate_tags_at_launch
+      "propagate_at_launch" = false
     },
     {
       "key"                 = "SubService"
       "value"               = lower(local._subservice_name)
-      "propagate_at_launch" = var.propagate_tags_at_launch
+      "propagate_at_launch" = false
     },
     {
       "key"                 = "Environment"
       "value"               = lower(var.environment)
-      "propagate_at_launch" = var.propagate_tags_at_launch
+      "propagate_at_launch" = false
     },
     {
       "key"                 = "FabTag"
       "value"               = var.fab_tag
-      "propagate_at_launch" = var.propagate_tags_at_launch
+      "propagate_at_launch" = false
     },
     {
       "key"                 = "Cluster"
       "value"               = lower(var.cluster)
-      "propagate_at_launch" = var.propagate_tags_at_launch
+      "propagate_at_launch" = false
     },
     {
       "key"                 = "ManagedBy"
       "value"               = "terraform"
-      "propagate_at_launch" = var.propagate_tags_at_launch
+      "propagate_at_launch" = false
     },
     {
       "key"                 = "Name"
-      "value"               = local.resource_identifier
-      "propagate_at_launch" = var.propagate_tags_at_launch
+      "value"               = coalesce(var.alternate_resource_name, local.resource_identifier)
+      "propagate_at_launch" = false
     },
     {
       "key"                 = "CreatedBy"
       "value"               = var.created_by
-      "propagate_at_launch" = var.propagate_tags_at_launch
+      "propagate_at_launch" = false
     },
     {
       "key"                 = "cost_tracking"
       "value"               = "enabled"
-      "propagate_at_launch" = true
-    },
-    {
-      "key"                 = "arch_type"
-      "value"               = var.arch_type
       "propagate_at_launch" = true
     },
   ]
@@ -84,7 +80,7 @@ locals {
   asg_tags = concat(local._asg_tags, var.extra_asg_tags)
 
   asg_managed_name_tag = {
-    Name = local.resource_identifier
+    Name = coalesce(var.alternate_resource_name, local.resource_identifier)
   }
 }
 

@@ -78,11 +78,6 @@ variable "instance_subnet_ids" {
   type        = list(string)
 }
 
-variable "instance_types" {
-  description = "List of instance types, ordered priority, less index more priority"
-  type        = list(string)
-}
-
 variable "architecture_type" { 
   description = "Architecture type for instance selection" 
   type = string 
@@ -92,24 +87,24 @@ variable "architecture_type" {
 variable "cpu_manufacturers" {
   type    = map(list(string))
   default = {
-    "x86_64" = ["intel", "amd"]
-    "arm64"  = ["amazon-web-services"]
+    "AMD" = ["intel", "amd"]
+    "ARM"  = ["amazon-web-services"]
   }
 }
 
 variable "excluded_instance_types" {
   type    = map(list(string))
   default = {
-    "x86_64" = ["a*", "d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "i*", "*6.*", "*6*.*"]
-    "arm64"  = ["d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "*1.*", "*1*.*"]
+    "AMD" = ["a*", "d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "i*", "*6.*", "*6*.*"]
+    "ARM"  = ["d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "*1.*", "*1*.*"]
   }
 }
 
 variable "burstable_performance" {
   type    = map(string)
   default = {
-    "x86_64" = "included"
-    "arm64"  = "excluded"
+    "AMD" = "included"
+    "ARM"  = "excluded"
   }
 }
 
