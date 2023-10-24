@@ -3,6 +3,8 @@ resource "aws_s3_bucket" "logs" {
   bucket        = local.logs_bucket_name
   acl           = "log-delivery-write"
   force_destroy = true
+  control_object_ownership = true
+  object_ownership         = "ObjectWriter"
 
   policy = <<EOF
 {
