@@ -1,31 +1,7 @@
 resource "aws_s3_bucket" "logs" {
   count         = var.lb_access_logs_enabled ? 1 : 0
   bucket        = local.logs_bucket_name
-  acl           = "log-delivery-write"
   force_destroy = true
-  control_object_ownership = true
-  object_ownership         = "ObjectWriter"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": [
-          "${var.aws_lb_accounts[data.aws_region.current.name]}"
-        ]
-      },
-      "Action": [
-        "s3:PutObject"
-      ],
-      "Resource": "arn:aws:s3:::${local.logs_bucket_name}/*"
-    }
-  ]
-}
-EOF
-
 
   lifecycle_rule {
     id      = "cleanup"
@@ -48,5 +24,15 @@ EOF
       "Name" = local.logs_bucket_name
     },
   )
+}
+
+resource "aws_s3_bucket_acl" "lb-logs-acl" {
+  bucket = aws_s3_bucket.logs.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_policy" "allow-lb" {
+  bucket = aws_s3_bucket.logs.id
+  policy = data.aws_iam_policy_document.allow-lb.json
 }
 
