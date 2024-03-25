@@ -44,7 +44,7 @@ resource "aws_autoscaling_group" "default" {
           instance_generations = var.instance_generations
           memory_mib {
             min = var.memory_mib
-            max = 4*(var.memory_mib)
+            max = 16*(var.memory_mib)
           }
           vcpu_count {
             min = var.vcpu_count
