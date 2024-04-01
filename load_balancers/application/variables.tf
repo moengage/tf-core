@@ -9,6 +9,7 @@ variable "aws_lb_accounts" {
     us-west-2      = "797873946194"
     ca-central-1   = "985666609251"
     eu-central-1   = "054676820928"
+    ap-southeast-3 = "589379963580"
     eu-west-1      = "156460612806"
     eu-west-2      = "652711504416"
     eu-west-3      = "009996457667"
