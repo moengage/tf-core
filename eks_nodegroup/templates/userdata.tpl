@@ -7,6 +7,11 @@
 #iptables-save | tee /etc/sysconfig/iptables
 #systemctl enable --now iptables
 
+# Enable BCC
+amazon-linux-extras enable BCC
+yum install -y kernel-devel-$(uname -r)
+yum install -y bcc
+
 # Enable IPVS
 yum install -y ipvsadm
 ipvsadm -l
