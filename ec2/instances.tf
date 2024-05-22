@@ -13,7 +13,7 @@ resource "aws_instance" "ec2" {
   root_block_device {
     volume_type = var.root_volume_type
     volume_size = var.root_volume_size
-    encrypted   = var.aws_ebs_default_kms_key ? true : false
+    encrypted   = var.aws_ebs_default_kms_key != "" ? true : false
     kms_key_id  = var.aws_ebs_default_kms_key
     tags = merge(
       local.default_tags,
