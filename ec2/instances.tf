@@ -36,6 +36,8 @@ resource "aws_ebs_volume" "ebs_volume" {
   type              = var.ebs_volume_type
   iops              = var.ebs_volume_type == "gp3" ? var.data_disk_iops : null
   throughput        = var.ebs_volume_type == "gp3" ? var.data_disk_throughput : null
+  encrypted         = var.aws_ebs_default_kms_key != "" ? true : false
+  kms_key_id        = var.aws_ebs_default_kms_key
 
   tags = merge(
     local.default_tags,
