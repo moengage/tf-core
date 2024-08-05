@@ -193,7 +193,7 @@ variable "license_model" {
 }
 
 variable "major_engine_version" {
-  default     = "5.7"
+  default     = "8.0"
   type        = string
   description = "Specifies the major version of the engine that this option group should be associated with."
 }
