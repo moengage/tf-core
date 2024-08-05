@@ -16,7 +16,7 @@ resource "aws_db_instance" "default" {
   apply_immediately                   = var.apply_immediately
   multi_az                            = var.multi_az
   port                                = var.port
-  name                                = var.service_name
+  db_name                                = var.service_name
   storage_type                        = var.storage_type
   iops                                = var.iops
   auto_minor_version_upgrade          = var.auto_minor_version_upgrade
