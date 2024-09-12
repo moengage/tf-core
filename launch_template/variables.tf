@@ -87,3 +87,7 @@ variable "volume_type" {
   default     = "gp2"
 }
 
+variable "user_data" {
+  description = "Instance user data"
+  default     = ""
+}
