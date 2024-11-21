@@ -38,7 +38,7 @@ resource "aws_ebs_volume" "ebs_volume" {
   throughput        = var.ebs_volume_type == "gp3" ? var.data_disk_throughput : null
   encrypted         = var.aws_ebs_default_kms_key != "" ? true : false
   kms_key_id        = var.aws_ebs_default_kms_key
-
+  snapshot_id       = var.aws_ebs_snapshot_id
   tags = merge(
     local.default_tags,
     map("Name", "${local.resource_identifier}-ebs-${(count.index) % var.ebs_volume_count + 1}"),

@@ -114,3 +114,8 @@ variable "data_disk_throughput" {
   type = number
   default = "125"
 }
+
+variable "aws_ebs_snapshot_id" {
+  type = string
+  default = ""
+}
