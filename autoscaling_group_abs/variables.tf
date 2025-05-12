@@ -78,10 +78,10 @@ variable "instance_subnet_ids" {
   type        = list(string)
 }
 
-variable "architecture_type" { 
-  description = "Architecture type for instance selection" 
-  type = string 
-  default = "x86_64" 
+variable "architecture_type" {
+  description = "Architecture type for instance selection"
+  type = string
+  default = "x86_64"
 }
 
 variable "cpu_manufacturers" {
@@ -108,22 +108,22 @@ variable "burstable_performance" {
   }
 }
 
-variable "instance_generations" { 
-  description = "Instance generation for instance selection" 
+variable "instance_generations" {
+  description = "Instance generation for instance selection"
   type = list(string)
   default = ["current"]
 }
 
-variable "memory_mib" { 
-  description = "Minimum memory (in MiB) for ABS instance selection" 
-  type = number 
-  default = 2048 
+variable "memory_mib" {
+  description = "Minimum memory (in MiB) for ABS instance selection"
+  type = number
+  default = 2048
 }
 
-variable "vcpu_count" { 
-  description = "Minimum number of vCPUs for ABS instance selection" 
-  type = number 
-  default = 2 
+variable "vcpu_count" {
+  description = "Minimum number of vCPUs for ABS instance selection"
+  type = number
+  default = 2
 }
 
 variable "launch_template_id" {

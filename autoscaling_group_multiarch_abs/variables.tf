@@ -78,10 +78,10 @@ variable "instance_subnet_ids" {
   type        = list(string)
 }
 
-variable "architecture_type" { 
-  description = "Architecture type for instance selection" 
-  type = string 
-  default = "x86_64" 
+variable "architecture_type" {
+  description = "Architecture type for instance selection"
+  type = string
+  default = "x86_64"
 }
 
 variable "cpu_manufacturers" {
@@ -92,6 +92,16 @@ variable "cpu_manufacturers" {
   }
 }
 
+variable "arm_cpu_manufacturers_value" {
+  type    = list(string)
+  default = ["amazon-web-services"]
+}
+
+variable "amd_cpu_manufacturers_value" {
+  type    = list(string)
+  default = ["intel", "amd"]
+}
+
 variable "excluded_instance_types" {
   type    = map(list(string))
   default = {
@@ -100,34 +110,56 @@ variable "excluded_instance_types" {
   }
 }
 
+variable "arm_excluded_instance_types" {
+  type    = list(string)
+  default = ["a*", "d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "i*"]
+}
+
+variable "amd_excluded_instance_types" {
+  type    = list(string)
+  default = ["a*", "d*", "f*", "g*", "h*", "p*", "u*", "v*", "x*", "z*", "i*"]
+}
+
 variable "burstable_performance" {
   type    = map(string)
   default = {
     "AMD" = "included"
     "ARM"  = "excluded"
+    "MULTIARCH" = "excluded"
   }
 }
 
-variable "instance_generations" { 
-  description = "Instance generation for instance selection" 
+variable "instance_generations" {
+  description = "Instance generation for instance selection"
   type = list(string)
-  default = ["current"]
+  default = ["current", "previous"]
 }
 
-variable "memory_mib" { 
-  description = "Minimum memory (in MiB) for ABS instance selection" 
-  type = number 
-  default = 2048 
+variable "memory_mib" {
+  description = "Minimum memory (in MiB) for ABS instance selection"
+  type = number
+  default = 2048
 }
 
-variable "vcpu_count" { 
-  description = "Minimum number of vCPUs for ABS instance selection" 
-  type = number 
-  default = 2 
+variable "vcpu_count" {
+  description = "Minimum number of vCPUs for ABS instance selection"
+  type = number
+  default = 2
 }
 
 variable "launch_template_id" {
   description = "Template ID"
+  default = ""
+}
+
+variable "arm_launch_template_id" {
+  description = "ARM Template ID"
+  default = ""
+}
+
+variable "amd_launch_template_id" {
+  description = "AMD Template ID"
+  default = ""
 }
 
 variable "launch_template_version" {
@@ -434,4 +466,10 @@ variable "arch_type" {
   type        = string
   default     = "AMD"
   description = "The Architecture type for the ASG Instances."
+}
+
+variable "multi_arch" {
+  description = "Create ASG with multiple launch template"
+  default     = false
+  type        = bool
 }
