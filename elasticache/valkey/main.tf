@@ -1,11 +1,11 @@
 resource "aws_elasticache_replication_group" "valkey" {
   replication_group_id          = format("%.30s", "${local.resource_identifier}")
-  replication_group_description = "Terraform-managed ElastiCache replication group for ${local.resource_identifier}"
-  number_cache_clusters         = var.cluster_mode_enabled ? null : var.number_cache_clusters
+  num_cache_clusters         = var.cluster_mode_enabled ? null : var.number_cache_clusters
   node_type                     = var.valkey_node_type
   automatic_failover_enabled    = var.automatic_failover_enabled && var.cluster_mode_enabled ? true : false
   auto_minor_version_upgrade    = var.auto_minor_version_upgrade
-  availability_zones            = var.availability_zones
+  preferred_cache_cluster_azs   = var.availability_zones
+  description                   = "Terraform-managed ElastiCache replication group for ${local.resource_identifier}"
   engine                        = "valkey"
   at_rest_encryption_enabled    = var.at_rest_encryption_enabled
   kms_key_id                    = var.kms_key_id
@@ -24,14 +24,7 @@ resource "aws_elasticache_replication_group" "valkey" {
   snapshot_window               = var.valkey_snapshot_window
   snapshot_retention_limit      = var.valkey_snapshot_retention_limit
   tags                          = local.default_tags
-
-  dynamic "cluster_mode" {
-    for_each = var.cluster_mode_enabled ? [1] : []
-    content {
-      replicas_per_node_group = var.replicas_per_node_group
-      num_node_groups         = var.num_node_groups
-    }
-  }
+  cluster_mode_enabled         = var.cluster_mode_enabled
 
 }
 
