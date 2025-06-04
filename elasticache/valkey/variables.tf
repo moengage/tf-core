@@ -150,6 +150,12 @@ variable "cluster_mode_enabled" {
   default     = false
 }
 
+variable "cluster_mode" {
+  type        = string
+  description = "Enable creation of a native valkey cluster."
+  default     = "disabled"
+}
+
 variable "num_node_groups" {
   type        = number
   description = "Required when cluster_mode_enabled is set to true. Specify the number of node groups (shards) for this Redis replication group. Changing this number will trigger an online resizing operation before other settings modifications."
