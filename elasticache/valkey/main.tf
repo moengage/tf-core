@@ -24,7 +24,7 @@ resource "aws_elasticache_replication_group" "valkey" {
   snapshot_window               = var.valkey_snapshot_window
   snapshot_retention_limit      = var.valkey_snapshot_retention_limit
   tags                          = local.default_tags
-  cluster_mode_enabled         = var.cluster_mode_enabled
+  cluster_mode                  = var.cluster_mode_enabled
 
 }
 
