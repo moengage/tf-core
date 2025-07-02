@@ -5,7 +5,6 @@ resource "aws_elasticache_replication_group" "redis" {
   node_type                     = var.redis_node_type
   automatic_failover_enabled    = var.automatic_failover_enabled && var.cluster_mode_enabled ? true : false
   auto_minor_version_upgrade    = var.auto_minor_version_upgrade
-  availability_zones            = var.availability_zones ? null : var.availability_zones
   engine                        = "redis"
   at_rest_encryption_enabled    = var.at_rest_encryption_enabled
   kms_key_id                    = var.kms_key_id
