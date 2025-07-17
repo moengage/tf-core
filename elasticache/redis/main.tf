@@ -39,7 +39,8 @@ resource "aws_elasticache_parameter_group" "redis_parameter_group" {
   name        = local.resource_identifier
   description = "Terraform-managed ElastiCache parameter group for ${local.resource_identifier}"
   # Strip the patch version from redis_version var
-  family = "redis${replace(var.redis_version, "/\\.[\\d]+$/", "")}"
+  #family = "redis${replace(var.redis_version, "/\\.[\\d]+$/", "")}"
+  family = var.redis_version == "6.2" ? "redis6.x" : "redis${replace(var.redis_version, "/\\.[\\d]+$/", "")}"
 
   dynamic "parameter" {
     for_each = var.cluster_mode_enabled ? concat([{ name = "cluster-enabled", value = "yes" }], var.parameter) : var.parameter
