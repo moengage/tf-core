@@ -3,6 +3,7 @@ resource "aws_launch_template" "default" {
   ebs_optimized = var.ebs_optimized
   image_id      = var.image_id
   key_name      = var.key_name
+  user_data     = base64encode(var.user_data)
 
   iam_instance_profile {
     arn = var.iam_instance_profile
