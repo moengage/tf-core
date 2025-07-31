@@ -13,6 +13,8 @@ resource "aws_instance" "ec2" {
   root_block_device {
     volume_type = var.root_volume_type
     volume_size = var.root_volume_size
+    encrypted   = var.aws_ebs_default_kms_key != "" ? true : false
+    kms_key_id  = var.aws_ebs_default_kms_key
     tags = merge(
       local.default_tags,
       map("Name", "${local.resource_identifier}-root-${count.index + 1}"),
@@ -32,6 +34,10 @@ resource "aws_ebs_volume" "ebs_volume" {
   availability_zone = element(aws_instance.ec2.*.availability_zone, count.index)
   size              = var.ebs_volume_size
   type              = var.ebs_volume_type
+  iops              = var.ebs_volume_type == "gp3" ? var.data_disk_iops : null
+  throughput        = var.ebs_volume_type == "gp3" ? var.data_disk_throughput : null
+  encrypted         = var.aws_ebs_default_kms_key != "" ? true : false
+  kms_key_id        = var.aws_ebs_default_kms_key
 
   tags = merge(
     local.default_tags,

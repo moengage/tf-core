@@ -99,3 +99,18 @@ variable "ec2_device_names" {
   description = "Name of the EBS device to mount"
   default     = ["/dev/xvdb", "/dev/xvdc", "/dev/xvdd", "/dev/xvde", "/dev/xvdf", "/dev/xvdg", "/dev/xvdh", "/dev/xvdi", "/dev/xvdj", "/dev/xvdk", "/dev/xvdl", "/dev/xvdm", "/dev/xvdn", "/dev/xvdo", "/dev/xvdp", "/dev/xvdq", "/dev/xvdr", "/dev/xvds", "/dev/xvdt", "/dev/xvdu", "/dev/xvdv", "/dev/xvdw", "/dev/xvdx", "/dev/xvdy", "/dev/xvdz"]
 }
+
+variable "aws_ebs_default_kms_key" {
+  type = string
+  default = ""
+}
+
+variable "data_disk_iops" {
+  type = number
+  default = 3000
+}
+
+variable "data_disk_throughput" {
+  type = number
+  default = "125"
+}
