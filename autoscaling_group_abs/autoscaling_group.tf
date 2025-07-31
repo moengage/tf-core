@@ -30,40 +30,7 @@ resource "aws_autoscaling_group" "default" {
     }
   }
 
-  mixed_instances_policy {
-    launch_template {
-      launch_template_specification {
-        launch_template_id = var.launch_template_id
-        version            = var.launch_template_version
-      }
-
-      override {
-        instance_requirements { 
-          burstable_performance = local.burstable_performance_value
-          excluded_instance_types = local.excluded_instance_types_value
-          instance_generations = var.instance_generations
-          memory_mib {
-            min = var.memory_mib
-            max = 4*(var.memory_mib)
-          }
-          vcpu_count {
-            min = var.vcpu_count
-            max = 2*(var.vcpu_count)
-          }
-          cpu_manufacturers = local.cpu_manufacturers_value
-        }
-      }
-      
-    }
-    instances_distribution {
-      on_demand_allocation_strategy            = var.on_demand_allocation_strategy
-      on_demand_base_capacity                  = var.on_demand_base_capacity
-      on_demand_percentage_above_base_capacity = var.on_demand_percentage_above_base_capacity
-      spot_allocation_strategy                 = var.spot_allocation_strategy
-      spot_instance_pools                      = var.spot_instance_pools
-      spot_max_price                           = var.spot_max_price
-    }
-  }
+  mixed_instances_policy = var.multi_arch ? local.mixed_instances_policy_with_multiarch : local.mixed_instances_policy_without_multiarch
 
   lifecycle {
     create_before_destroy = true
