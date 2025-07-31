@@ -111,7 +111,7 @@ variable "burstable_performance" {
 variable "instance_generations" {
   description = "Instance generation for instance selection"
   type = list(string)
-  default = ["current"]
+  default = ["current","previous"]
 }
 
 variable "memory_mib" {
