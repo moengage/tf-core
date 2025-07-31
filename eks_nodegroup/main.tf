@@ -20,7 +20,7 @@ resource "aws_iam_instance_profile" "default" {
 }
 
 module "nodegroup" {
-  source                                   = "git@github.com:moengage/tf-core.git//autoscaling_with_launch_template?ref=master"
+  source                                   = "git@github.com:moengage/tf-core.git//autoscaling_with_launch_template?ref=fix-version-patch"
   alternate_resource_name                  = local.resource_identifier
   associate_public_ip_address              = var.associate_public_ip_address
   business_name                            = var.business_name
