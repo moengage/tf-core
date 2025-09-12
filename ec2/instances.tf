@@ -29,7 +29,7 @@ resource "aws_instance" "ec2" {
 
 resource "aws_ebs_volume" "ebs_volume" {
   count             = var.ec2_instance_count * var.ebs_volume_count
-  availability_zone = element(aws_instance.ec2.*.availability_zone, count.index)
+  availability_zone = element(aws_instance.ec2.*.availability_zone, floor(count.index / var.ebs_volume_count))
   size              = var.ebs_volume_size
   type              = var.ebs_volume_type
 
