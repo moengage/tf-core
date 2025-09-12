@@ -1,11 +1,11 @@
 resource "aws_instance" "ec2" {
   count                       = var.ec2_instance_count
   ami                         = var.ami_id
-  availability_zone           = element(var.availability_zones, length(var.availability_zones) % var.ec2_instance_count)
+  availability_zone           = element(var.availability_zones, count.index)
   instance_type               = var.instance_type
   key_name                    = var.instance_keyname
   vpc_security_group_ids      = var.security_group_ids
-  subnet_id                   = element(var.subnet_ids, length(var.subnet_ids) % var.ec2_instance_count)
+  subnet_id                   = element(var.subnet_ids, count.index)
   associate_public_ip_address = var.associate_public_ip_address
   iam_instance_profile        = var.iam_instance_profile
   user_data                   = var.user_data
