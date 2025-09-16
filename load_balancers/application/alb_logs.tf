@@ -1,6 +1,7 @@
 resource "aws_s3_bucket" "logs" {
   count         = var.lb_access_logs_enabled ? 1 : 0
   bucket        = local.logs_bucket_name
+  object_ownership = "BucketOwnerPreferred"
   acl           = "log-delivery-write"
   force_destroy = true
 
