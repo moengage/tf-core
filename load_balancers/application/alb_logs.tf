@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "logs" {
   count         = var.lb_access_logs_enabled ? 1 : 0
   bucket        = local.logs_bucket_name
-  acl           = "log-delivery-write"
+  #acl           = "log-delivery-write"
   force_destroy = true
 
   policy = <<EOF
@@ -47,11 +47,3 @@ EOF
     },
   )
 }
-
-resource "aws_s3_bucket_ownership_controls" "logs_ownership" {
-  bucket = aws_s3_bucket.logs.id
-  rule {
-    object_ownership = "BucketOwnerEnforced"
-  }
-}
-
